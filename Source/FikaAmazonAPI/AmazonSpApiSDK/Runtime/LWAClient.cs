@@ -25,7 +25,9 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
             // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
             if (string.IsNullOrWhiteSpace(proxyAddress))
             {
-                RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+                var options =
+                    new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
+                RestClient = new RestClient(httpClientFactory.CreateClient(nameof(LWAClient)), options);
             }
             else
             {
