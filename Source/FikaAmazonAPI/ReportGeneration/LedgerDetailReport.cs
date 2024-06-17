@@ -1,12 +1,11 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class LedgerDetailReport
     {
-        public List<LedgerDetailReportRow> Data { get; set; } = new List<LedgerDetailReportRow>();
         public LedgerDetailReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -14,14 +13,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<LedgerDetailReportRow> values = new List<LedgerDetailReportRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(LedgerDetailReportRow.FromRow(row, refNumber));
-            }
+            var values = new List<LedgerDetailReportRow>();
+            foreach (var row in table.Rows) values.Add(LedgerDetailReportRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<LedgerDetailReportRow> Data { get; set; } = new List<LedgerDetailReportRow>();
     }
+
     public class LedgerDetailReportRow
     {
         public DateTime? Date { get; set; }
@@ -44,7 +43,8 @@ namespace FikaAmazonAPI.ReportGeneration
         public static LedgerDetailReportRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new LedgerDetailReportRow();
-            row.Date = DataConverter.GetDate(rowData.GetString("Date"), DataConverter.DateTimeFormat.DATE_LEDGER_FORMAT);
+            row.Date = DataConverter.GetDate(rowData.GetString("Date"),
+                DataConverter.DateTimeFormat.DATE_LEDGER_FORMAT);
             row.FNSKU = rowData.GetString("FNSKU");
             row.ASIN = rowData.GetString("ASIN");
             row.MSKU = rowData.GetString("MSKU");

@@ -8,14 +8,14 @@
         private const string Delimiter = " ";
 
         /// <summary>
-        /// Builds an instance of LWAAccessTokenRequestMeta modeling appropriate LWA token
-        /// request params based on configured LWAAuthorizationCredentials
+        ///     Builds an instance of LWAAccessTokenRequestMeta modeling appropriate LWA token
+        ///     request params based on configured LWAAuthorizationCredentials
         /// </summary>
         /// <param name="lwaAuthorizationCredentials">LWA Authorization Credentials</param>
         /// <returns></returns>
         public virtual LWAAccessTokenRequestMeta Build(LWAAuthorizationCredentials lwaAuthorizationCredentials)
         {
-            LWAAccessTokenRequestMeta lwaAccessTokenRequestMeta = new LWAAccessTokenRequestMeta()
+            var lwaAccessTokenRequestMeta = new LWAAccessTokenRequestMeta
             {
                 ClientId = lwaAuthorizationCredentials.ClientId,
                 ClientSecret = lwaAuthorizationCredentials.ClientSecret,

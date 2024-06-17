@@ -2,7 +2,7 @@
 
 namespace FikaAmazonAPI.NotificationMessages
 {
-    public partial class EventTime
+    public class EventTime
     {
         public string Id { get; set; }
         public string Type { get; set; }

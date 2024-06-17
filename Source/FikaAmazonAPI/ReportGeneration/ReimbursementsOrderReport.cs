@@ -7,20 +7,20 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReimbursementsOrderReport
     {
-        public List<ReimbursementsOrderRow> Data { get; set; }=new List<ReimbursementsOrderRow>();
         public ReimbursementsOrderReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            List<ReimbursementsOrderRow> values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => ReimbursementsOrderRow.FromCsv(v, refNumber))
-                                           .ToList();
+            var values = File.ReadAllLines(path)
+                .Skip(1)
+                .Select(v => ReimbursementsOrderRow.FromCsv(v, refNumber))
+                .ToList();
             Data = values;
         }
 
-
+        public List<ReimbursementsOrderRow> Data { get; set; } = new List<ReimbursementsOrderRow>();
     }
+
     public class ReimbursementsOrderRow
     {
         public DateTime? ApprovalDate { get; set; }
@@ -46,7 +46,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public static ReimbursementsOrderRow FromCsv(string csvLine, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
+            var values = csvLine.Split('\t');
             var row = new ReimbursementsOrderRow();
             row.ApprovalDate = DataConverter.GetDate(values[0], DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.ReimbursementId = values[1];
@@ -70,7 +70,5 @@ namespace FikaAmazonAPI.ReportGeneration
 
             return row;
         }
-
-
     }
 }

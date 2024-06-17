@@ -1,42 +1,37 @@
-﻿using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
-using System.IO;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class OrderItemAcknowledgement : IEquatable<OrderItemAcknowledgement>, IValidatableObject
+    public class OrderItemAcknowledgement : IEquatable<OrderItemAcknowledgement>, IValidatableObject
     {
-        public OrderItemAcknowledgement() { }
-        public OrderItemAcknowledgement(AcknowledgementCode? acknowledgementCode = default(AcknowledgementCode?), ItemQuantity acknowledgedQuantity = default(ItemQuantity), DateTime? scheduledShipDate = default(DateTime?), DateTime? scheduledDeliveryDate = default(DateTime?), RejectionReason? rejectionReason = default(RejectionReason?))
+        public OrderItemAcknowledgement()
+        {
+        }
+
+        public OrderItemAcknowledgement(AcknowledgementCode? acknowledgementCode = default,
+            ItemQuantity acknowledgedQuantity = default, DateTime? scheduledShipDate = default,
+            DateTime? scheduledDeliveryDate = default, RejectionReason? rejectionReason = default)
         {
             // to ensure "acknowledgementCode" is required (not null)
             if (acknowledgementCode == null)
-            {
-                throw new InvalidDataException("acknowledgementCode is a required property for OrderItemAcknowledgement and cannot be null");
-            }
-            else
-            {
-                this.AcknowledgementCode = acknowledgementCode;
-            }
+                throw new InvalidDataException(
+                    "acknowledgementCode is a required property for OrderItemAcknowledgement and cannot be null");
+            AcknowledgementCode = acknowledgementCode;
             // to ensure "acknowledgedQuantity" is required (not null)
             if (acknowledgedQuantity == null)
-            {
-                throw new InvalidDataException("acknowledgedQuantity is a required property for OrderItemAcknowledgement and cannot be null");
-            }
-            else
-            {
-                this.AcknowledgedQuantity = acknowledgedQuantity;
-            }
-            this.ScheduledShipDate = scheduledShipDate;
-            this.ScheduledDeliveryDate = scheduledDeliveryDate;
-            this.RejectionReason = rejectionReason;
+                throw new InvalidDataException(
+                    "acknowledgedQuantity is a required property for OrderItemAcknowledgement and cannot be null");
+            AcknowledgedQuantity = acknowledgedQuantity;
+            ScheduledShipDate = scheduledShipDate;
+            ScheduledDeliveryDate = scheduledDeliveryDate;
+            RejectionReason = rejectionReason;
         }
 
         [DataMember(Name = "acknowledgementCode", EmitDefaultValue = false)]
@@ -54,6 +49,49 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         [DataMember(Name = "rejectionReason", EmitDefaultValue = false)]
         public RejectionReason? RejectionReason { get; set; }
 
+        public bool Equals(OrderItemAcknowledgement input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    AcknowledgementCode == input.AcknowledgementCode ||
+                    (AcknowledgementCode != null &&
+                     AcknowledgementCode.Equals(input.AcknowledgementCode))
+                ) &&
+                (
+                    AcknowledgedQuantity == input.AcknowledgedQuantity ||
+                    (AcknowledgedQuantity != null &&
+                     AcknowledgedQuantity.Equals(input.AcknowledgedQuantity))
+                ) &&
+                (
+                    ScheduledShipDate == input.ScheduledShipDate ||
+                    (ScheduledShipDate != null &&
+                     ScheduledShipDate.Equals(input.ScheduledShipDate))
+                ) &&
+                (
+                    ScheduledDeliveryDate == input.ScheduledDeliveryDate ||
+                    (ScheduledDeliveryDate != null &&
+                     ScheduledDeliveryDate.Equals(input.ScheduledDeliveryDate))
+                ) &&
+                (
+                    RejectionReason == input.RejectionReason ||
+                    (RejectionReason != null &&
+                     RejectionReason.Equals(input.RejectionReason))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -68,7 +106,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -77,79 +115,36 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as OrderItemAcknowledgement);
-        }
-
-        public bool Equals(OrderItemAcknowledgement input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.AcknowledgementCode == input.AcknowledgementCode ||
-                    (this.AcknowledgementCode != null &&
-                    this.AcknowledgementCode.Equals(input.AcknowledgementCode))
-                ) &&
-                (
-                    this.AcknowledgedQuantity == input.AcknowledgedQuantity ||
-                    (this.AcknowledgedQuantity != null &&
-                    this.AcknowledgedQuantity.Equals(input.AcknowledgedQuantity))
-                ) &&
-                (
-                    this.ScheduledShipDate == input.ScheduledShipDate ||
-                    (this.ScheduledShipDate != null &&
-                    this.ScheduledShipDate.Equals(input.ScheduledShipDate))
-                ) &&
-                (
-                    this.ScheduledDeliveryDate == input.ScheduledDeliveryDate ||
-                    (this.ScheduledDeliveryDate != null &&
-                    this.ScheduledDeliveryDate.Equals(input.ScheduledDeliveryDate))
-                ) &&
-                (
-                    this.RejectionReason == input.RejectionReason ||
-                    (this.RejectionReason != null &&
-                    this.RejectionReason.Equals(input.RejectionReason))
-                );
+            return Equals(input as OrderItemAcknowledgement);
         }
 
         /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.AcknowledgementCode != null)
-                    hashCode = hashCode * 59 + this.AcknowledgementCode.GetHashCode();
-                if (this.AcknowledgedQuantity != null)
-                    hashCode = hashCode * 59 + this.AcknowledgedQuantity.GetHashCode();
-                if (this.ScheduledShipDate != null)
-                    hashCode = hashCode * 59 + this.ScheduledShipDate.GetHashCode();
-                if (this.ScheduledDeliveryDate != null)
-                    hashCode = hashCode * 59 + this.ScheduledDeliveryDate.GetHashCode();
-                if (this.RejectionReason != null)
-                    hashCode = hashCode * 59 + this.RejectionReason.GetHashCode();
+                var hashCode = 41;
+                if (AcknowledgementCode != null)
+                    hashCode = hashCode * 59 + AcknowledgementCode.GetHashCode();
+                if (AcknowledgedQuantity != null)
+                    hashCode = hashCode * 59 + AcknowledgedQuantity.GetHashCode();
+                if (ScheduledShipDate != null)
+                    hashCode = hashCode * 59 + ScheduledShipDate.GetHashCode();
+                if (ScheduledDeliveryDate != null)
+                    hashCode = hashCode * 59 + ScheduledDeliveryDate.GetHashCode();
+                if (RejectionReason != null)
+                    hashCode = hashCode * 59 + RejectionReason.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

@@ -7,12 +7,9 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
     {
         private readonly List<TableRow> innerList = new List<TableRow>();
 
-        public int Count { get { return innerList.Count; } }
+        public int Count => innerList.Count;
 
-        public TableRow this[int index]
-        {
-            get { return innerList[index]; }
-        }
+        public TableRow this[int index] => innerList[index];
 
         public IEnumerator<TableRow> GetEnumerator()
         {
@@ -28,6 +25,5 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         {
             innerList.Add(row);
         }
-
     }
 }

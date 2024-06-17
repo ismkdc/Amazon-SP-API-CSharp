@@ -1,76 +1,110 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
 {
     /// <summary>
-    /// A single order item.
+    ///     A single order item.
     /// </summary>
     [DataContract]
-    public partial class ConfirmShipmentOrderItem : IEquatable<ConfirmShipmentOrderItem>, IValidatableObject
+    public class ConfirmShipmentOrderItem : IEquatable<ConfirmShipmentOrderItem>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfirmShipmentOrderItem" /> class.
+        ///     Initializes a new instance of the <see cref="ConfirmShipmentOrderItem" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ConfirmShipmentOrderItem() { }
+        protected ConfirmShipmentOrderItem()
+        {
+        }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConfirmShipmentOrderItem" /> class.
+        ///     Initializes a new instance of the <see cref="ConfirmShipmentOrderItem" /> class.
         /// </summary>
         /// <param name="orderItemId">The unique identifier of the order item. (required).</param>
         /// <param name="quantity">The quantity of the item. (required).</param>
         /// <param name="transparencyCodes">The list of transparency codes..</param>
-        public ConfirmShipmentOrderItem(string orderItemId = default(string), int? quantity = default(int?), TransparencyCodeList transparencyCodes = default(TransparencyCodeList))
+        public ConfirmShipmentOrderItem(string orderItemId = default, int? quantity = default,
+            TransparencyCodeList transparencyCodes = default)
         {
             // to ensure "orderItemId" is required (not null)
             if (orderItemId == null)
-            {
-                throw new InvalidDataException("orderItemId is a required property for ConfirmShipmentOrderItem and cannot be null");
-            }
-            else
-            {
-                this.OrderItemId = orderItemId;
-            }
+                throw new InvalidDataException(
+                    "orderItemId is a required property for ConfirmShipmentOrderItem and cannot be null");
+            OrderItemId = orderItemId;
             // to ensure "quantity" is required (not null)
             if (quantity == null)
-            {
-                throw new InvalidDataException("quantity is a required property for ConfirmShipmentOrderItem and cannot be null");
-            }
-            else
-            {
-                this.Quantity = quantity;
-            }
-            this.TransparencyCodes = transparencyCodes;
+                throw new InvalidDataException(
+                    "quantity is a required property for ConfirmShipmentOrderItem and cannot be null");
+            Quantity = quantity;
+            TransparencyCodes = transparencyCodes;
         }
 
         /// <summary>
-        /// The unique identifier of the order item.
+        ///     The unique identifier of the order item.
         /// </summary>
         /// <value>The unique identifier of the order item.</value>
         [DataMember(Name = "orderItemId", EmitDefaultValue = false)]
         public string OrderItemId { get; set; }
 
         /// <summary>
-        /// The quantity of the item.
+        ///     The quantity of the item.
         /// </summary>
         /// <value>The quantity of the item.</value>
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
         public int? Quantity { get; set; }
 
         /// <summary>
-        /// The list of transparency codes.
+        ///     The list of transparency codes.
         /// </summary>
         /// <value>The list of transparency codes.</value>
         [DataMember(Name = "transparencyCodes", EmitDefaultValue = false)]
         public TransparencyCodeList TransparencyCodes { get; set; }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     Returns true if ConfirmShipmentOrderItem instances are equal
+        /// </summary>
+        /// <param name="input">Instance of ConfirmShipmentOrderItem to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(ConfirmShipmentOrderItem input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    OrderItemId == input.OrderItemId ||
+                    (OrderItemId != null &&
+                     OrderItemId.Equals(input.OrderItemId))
+                ) &&
+                (
+                    Quantity == input.Quantity ||
+                    (Quantity != null &&
+                     Quantity.Equals(input.Quantity))
+                ) &&
+                (
+                    TransparencyCodes == input.TransparencyCodes ||
+                    (TransparencyCodes != null &&
+                     TransparencyCodes.Equals(input.TransparencyCodes))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -85,7 +119,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -94,72 +128,32 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Orders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ConfirmShipmentOrderItem);
+            return Equals(input as ConfirmShipmentOrderItem);
         }
 
         /// <summary>
-        /// Returns true if ConfirmShipmentOrderItem instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ConfirmShipmentOrderItem to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ConfirmShipmentOrderItem input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.OrderItemId == input.OrderItemId ||
-                    (this.OrderItemId != null &&
-                    this.OrderItemId.Equals(input.OrderItemId))
-                ) &&
-                (
-                    this.Quantity == input.Quantity ||
-                    (this.Quantity != null &&
-                    this.Quantity.Equals(input.Quantity))
-                ) &&
-                (
-                    this.TransparencyCodes == input.TransparencyCodes ||
-                    (this.TransparencyCodes != null &&
-                    this.TransparencyCodes.Equals(input.TransparencyCodes))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.OrderItemId != null)
-                    hashCode = hashCode * 59 + this.OrderItemId.GetHashCode();
-                if (this.Quantity != null)
-                    hashCode = hashCode * 59 + this.Quantity.GetHashCode();
-                if (this.TransparencyCodes != null)
-                    hashCode = hashCode * 59 + this.TransparencyCodes.GetHashCode();
+                var hashCode = 41;
+                if (OrderItemId != null)
+                    hashCode = hashCode * 59 + OrderItemId.GetHashCode();
+                if (Quantity != null)
+                    hashCode = hashCode * 59 + Quantity.GetHashCode();
+                if (TransparencyCodes != null)
+                    hashCode = hashCode * 59 + TransparencyCodes.GetHashCode();
                 return hashCode;
             }
         }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
-
 }
-

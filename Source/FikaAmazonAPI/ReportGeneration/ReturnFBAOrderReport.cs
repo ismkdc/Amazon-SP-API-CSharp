@@ -1,12 +1,11 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReturnFBAOrderReport
     {
-        public List<ReturnFBAOrderRow> Data { get; set; } = new List<ReturnFBAOrderRow>();
         public ReturnFBAOrderReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -14,14 +13,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<ReturnFBAOrderRow> values = new List<ReturnFBAOrderRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(ReturnFBAOrderRow.FromRow(row, refNumber));
-            }
+            var values = new List<ReturnFBAOrderRow>();
+            foreach (var row in table.Rows) values.Add(ReturnFBAOrderRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<ReturnFBAOrderRow> Data { get; set; } = new List<ReturnFBAOrderRow>();
     }
+
     public class ReturnFBAOrderRow
     {
         public DateTime? ReturnDate { get; set; }
@@ -43,7 +42,8 @@ namespace FikaAmazonAPI.ReportGeneration
         public static ReturnFBAOrderRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new ReturnFBAOrderRow();
-            row.ReturnDate = DataConverter.GetDate(rowData.GetString("return-date"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
+            row.ReturnDate = DataConverter.GetDate(rowData.GetString("return-date"),
+                DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.OrderId = rowData.GetString("order-id");
             row.SKU = rowData.GetString("sku");
             row.ASIN = rowData.GetString("asin");

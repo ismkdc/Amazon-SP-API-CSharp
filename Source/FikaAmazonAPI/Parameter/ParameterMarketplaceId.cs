@@ -8,11 +8,13 @@ namespace FikaAmazonAPI.Search
         {
             marketplaceIds = new List<string>();
         }
+
         public ParameterMarketplaceId(string marketplaceId)
         {
             marketplaceIds = new List<string>();
             marketplaceIds.Add(marketplaceId);
         }
+
         public ICollection<string> marketplaceIds { get; set; }
     }
 }

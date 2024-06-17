@@ -1,19 +1,18 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// The format options available for a label.
+    ///     The format options available for a label.
     /// </summary>
     [DataContract]
     public class PrintOption
     {
         /// <summary>
-        /// A list of the supported DPI options for a document.
+        ///     A list of the supported DPI options for a document.
         /// </summary>
         /// <value>A list of the supported DPI options for a document.</value>
         [DataMember(Name = "supportedDPIs", EmitDefaultValue = false)]
@@ -21,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         public List<int> SupportedDPIs { get; set; }
 
         /// <summary>
-        /// A list of the supported page layout options for a document.
+        ///     A list of the supported page layout options for a document.
         /// </summary>
         /// <value>A list of the supported page layout options for a document.</value>
         [DataMember(Name = "supportedPageLayouts", EmitDefaultValue = false)]
@@ -29,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         public List<string> SupportedPageLayouts { get; set; }
 
         /// <summary>
-        /// A list of the supported needFileJoining boolean values for a document.
+        ///     A list of the supported needFileJoining boolean values for a document.
         /// </summary>
         /// <value>A list of the supported needFileJoining boolean values for a document.</value>
         [DataMember(Name = "supportedFileJoiningOptions", EmitDefaultValue = false)]
@@ -37,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         public List<bool> SupportedFileJoiningOptions { get; set; }
 
         /// <summary>
-        /// A list of the supported documented details.
+        ///     A list of the supported documented details.
         /// </summary>
         /// <value>A list of the supported documented details.</value>
         [DataMember(Name = "supportedDocumentDetails", EmitDefaultValue = false)]
@@ -46,7 +45,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -62,13 +61,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

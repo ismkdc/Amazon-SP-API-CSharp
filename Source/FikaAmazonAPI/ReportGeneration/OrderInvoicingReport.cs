@@ -1,14 +1,11 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class OrderInvoicingReport
     {
-        public List<OrderInvoicingReportRow> Data { get; set; } = new List<OrderInvoicingReportRow>();
         public OrderInvoicingReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -16,13 +13,12 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<OrderInvoicingReportRow> values = new List<OrderInvoicingReportRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(OrderInvoicingReportRow.FromRow(row, refNumber));
-            }
+            var values = new List<OrderInvoicingReportRow>();
+            foreach (var row in table.Rows) values.Add(OrderInvoicingReportRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<OrderInvoicingReportRow> Data { get; set; } = new List<OrderInvoicingReportRow>();
     }
 
 
@@ -30,7 +26,7 @@ namespace FikaAmazonAPI.ReportGeneration
     {
         public string AmazonOrderId { get; set; }
         public string OrderItemId { get; set; }
-        public DateTime? PurchaseDate{ get; set; }
+        public DateTime? PurchaseDate { get; set; }
         public DateTime? PaymentDate { get; set; }
         public string BuyerEmail { get; set; }
         public string BuyerName { get; set; }
@@ -68,18 +64,15 @@ namespace FikaAmazonAPI.ReportGeneration
         public string BuyerTaxRegistationCountry { get; set; }
         public string refNumber { get; set; }
 
-        public OrderInvoicingReportRow()
-        {
-
-        }
-
         public static OrderInvoicingReportRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new OrderInvoicingReportRow();
             row.AmazonOrderId = rowData.GetString("order-id");
             row.OrderItemId = rowData.GetString("order-item-id");
-            row.PurchaseDate = DataConverter.GetDate(rowData.GetString("purchase-date"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
-            row.PaymentDate = DataConverter.GetDate(rowData.GetString("payments-date"), DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
+            row.PurchaseDate = DataConverter.GetDate(rowData.GetString("purchase-date"),
+                DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
+            row.PaymentDate = DataConverter.GetDate(rowData.GetString("payments-date"),
+                DataConverter.DateTimeFormat.DATETIME_K_FORMAT);
             row.BuyerEmail = rowData.GetString("buyer-email");
             row.BuyerName = rowData.GetString("buyer-name");
             row.PaymentMethodeDetails = rowData.GetString("payment-method-details");

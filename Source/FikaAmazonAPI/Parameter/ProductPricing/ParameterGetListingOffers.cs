@@ -7,8 +7,9 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
     public class ParameterGetListingOffers : ParameterBased
     {
         public string MarketplaceId { get; set; }
-        [JsonIgnore]
-        public string SellerSKU { get; set; }
+
+        [JsonIgnore] public string SellerSKU { get; set; }
+
         public CustomerType? CustomerType { get; set; }
         public ItemCondition ItemCondition { get; set; }
     }

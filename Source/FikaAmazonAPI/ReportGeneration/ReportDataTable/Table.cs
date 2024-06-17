@@ -12,41 +12,29 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         internal const string ERROR_NO_CELLS_TO_ADD = "No cells to add";
         internal const string ERROR_NO_HEADER_TO_ADD = "No headers to add";
         internal const string ERROR_COLUMN_NAME_NOT_FOUND = "Could not find a column named '{0}' in the table.";
-        internal const string ERROR_CELLS_NOT_MATCHING_HEADERS = "The number of cells ({0}) you are trying to add doesn't match the number of columns ({1})";
+
+        internal const string ERROR_CELLS_NOT_MATCHING_HEADERS =
+            "The number of cells ({0}) you are trying to add doesn't match the number of columns ({1})";
 
         private readonly string[] header;
-        private readonly TableRows rows = new TableRows();
-
-        public ICollection<string> Header
-        {
-            get { return header; }
-        }
-
-        public TableRows Rows
-        {
-            get { return rows; }
-        }
-
-        public int RowCount
-        {
-            get { return rows.Count; }
-        }
 
         public Table(params string[] header)
         {
-
-            if (header == null || header.Length == 0)
-            {
-                throw new ArgumentException(ERROR_NO_HEADER_TO_ADD, "header");
-            }
-            for (int colIndex = 0; colIndex < header.Length; colIndex++)
+            if (header == null || header.Length == 0) throw new ArgumentException(ERROR_NO_HEADER_TO_ADD, "header");
+            for (var colIndex = 0; colIndex < header.Length; colIndex++)
                 header[colIndex] = header[colIndex] ?? string.Empty;
 
-            for (int colIndex = 0; colIndex < header.Length; colIndex++)
+            for (var colIndex = 0; colIndex < header.Length; colIndex++)
                 header[colIndex] = TheValue(header[colIndex]);
 
             this.header = header;
         }
+
+        public ICollection<string> Header => header;
+
+        public TableRows Rows { get; } = new TableRows();
+
+        public int RowCount => Rows.Count;
 
         public static Table ConvertFromCSV(string path, char separator = '\t', Encoding encoding = default)
         {
@@ -58,10 +46,12 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
             lines.Skip(1).ToList().ForEach(a => ConvertFromCSVAddRow(table, a, separator));
             return table;
         }
+
         private static void ConvertFromCSVAddRow(Table table, string line, char separator)
         {
             table.AddRow(line.Split(separator));
         }
+
         public bool ContainsColumn(string column)
         {
             return GetHeaderIndex(column, false) >= 0;
@@ -69,26 +59,27 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         internal int GetHeaderIndex(string column, bool throwIfNotFound = true)
         {
-            int index = Array.IndexOf(header, column);
+            var index = Array.IndexOf(header, column);
             if (!throwIfNotFound)
                 return index;
             if (index < 0)
             {
                 var mess = string.Format(
-                            ERROR_COLUMN_NAME_NOT_FOUND + "\nThe table looks like this:\n{1}",
-                            column,
-                            this);
+                    ERROR_COLUMN_NAME_NOT_FOUND + "\nThe table looks like this:\n{1}",
+                    column,
+                    this);
                 throw new IndexOutOfRangeException(mess);
             }
+
             return index;
         }
 
         public void AddRow(IDictionary<string, string> values)
         {
-            string[] cells = new string[header.Length];
+            var cells = new string[header.Length];
             foreach (var value in values)
             {
-                int headerIndex = GetHeaderIndex(value.Key);
+                var headerIndex = GetHeaderIndex(value.Key);
                 cells[headerIndex] = value.Value;
             }
 
@@ -110,44 +101,39 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
                         this);
                 throw new ArgumentException(mess);
             }
+
             var row = new TableRow(this, cells);
-            rows.Add(row);
+            Rows.Add(row);
         }
 
         public void RenameColumn(string oldColumn, string newColumn)
         {
-            int colIndex = GetHeaderIndex(oldColumn);
+            var colIndex = GetHeaderIndex(oldColumn);
             header[colIndex] = newColumn;
         }
 
         public override string ToString()
         {
-            return ToString(false, true);
+            return ToString();
         }
 
         public string ToString(bool headersOnly = false, bool withNewline = true)
         {
-            int[] columnWidths = new int[header.Length];
-            for (int colIndex = 0; colIndex < header.Length; colIndex++)
+            var columnWidths = new int[header.Length];
+            for (var colIndex = 0; colIndex < header.Length; colIndex++)
                 columnWidths[colIndex] = header[colIndex].Length;
 
             if (!headersOnly)
-            {
-                foreach (TableRow row in rows)
-                {
-                    for (int colIndex = 0; colIndex < header.Length; colIndex++)
+                foreach (var row in Rows)
+                    for (var colIndex = 0; colIndex < header.Length; colIndex++)
                         columnWidths[colIndex] = Math.Max(columnWidths[colIndex], row[colIndex].Length);
-                }
-            }
 
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             AddTableRow(builder, header, columnWidths);
 
             if (!headersOnly)
-            {
-                foreach (TableRow row in rows)
+                foreach (var row in Rows)
                     AddTableRow(builder, row.Select(pair => pair.Value), columnWidths);
-            }
 
             if (!withNewline)
             {
@@ -162,10 +148,10 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
         {
             const string margin = " ";
             const string separator = "|";
-            int colIndex = 0;
+            var colIndex = 0;
 
             builder.Append(separator);
-            foreach (string cell in cells)
+            foreach (var cell in cells)
             {
                 builder.Append(margin);
 

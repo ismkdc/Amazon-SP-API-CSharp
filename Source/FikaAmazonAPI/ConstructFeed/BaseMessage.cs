@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.ConstructFeed.Messages;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
+using FikaAmazonAPI.ConstructFeed.Messages;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.ConstructFeed
@@ -66,62 +66,61 @@ namespace FikaAmazonAPI.ConstructFeed
         public EasyShipDocumentMessage EasyShipDocument { get; set; }
 
 
+        [XmlIgnore] public bool InventorySpecified => Inventory != null;
+
+        [XmlIgnore] public bool PriceSpecified => Price != null;
+
+        [XmlIgnore] public bool AmazonAppSpecified => AmazonApp != null;
+        [XmlIgnore] public bool CatPILSpecified => CatPIL != null;
+        [XmlIgnore] public bool AutoPartsItemSpecified => AutoPartsItem != null;
+        [XmlIgnore] public bool CharacterDataSpecified => CharacterData != null;
+        [XmlIgnore] public bool CustomerSpecified => Customer != null;
+        [XmlIgnore] public bool CustomerReportSpecified => CustomerReport != null;
+        [XmlIgnore] public bool EnhancedContentSpecified => EnhancedContent != null;
+        [XmlIgnore] public bool ExternalCustomerSpecified => ExternalCustomer != null;
+        [XmlIgnore] public bool ExternalOrderSpecified => ExternalOrder != null;
+        [XmlIgnore] public bool FulfillmentCenterSpecified => FulfillmentCenter != null;
+        [XmlIgnore] public bool FulfillmentOrderRequestSpecified => FulfillmentOrderRequest != null;
+
         [XmlIgnore]
-        public bool InventorySpecified { get { return Inventory != null; } }
-        [XmlIgnore]
-        public bool PriceSpecified { get { return Price != null; } }
+        public bool FulfillmentOrderCancellationRequestSpecified => FulfillmentOrderCancellationRequest != null;
 
-        [XmlIgnore] public bool AmazonAppSpecified { get { return AmazonApp != null; } }
-        [XmlIgnore] public bool CatPILSpecified { get { return CatPIL != null; } }
-        [XmlIgnore] public bool AutoPartsItemSpecified { get { return AutoPartsItem != null; } }
-        [XmlIgnore] public bool CharacterDataSpecified { get { return CharacterData != null; } }
-        [XmlIgnore] public bool CustomerSpecified { get { return Customer != null; } }
-        [XmlIgnore] public bool CustomerReportSpecified { get { return CustomerReport != null; } }
-        [XmlIgnore] public bool EnhancedContentSpecified { get { return EnhancedContent != null; } }
-        [XmlIgnore] public bool ExternalCustomerSpecified { get { return ExternalCustomer != null; } }
-        [XmlIgnore] public bool ExternalOrderSpecified { get { return ExternalOrder != null; } }
-        [XmlIgnore] public bool FulfillmentCenterSpecified { get { return FulfillmentCenter != null; } }
-        [XmlIgnore] public bool FulfillmentOrderRequestSpecified { get { return FulfillmentOrderRequest != null; } }
-        [XmlIgnore] public bool FulfillmentOrderCancellationRequestSpecified { get { return FulfillmentOrderCancellationRequest != null; } }
-        [XmlIgnore] public bool CartonContentsRequestSpecified { get { return CartonContentsRequest != null; } }
-        [XmlIgnore] public bool ImageSpecified { get { return Image != null; } }
-        [XmlIgnore] public bool LocalSpecified { get { return Local != null; } }
-        [XmlIgnore] public bool InvoiceConfirmationSpecified { get { return InvoiceConfirmation != null; } }
-        [XmlIgnore] public bool ItemSpecified { get { return Item != null; } }
-        [XmlIgnore] public bool MSVatSpecified { get { return MSVat != null; } }
-        [XmlIgnore] public bool LoyaltySpecified { get { return Loyalty != null; } }
-        [XmlIgnore] public bool MultiChannelOrderReportSpecified { get { return MultiChannelOrderReport != null; } }
-        [XmlIgnore] public bool NavigationReportSpecified { get { return NavigationReport != null; } }
-        [XmlIgnore] public bool OfferSpecified { get { return Offer != null; } }
-        [XmlIgnore] public bool OrderAcknowledgementSpecified { get { return OrderAcknowledgement != null; } }
-        [XmlIgnore] public bool OrderAdjustmentSpecified { get { return OrderAdjustment != null; } }
-        [XmlIgnore] public bool OrderFulfillmentSpecified { get { return OrderFulfillment != null; } }
-        [XmlIgnore] public bool OrderSourcingOnDemandSpecified { get { return OrderSourcingOnDemand != null; } }
-        [XmlIgnore] public bool OrderNotificationReportSpecified { get { return OrderNotificationReport != null; } }
-        [XmlIgnore] public bool OrderReportSpecified { get { return OrderReport != null; } }
-        [XmlIgnore] public bool OverrideSpecified { get { return Override != null; } }
-        [XmlIgnore] public bool PointOfSaleSpecified { get { return PointOfSale != null; } }
-        [XmlIgnore] public bool TradeInPriceSpecified { get { return TradeInPrice != null; } }
-        [XmlIgnore] public bool ProcessingReportSpecified { get { return ProcessingReport != null; } }
-        [XmlIgnore] public bool ProductSpecified { get { return Product != null; } }
-        [XmlIgnore] public bool ProductImageSpecified { get { return ProductImage != null; } }
-        [XmlIgnore] public bool PromotionRequestSpecified { get { return PromotionRequest != null; } }
-        [XmlIgnore] public bool RelationshipSpecified { get { return Relationship != null; } }
-        [XmlIgnore] public bool ReverseItemSpecified { get { return ReverseItem != null; } }
-        [XmlIgnore] public bool RichContentSpecified { get { return RichContent != null; } }
-        [XmlIgnore] public bool SettlementReportSpecified { get { return SettlementReport != null; } }
-        [XmlIgnore] public bool SalesHistorySpecified { get { return SalesHistory != null; } }
-        [XmlIgnore] public bool StandardProductSpecified { get { return StandardProduct != null; } }
-        [XmlIgnore] public bool TestOrderRequestSpecified { get { return TestOrderRequest != null; } }
-        [XmlIgnore] public bool StoreSpecified { get { return Store != null; } }
-        [XmlIgnore] public bool StoreStockMovementSpecified { get { return StoreStockMovement != null; } }
-        [XmlIgnore] public bool WebstoreItemSpecified { get { return WebstoreItem != null; } }
-        [XmlIgnore] public bool PendingOrderReportSpecified { get { return PendingOrderReport != null; } }
-        [XmlIgnore] public bool PurchaseConfirmationSpecified { get { return PurchaseConfirmation != null; } }
-        [XmlIgnore] public bool SalesAdjustmentSpecified { get { return SalesAdjustment != null; } }
-        [XmlIgnore] public bool EasyShipDocumentSpecified { get { return EasyShipDocument != null; } }
-
-
-
+        [XmlIgnore] public bool CartonContentsRequestSpecified => CartonContentsRequest != null;
+        [XmlIgnore] public bool ImageSpecified => Image != null;
+        [XmlIgnore] public bool LocalSpecified => Local != null;
+        [XmlIgnore] public bool InvoiceConfirmationSpecified => InvoiceConfirmation != null;
+        [XmlIgnore] public bool ItemSpecified => Item != null;
+        [XmlIgnore] public bool MSVatSpecified => MSVat != null;
+        [XmlIgnore] public bool LoyaltySpecified => Loyalty != null;
+        [XmlIgnore] public bool MultiChannelOrderReportSpecified => MultiChannelOrderReport != null;
+        [XmlIgnore] public bool NavigationReportSpecified => NavigationReport != null;
+        [XmlIgnore] public bool OfferSpecified => Offer != null;
+        [XmlIgnore] public bool OrderAcknowledgementSpecified => OrderAcknowledgement != null;
+        [XmlIgnore] public bool OrderAdjustmentSpecified => OrderAdjustment != null;
+        [XmlIgnore] public bool OrderFulfillmentSpecified => OrderFulfillment != null;
+        [XmlIgnore] public bool OrderSourcingOnDemandSpecified => OrderSourcingOnDemand != null;
+        [XmlIgnore] public bool OrderNotificationReportSpecified => OrderNotificationReport != null;
+        [XmlIgnore] public bool OrderReportSpecified => OrderReport != null;
+        [XmlIgnore] public bool OverrideSpecified => Override != null;
+        [XmlIgnore] public bool PointOfSaleSpecified => PointOfSale != null;
+        [XmlIgnore] public bool TradeInPriceSpecified => TradeInPrice != null;
+        [XmlIgnore] public bool ProcessingReportSpecified => ProcessingReport != null;
+        [XmlIgnore] public bool ProductSpecified => Product != null;
+        [XmlIgnore] public bool ProductImageSpecified => ProductImage != null;
+        [XmlIgnore] public bool PromotionRequestSpecified => PromotionRequest != null;
+        [XmlIgnore] public bool RelationshipSpecified => Relationship != null;
+        [XmlIgnore] public bool ReverseItemSpecified => ReverseItem != null;
+        [XmlIgnore] public bool RichContentSpecified => RichContent != null;
+        [XmlIgnore] public bool SettlementReportSpecified => SettlementReport != null;
+        [XmlIgnore] public bool SalesHistorySpecified => SalesHistory != null;
+        [XmlIgnore] public bool StandardProductSpecified => StandardProduct != null;
+        [XmlIgnore] public bool TestOrderRequestSpecified => TestOrderRequest != null;
+        [XmlIgnore] public bool StoreSpecified => Store != null;
+        [XmlIgnore] public bool StoreStockMovementSpecified => StoreStockMovement != null;
+        [XmlIgnore] public bool WebstoreItemSpecified => WebstoreItem != null;
+        [XmlIgnore] public bool PendingOrderReportSpecified => PendingOrderReport != null;
+        [XmlIgnore] public bool PurchaseConfirmationSpecified => PurchaseConfirmation != null;
+        [XmlIgnore] public bool SalesAdjustmentSpecified => SalesAdjustment != null;
+        [XmlIgnore] public bool EasyShipDocumentSpecified => EasyShipDocument != null;
     }
 }

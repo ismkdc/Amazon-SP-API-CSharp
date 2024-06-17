@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class InventoryPlanningDataReport
     {
-        public List<InventoryPlanningDataRow> Data { get; set; } = new List<InventoryPlanningDataRow>();
         public InventoryPlanningDataReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -15,13 +13,12 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<InventoryPlanningDataRow> values = new List<InventoryPlanningDataRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(InventoryPlanningDataRow.FromRow(row, refNumber));
-            }
+            var values = new List<InventoryPlanningDataRow>();
+            foreach (var row in table.Rows) values.Add(InventoryPlanningDataRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<InventoryPlanningDataRow> Data { get; set; } = new List<InventoryPlanningDataRow>();
     }
 
     public class InventoryPlanningDataRow
@@ -93,7 +90,8 @@ namespace FikaAmazonAPI.ReportGeneration
         public static InventoryPlanningDataRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new InventoryPlanningDataRow();
-            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
+            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"),
+                DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
             row.SKU = rowData.GetString("sku");
             row.FNSKU = rowData.GetString("fnsku");
             row.ASIN = rowData.GetString("asin");
@@ -118,14 +116,16 @@ namespace FikaAmazonAPI.ReportGeneration
             row.Alert = rowData.GetString("alert");
             row.YourPrice = DataConverter.GetDecimal(rowData.GetString("your-price"));
             row.SalesPrice = DataConverter.GetDecimal(rowData.GetString("sales-price"));
-            row.LowestPriceNewPlusShipping = DataConverter.GetDecimal(rowData.GetString("lowest-price-new-plus-shipping"));
+            row.LowestPriceNewPlusShipping =
+                DataConverter.GetDecimal(rowData.GetString("lowest-price-new-plus-shipping"));
             row.LowestPriceUsed = DataConverter.GetDecimal(rowData.GetString("lowest-price-used"));
             row.RecommendedAction = rowData.GetString("recommended-action");
             row.HealthyInventoryLevel = DataConverter.GetInt(rowData.GetString("healthy-inventory-level"));
             row.RecommendedSalesPrice = DataConverter.GetDecimal(rowData.GetString("recommended-sales-price"));
             row.RecommendedSaleDuartionDays = DataConverter.GetInt(rowData.GetString("recommended-sale-duration-days"));
             row.RecommendedRemovalQuantity = DataConverter.GetInt(rowData.GetString("recommended-removal-quantity"));
-            row.EstimatedCostSavingsOfRecommendedActions = DataConverter.GetDecimal(rowData.GetString("estimated-cost-savings-of-recommended-actions"));
+            row.EstimatedCostSavingsOfRecommendedActions =
+                DataConverter.GetDecimal(rowData.GetString("estimated-cost-savings-of-recommended-actions"));
             row.SellThrough = DataConverter.GetDecimal(rowData.GetString("sell-through"));
             row.ItemVolume = DataConverter.GetDouble(rowData.GetString("item-volume"));
             row.VolumeUnitMeasurement = rowData.GetString("volume-unit-measurement");
@@ -148,7 +148,8 @@ namespace FikaAmazonAPI.ReportGeneration
             row.InvAge61To90Days = DataConverter.GetInt(rowData.GetString("inv-age-61-to-90-days"));
             row.InvAge181To330Days = DataConverter.GetInt(rowData.GetString("inv-age-181-to-330-days"));
             row.InvAge331To365Days = DataConverter.GetInt(rowData.GetString("inv-age-331-to-365-days"));
-            row.EstimatedStorageCostNextMonth = DataConverter.GetDecimal(rowData.GetString("estimated-storage-cost-next-month"));
+            row.EstimatedStorageCostNextMonth =
+                DataConverter.GetDecimal(rowData.GetString("estimated-storage-cost-next-month"));
             row.InboundQuantity = DataConverter.GetInt(rowData.GetString("inbound-quantity"));
             row.InboundWorking = DataConverter.GetInt(rowData.GetString("inbound-working"));
             row.InboundShipped = DataConverter.GetInt(rowData.GetString("inbound-shipped"));
@@ -159,6 +160,5 @@ namespace FikaAmazonAPI.ReportGeneration
             row.refNumber = refNumber;
             return row;
         }
-
     }
 }

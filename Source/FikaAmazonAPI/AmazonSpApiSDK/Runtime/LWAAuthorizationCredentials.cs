@@ -36,4 +36,3 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public List<string> Scopes { get; set; }
     }
 }
-

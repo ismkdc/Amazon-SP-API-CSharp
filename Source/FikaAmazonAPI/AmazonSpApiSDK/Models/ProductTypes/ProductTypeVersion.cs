@@ -1,18 +1,17 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
 {
-
     /// <summary>
-    /// The version details for an Amazon product type.
+    ///     The version details for an Amazon product type.
     /// </summary>
     [DataContract]
     public class ProductTypeVersion
     {
         /// <summary>
-        /// Version identifier.
+        ///     Version identifier.
         /// </summary>
         /// <value>Version identifier.</value>
         [DataMember(Name = "version", EmitDefaultValue = false)]
@@ -20,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         public string Version { get; set; }
 
         /// <summary>
-        /// When true, the version indicated by the version identifier is the latest available for the Amazon product type.
+        ///     When true, the version indicated by the version identifier is the latest available for the Amazon product type.
         /// </summary>
         /// <value>When true, the version indicated by the version identifier is the latest available for the Amazon product type.</value>
         [DataMember(Name = "latest", EmitDefaultValue = false)]
@@ -28,16 +27,20 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         public bool? Latest { get; set; }
 
         /// <summary>
-        /// When true, the version indicated by the version identifier is the prerelease (release candidate) for the Amazon product type.
+        ///     When true, the version indicated by the version identifier is the prerelease (release candidate) for the Amazon
+        ///     product type.
         /// </summary>
-        /// <value>When true, the version indicated by the version identifier is the prerelease (release candidate) for the Amazon product type.</value>
+        /// <value>
+        ///     When true, the version indicated by the version identifier is the prerelease (release candidate) for the Amazon
+        ///     product type.
+        /// </value>
         [DataMember(Name = "releaseCandidate", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "releaseCandidate")]
         public bool? ReleaseCandidate { get; set; }
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -52,13 +55,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

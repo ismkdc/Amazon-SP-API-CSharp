@@ -1,42 +1,41 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
+using FikaAmazonAPI.Parameter.ProductFee;
 using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+public class ProductFeeSample
 {
-    public class ProductFeeSample
-    {
-        AmazonConnection amazonConnection;
-        public ProductFeeSample(AmazonConnection amazonConnection)
-        {
-            this.amazonConnection = amazonConnection;
-        }
+    private readonly AmazonConnection amazonConnection;
 
-        public async Task getMyFeesEstimates()
+    public ProductFeeSample(AmazonConnection amazonConnection)
+    {
+        this.amazonConnection = amazonConnection;
+    }
+
+    public async Task getMyFeesEstimates()
+    {
+        var data = await amazonConnection.ProductFee.GetMyFeesEstimateAsync(new FeesEstimateByIdRequest[]
         {
-            var data = await amazonConnection.ProductFee.GetMyFeesEstimateAsync(new Parameter.ProductFee.FeesEstimateByIdRequest[]
+            new()
             {
-                new Parameter.ProductFee.FeesEstimateByIdRequest{
-                    IdType = AmazonSpApiSDK.Models.ProductFees.IdTypeEnum.SellerSKU,
-                    IdValue = "xxx",
-                    FeesEstimateRequest = new AmazonSpApiSDK.Models.ProductFees.FeesEstimateRequest{
-                        Identifier = "xxx",
-                        IsAmazonFulfilled = true,
-                        MarketplaceId = MarketPlace.UnitedKingdom.ID,
-                        PriceToEstimateFees = new AmazonSpApiSDK.Models.ProductFees.PriceToEstimateFees(){
-                            ListingPrice = new AmazonSpApiSDK.Models.ProductFees.MoneyType(){
-                                Amount = 6.59m,
-                                CurrencyCode ="GBP"
-                            }
+                IdType = IdTypeEnum.SellerSKU,
+                IdValue = "xxx",
+                FeesEstimateRequest = new FeesEstimateRequest
+                {
+                    Identifier = "xxx",
+                    IsAmazonFulfilled = true,
+                    MarketplaceId = MarketPlace.UnitedKingdom.ID,
+                    PriceToEstimateFees = new PriceToEstimateFees
+                    {
+                        ListingPrice = new MoneyType
+                        {
+                            Amount = 6.59m,
+                            CurrencyCode = "GBP"
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     }
 }

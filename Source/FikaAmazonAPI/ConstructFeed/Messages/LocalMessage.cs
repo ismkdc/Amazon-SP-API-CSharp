@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class LocalMessage
+    public class LocalMessage
     {
     }
 }

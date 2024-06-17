@@ -1,19 +1,18 @@
-using Newtonsoft.Json;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 {
-
     /// <summary>
-    /// Invoice number and date.
+    ///     Invoice number and date.
     /// </summary>
     [DataContract]
     public class InvoiceData
     {
         /// <summary>
-        /// The invoice number.
+        ///     The invoice number.
         /// </summary>
         /// <value>The invoice number.</value>
         [DataMember(Name = "invoiceNumber", EmitDefaultValue = false)]
@@ -21,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         public string InvoiceNumber { get; set; }
 
         /// <summary>
-        /// The date that the invoice was generated.
+        ///     The date that the invoice was generated.
         /// </summary>
         /// <value>The date that the invoice was generated.</value>
         [DataMember(Name = "invoiceDate", EmitDefaultValue = false)]
@@ -30,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -44,13 +43,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

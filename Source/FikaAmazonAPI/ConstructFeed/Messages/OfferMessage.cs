@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class OfferMessage
+    public class OfferMessage
     {
         public string SKU { get; set; }
 

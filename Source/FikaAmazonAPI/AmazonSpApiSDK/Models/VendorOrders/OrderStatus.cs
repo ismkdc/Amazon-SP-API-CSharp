@@ -1,78 +1,56 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json.Converters;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders.Constants;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class OrderStatus : IEquatable<OrderStatus>, IValidatableObject
+    public class OrderStatus : IEquatable<OrderStatus>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public OrderStatus() { }
+        public OrderStatus()
+        {
+        }
+
         public OrderStatus(
-            string purchaseOrderNumber = default(string), PurchaseOrderStatus? purchaseOrderStatus = default(PurchaseOrderStatus?), DateTime? purchaseOrderDate = default(DateTime?), 
-            DateTime? lastUpdatedDate = default(DateTime?), PartyIdentification sellingParty = default(PartyIdentification), PartyIdentification shipToParty = default(PartyIdentification), List<OrderItemStatus> itemStatus = default(List<OrderItemStatus>)
+            string purchaseOrderNumber = default, PurchaseOrderStatus? purchaseOrderStatus = default,
+            DateTime? purchaseOrderDate = default,
+            DateTime? lastUpdatedDate = default, PartyIdentification sellingParty = default,
+            PartyIdentification shipToParty = default, List<OrderItemStatus> itemStatus = default
         )
         {
             if (purchaseOrderNumber == null)
-            {
-                throw new InvalidDataException("purchaseOrderNumber is a required property for OrderStatus and cannot be null");
-            }
-            else
-            {
-                this.PurchaseOrderNumber = purchaseOrderNumber;
-            }
+                throw new InvalidDataException(
+                    "purchaseOrderNumber is a required property for OrderStatus and cannot be null");
+            PurchaseOrderNumber = purchaseOrderNumber;
             if (purchaseOrderStatus == null)
-            {
-                throw new InvalidDataException("purchaseOrderStatus is a required property for OrderStatus and cannot be null");
-            }
-            else
-            {
-                this.PurchaseOrderStatus = purchaseOrderStatus;
-            }
+                throw new InvalidDataException(
+                    "purchaseOrderStatus is a required property for OrderStatus and cannot be null");
+            PurchaseOrderStatus = purchaseOrderStatus;
             if (purchaseOrderDate == null)
-            {
-                throw new InvalidDataException("purchaseOrderDate is a required property for OrderStatus and cannot be null");
-            }
-            else
-            {
-                this.PurchaseOrderDate = purchaseOrderDate;
-            }
-            this.LastUpdatedDate = lastUpdatedDate;
+                throw new InvalidDataException(
+                    "purchaseOrderDate is a required property for OrderStatus and cannot be null");
+            PurchaseOrderDate = purchaseOrderDate;
+            LastUpdatedDate = lastUpdatedDate;
             if (sellingParty == null)
-            {
-                throw new InvalidDataException("sellingParty is a required property for OrderStatus and cannot be null");
-            }
-            else
-            {
-                this.SellingParty = sellingParty;
-            }
+                throw new InvalidDataException(
+                    "sellingParty is a required property for OrderStatus and cannot be null");
+            SellingParty = sellingParty;
             if (shipToParty == null)
-            {
                 throw new InvalidDataException("shipToParty is a required property for OrderStatus and cannot be null");
-            }
-            else
-            {
-                this.ShipToParty = shipToParty;
-            }
+            ShipToParty = shipToParty;
             if (itemStatus == null)
-            {
                 throw new InvalidDataException("itemStatus is a required property for OrderStatus and cannot be null");
-            }
-            else
-            {
-                this.ItemStatus = itemStatus;
-            }
+            ItemStatus = itemStatus;
         }
 
         /// <summary>
-        /// The purchase order number for this order. Formatting Notes: alpha-numeric code.
+        ///     The purchase order number for this order. Formatting Notes: alpha-numeric code.
         /// </summary>
         /// <value>The purchase order number for this order. Formatting Notes: alpha-numeric code.</value>
         [DataMember(Name = "purchaseOrderNumber", EmitDefaultValue = false)]
@@ -97,7 +75,65 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         public List<OrderItemStatus> ItemStatus { get; set; }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     Returns true if Order instances are equal
+        /// </summary>
+        /// <param name="input">Instance of Order to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(OrderStatus input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    PurchaseOrderNumber == input.PurchaseOrderNumber ||
+                    (PurchaseOrderNumber != null &&
+                     PurchaseOrderNumber.Equals(input.PurchaseOrderNumber))
+                ) &&
+                (
+                    PurchaseOrderStatus == input.PurchaseOrderStatus ||
+                    (PurchaseOrderStatus != null &&
+                     PurchaseOrderStatus.Equals(input.PurchaseOrderStatus))
+                ) &&
+                (
+                    PurchaseOrderDate == input.PurchaseOrderDate ||
+                    (PurchaseOrderDate != null &&
+                     PurchaseOrderDate.Equals(input.PurchaseOrderDate))
+                ) &&
+                (
+                    LastUpdatedDate == input.LastUpdatedDate ||
+                    (LastUpdatedDate != null &&
+                     LastUpdatedDate.Equals(input.LastUpdatedDate))
+                ) &&
+                (
+                    SellingParty == input.SellingParty ||
+                    (SellingParty != null &&
+                     SellingParty.Equals(input.SellingParty))
+                ) &&
+                (
+                    ShipToParty == input.ShipToParty ||
+                    (ShipToParty != null &&
+                     ShipToParty.Equals(input.ShipToParty))
+                ) &&
+                (
+                    ItemStatus == input.ItemStatus ||
+                    (ItemStatus != null &&
+                     ItemStatus.Equals(input.ItemStatus))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -116,7 +152,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -125,99 +161,40 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Order);
+            return Equals(input as Order);
         }
 
         /// <summary>
-        /// Returns true if Order instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Order to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(OrderStatus input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.PurchaseOrderNumber == input.PurchaseOrderNumber ||
-                    (this.PurchaseOrderNumber != null &&
-                    this.PurchaseOrderNumber.Equals(input.PurchaseOrderNumber))
-                ) &&
-                (
-                    this.PurchaseOrderStatus == input.PurchaseOrderStatus ||
-                    (this.PurchaseOrderStatus != null &&
-                    this.PurchaseOrderStatus.Equals(input.PurchaseOrderStatus))
-                ) &&
-                (
-                    this.PurchaseOrderDate == input.PurchaseOrderDate ||
-                    (this.PurchaseOrderDate != null &&
-                    this.PurchaseOrderDate.Equals(input.PurchaseOrderDate))
-                ) &&
-                (
-                    this.LastUpdatedDate == input.LastUpdatedDate ||
-                    (this.LastUpdatedDate != null &&
-                    this.LastUpdatedDate.Equals(input.LastUpdatedDate))
-                ) &&
-                (
-                    this.SellingParty == input.SellingParty ||
-                    (this.SellingParty != null &&
-                    this.SellingParty.Equals(input.SellingParty))
-                ) &&
-                (
-                    this.ShipToParty == input.ShipToParty ||
-                    (this.ShipToParty != null &&
-                    this.ShipToParty.Equals(input.ShipToParty))
-                ) &&
-                (
-                    this.ItemStatus == input.ItemStatus ||
-                    (this.ItemStatus != null &&
-                    this.ItemStatus.Equals(input.ItemStatus))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.PurchaseOrderNumber != null)
-                    hashCode = hashCode * 59 + this.PurchaseOrderNumber.GetHashCode();
-                if (this.PurchaseOrderStatus != null)
-                    hashCode = hashCode * 59 + this.PurchaseOrderStatus.GetHashCode();
-                if (this.PurchaseOrderDate != null)
-                    hashCode = hashCode * 59 + this.PurchaseOrderDate.GetHashCode();
-                if (this.LastUpdatedDate != null)
-                    hashCode = hashCode * 59 + this.LastUpdatedDate.GetHashCode();
-                if (this.SellingParty != null)
-                    hashCode = hashCode * 59 + this.SellingParty.GetHashCode();
-                if (this.ShipToParty != null)
-                    hashCode = hashCode * 59 + this.ShipToParty.GetHashCode();
-                if (this.ItemStatus != null)
-                    hashCode = hashCode * 59 + this.ItemStatus.GetHashCode();
+                var hashCode = 41;
+                if (PurchaseOrderNumber != null)
+                    hashCode = hashCode * 59 + PurchaseOrderNumber.GetHashCode();
+                if (PurchaseOrderStatus != null)
+                    hashCode = hashCode * 59 + PurchaseOrderStatus.GetHashCode();
+                if (PurchaseOrderDate != null)
+                    hashCode = hashCode * 59 + PurchaseOrderDate.GetHashCode();
+                if (LastUpdatedDate != null)
+                    hashCode = hashCode * 59 + LastUpdatedDate.GetHashCode();
+                if (SellingParty != null)
+                    hashCode = hashCode * 59 + SellingParty.GetHashCode();
+                if (ShipToParty != null)
+                    hashCode = hashCode * 59 + ShipToParty.GetHashCode();
+                if (ItemStatus != null)
+                    hashCode = hashCode * 59 + ItemStatus.GetHashCode();
                 return hashCode;
             }
         }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
-
 }

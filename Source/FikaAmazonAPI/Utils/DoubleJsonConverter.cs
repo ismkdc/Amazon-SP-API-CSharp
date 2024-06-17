@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.Utils
 {
@@ -20,13 +18,9 @@ namespace FikaAmazonAPI.Utils
             // Customise how you want the decimal value to be output in here
             // for example, you may want to consider culture
             if (value % 1 != 0)
-            {
                 writer.WriteRawValue(value.ToString());
-            }
             else
-            {
-                writer.WriteRawValue(((double)value).ToString("F0", CultureInfo.InvariantCulture));
-            }
+                writer.WriteRawValue(value.ToString("F0", CultureInfo.InvariantCulture));
         }
     }
 }

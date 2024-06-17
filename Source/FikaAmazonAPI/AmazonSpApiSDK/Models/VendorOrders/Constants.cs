@@ -1,11 +1,27 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     public class Constants
     {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ItemConfirmationStatus
+        {
+            ACCEPTED,
+            PARTIALLY_ACCEPTED,
+            REJECTED,
+            UNCONFIRMED
+        }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ItemReceiveStatus
+        {
+            NOT_RECEIVED,
+            PARTIALLY_RECEIVED,
+            RECEIVED
+        }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PoItemState
         {
@@ -26,23 +42,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
             OPEN,
             CLOSED
         }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ItemConfirmationStatus
-        {
-            ACCEPTED,
-            PARTIALLY_ACCEPTED,
-            REJECTED,
-            UNCONFIRMED
-        }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ItemReceiveStatus
-        {
-            NOT_RECEIVED,
-            PARTIALLY_RECEIVED,
-            RECEIVED
-        }
-
     }
 }

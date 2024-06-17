@@ -1,37 +1,36 @@
-﻿using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes;
+using FikaAmazonAPI.Parameter.ProductTypes;
+using static FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems.ListingsItemPutRequest;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+internal class ProductTypeSample
 {
-    internal class ProductTypeSample
+    private readonly AmazonConnection amazonConnection;
+
+    public ProductTypeSample(AmazonConnection amazonConnection)
     {
-
-        AmazonConnection amazonConnection;
-        public ProductTypeSample(AmazonConnection amazonConnection)
-        {
-            this.amazonConnection = amazonConnection;
-        }
+        this.amazonConnection = amazonConnection;
+    }
 
 
-        private void SearchDefinitionsProductTypes()
-        {
-            var list = amazonConnection.ProductType.SearchDefinitionsProductTypes(
-                new Parameter.ProductTypes.SearchDefinitionsProductTypesParameter()
-                {
-                    keywords = new List<string> { String.Empty },
-                });
+    private void SearchDefinitionsProductTypes()
+    {
+        var list = amazonConnection.ProductType.SearchDefinitionsProductTypes(
+            new SearchDefinitionsProductTypesParameter
+            {
+                keywords = new List<string> { string.Empty }
+            });
+    }
 
-        }
-        private void GetDefinitionsProductType()
-        {
-            var def = amazonConnection.ProductType.GetDefinitionsProductType(
-                new Parameter.ProductTypes.GetDefinitionsProductTypeParameter()
-                {
-                    productType = "PRODUCT",
-                    requirements = RequirementsEnum.LISTING,
-                    locale = AmazonSpApiSDK.Models.ProductTypes.LocaleEnum.en_US
-                });
-        }
-
-
+    private void GetDefinitionsProductType()
+    {
+        var def = amazonConnection.ProductType.GetDefinitionsProductType(
+            new GetDefinitionsProductTypeParameter
+            {
+                productType = "PRODUCT",
+                requirements = RequirementsEnum.LISTING,
+                locale = LocaleEnum.en_US
+            });
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class OverrideMessage
+    public class OverrideMessage
     {
     }
 }

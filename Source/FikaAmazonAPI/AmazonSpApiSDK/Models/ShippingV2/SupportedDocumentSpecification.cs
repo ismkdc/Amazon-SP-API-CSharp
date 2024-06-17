@@ -1,32 +1,31 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// Document specification that is supported for a service offering.
+    ///     Document specification that is supported for a service offering.
     /// </summary>
     [DataContract]
     public class SupportedDocumentSpecification
     {
         /// <summary>
-        /// Gets or Sets Format
+        ///     Gets or Sets Format
         /// </summary>
         [DataMember(Name = "format", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "format")]
         public string Format { get; set; }
 
         /// <summary>
-        /// Gets or Sets Size
+        ///     Gets or Sets Size
         /// </summary>
         [DataMember(Name = "size", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "size")]
         public DocumentSize Size { get; set; }
 
         /// <summary>
-        /// Gets or Sets PrintOptions
+        ///     Gets or Sets PrintOptions
         /// </summary>
         [DataMember(Name = "printOptions", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "printOptions")]
@@ -34,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -49,13 +48,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

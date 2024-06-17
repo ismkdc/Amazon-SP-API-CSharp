@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class CustomerReportMessage
+    public class CustomerReportMessage
     {
     }
 }

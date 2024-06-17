@@ -1,12 +1,10 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class UnsuppressedInventoryDataReport
     {
-        public List<UnsuppressedInventoryDataRow> Data { get; set; } = new List<UnsuppressedInventoryDataRow>();
-
         public UnsuppressedInventoryDataReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -14,13 +12,12 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<UnsuppressedInventoryDataRow> values = new List<UnsuppressedInventoryDataRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(UnsuppressedInventoryDataRow.FromRow(row, refNumber));
-            }
+            var values = new List<UnsuppressedInventoryDataRow>();
+            foreach (var row in table.Rows) values.Add(UnsuppressedInventoryDataRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<UnsuppressedInventoryDataRow> Data { get; set; } = new List<UnsuppressedInventoryDataRow>();
     }
 
     public class UnsuppressedInventoryDataRow
@@ -47,6 +44,7 @@ namespace FikaAmazonAPI.ReportGeneration
         public int? AfnReservedFutureSupply { get; set; }
         public int? AfnFutureSupplyBuyable { get; set; }
         public string refNumber { get; set; }
+
         public static UnsuppressedInventoryDataRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new UnsuppressedInventoryDataRow();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FikaAmazonAPI.NotificationMessages
 {
-    public partial class FulfillmentShipment
+    public class FulfillmentShipment
     {
         public string FulfillmentShipmentStatus { get; set; }
         public string AmazonShipmentId { get; set; }

@@ -4,9 +4,6 @@
     {
         public TokenService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-
         }
-
-
     }
 }

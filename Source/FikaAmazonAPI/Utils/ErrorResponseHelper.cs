@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace FikaAmazonAPI.Utils
 {
@@ -7,7 +6,7 @@ namespace FikaAmazonAPI.Utils
     {
         public static ErrorResponse ConvertToErrorResponse(this string response)
         {
-            if (String.IsNullOrEmpty(response)) return null;
+            if (string.IsNullOrEmpty(response)) return null;
 
             try
             {
@@ -23,17 +22,15 @@ namespace FikaAmazonAPI.Utils
 
     public class ErrorResponse
     {
-        [JsonProperty("errors")]
-        public ErrorResponseElement[] Errors;
+        [JsonProperty("errors")] public ErrorResponseElement[] Errors;
     }
 
     public class ErrorResponseElement
     {
-        [JsonProperty("message")]
-        public string Message { get; set; }
-        [JsonProperty("code")]
-        public string Code { get; set; }
-        [JsonProperty("details")]
-        public string Details { get; set; }
+        [JsonProperty("message")] public string Message { get; set; }
+
+        [JsonProperty("code")] public string Code { get; set; }
+
+        [JsonProperty("details")] public string Details { get; set; }
     }
 }

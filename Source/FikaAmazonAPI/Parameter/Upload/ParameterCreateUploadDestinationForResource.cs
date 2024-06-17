@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 
 namespace FikaAmazonAPI.Parameter.Upload
 {
@@ -9,7 +9,5 @@ namespace FikaAmazonAPI.Parameter.Upload
         public string contentMD5 { get; set; }
         public string resource { get; set; }
         public string contentType { get; set; }
-
     }
-
 }

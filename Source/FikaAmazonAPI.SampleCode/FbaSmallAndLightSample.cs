@@ -1,44 +1,40 @@
-﻿using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
+using FikaAmazonAPI.Utils;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+public class FbaSmallAndLightSample
 {
-    public class FbaSmallAndLightSample
+    private readonly AmazonConnection amazonConnection;
+    private readonly string sellerSKU = "530487_1-hyx";
+
+    public FbaSmallAndLightSample(AmazonConnection amazonConnection)
     {
-        string sellerSKU = "530487_1-hyx";
+        this.amazonConnection = amazonConnection;
+    }
 
-        AmazonConnection amazonConnection;
-        public FbaSmallAndLightSample(AmazonConnection amazonConnection)
-        {
-            this.amazonConnection = amazonConnection;
-
-        }
-
-        public async Task GetSmallAndLightEnrollmentBySellerSKUAsync()
-        {
-            var smallAndLightEnrollment = await amazonConnection.FbaSmallandLight.GetSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU);
-        }
+    public async Task GetSmallAndLightEnrollmentBySellerSKUAsync()
+    {
+        var smallAndLightEnrollment =
+            await amazonConnection.FbaSmallandLight.GetSmallAndLightEnrollmentBySellerSKUAsync(sellerSKU);
+    }
 
 
-        public async Task GetSmallAndLightEligibilityBySellerSKUAsync()
-        {
-            //string sellerSKU = "530487_1-hyx";
+    public async Task GetSmallAndLightEligibilityBySellerSKUAsync()
+    {
+        //string sellerSKU = "530487_1-hyx";
 
-            var smallAndLightEnrollment = await amazonConnection.FbaSmallandLight.GetSmallAndLightEligibilityBySellerSKUAsync(sellerSKU);
-        }
+        var smallAndLightEnrollment =
+            await amazonConnection.FbaSmallandLight.GetSmallAndLightEligibilityBySellerSKUAsync(sellerSKU);
+    }
 
-        public async Task GetSmallAndLightFeePreviewAsync()
-        {
-
-            var smallAndLightEnrollment = await amazonConnection.FbaSmallandLight.GetSmallAndLightFeePreviewAsync(new AmazonSpApiSDK.Models.FbaSmallandLight.SmallAndLightFeePreviewRequest(MarketPlace.UnitedKingdom.ID, new List<AmazonSpApiSDK.Models.FbaSmallandLight.Item>
+    public async Task GetSmallAndLightFeePreviewAsync()
+    {
+        var smallAndLightEnrollment = await amazonConnection.FbaSmallandLight.GetSmallAndLightFeePreviewAsync(
+            new SmallAndLightFeePreviewRequest(MarketPlace.UnitedKingdom.ID, new List<Item>
             {
-                new AmazonSpApiSDK.Models.FbaSmallandLight.Item("B09TB5PJ9Q",
-                new AmazonSpApiSDK.Models.FbaSmallandLight.MoneyType("GBP",3.69m))
+                new("B09TB5PJ9Q",
+                    new MoneyType("GBP", 3.69m))
             }));
-        }
     }
 }

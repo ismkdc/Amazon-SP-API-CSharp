@@ -5,35 +5,40 @@ namespace FikaAmazonAPI.Utils
 {
     internal class RateLimits
     {
+        internal RateLimits(decimal Rate, int Burst)
+        {
+            this.Rate = Rate;
+            this.Burst = Burst;
+            LastRequest = DateTime.UtcNow;
+            RequestsSent = 0;
+        }
+
         internal decimal Rate { get; set; }
         internal int Burst { get; set; }
         internal DateTime LastRequest { get; set; }
         internal int RequestsSent { get; set; }
 
-        internal RateLimits(decimal Rate, int Burst)
+        private int GetRatePeriodMs()
         {
-            this.Rate = Rate;
-            this.Burst = Burst;
-            this.LastRequest = DateTime.UtcNow;
-            this.RequestsSent = 0;
+            return (int)(1 / Rate * 1000 / 1);
         }
-        private int GetRatePeriodMs() { return (int)(((1 / Rate) * 1000) / 1); }
+
         public async Task<RateLimits> NextRate(RateLimitType rateLimitType)
         {
             if (RequestsSent < 0)
                 RequestsSent = 0;
 
 
-            int ratePeriodMs = GetRatePeriodMs();
+            var ratePeriodMs = GetRatePeriodMs();
 
             var nextRequestsSent = RequestsSent + 1;
-            var nextRequestsSentTxt = (nextRequestsSent > Burst) ? "FULL" : nextRequestsSent.ToString();
+            var nextRequestsSentTxt = nextRequestsSent > Burst ? "FULL" : nextRequestsSent.ToString();
             if (AmazonCredential.DebugMode)
             {
-                string output = $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
+                var output =
+                    $"[RateLimits ,{rateLimitType,15}]: {DateTime.UtcNow.ToString(),10}\t Request/Burst: {nextRequestsSentTxt}/{Burst}\t Rate: {Rate}/{ratePeriodMs}ms";
                 Console.WriteLine(output);
             }
-
 
 
             if (RequestsSent >= Burst)
@@ -44,8 +49,7 @@ namespace FikaAmazonAPI.Utils
                     LastRequestTime = LastRequestTime.AddMilliseconds(ratePeriodMs);
                     if (LastRequestTime > DateTime.UtcNow)
                         break;
-                    else
-                        RequestsSent -= 1;
+                    RequestsSent -= 1;
 
                     if (RequestsSent <= 0)
                     {
@@ -62,9 +66,7 @@ namespace FikaAmazonAPI.Utils
                 var TempLastRequest = LastRequest;
                 while (TempLastRequest >= DateTime.UtcNow) //.AddMilliseconds(-100)
                     await Task.Delay(100);
-
             }
-
 
 
             if (RequestsSent + 1 <= Burst)

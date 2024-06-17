@@ -1,19 +1,18 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
 {
-
     /// <summary>
-    /// A list of Amazon product types with definitions available.
+    ///     A list of Amazon product types with definitions available.
     /// </summary>
     [DataContract]
     public class ProductTypeList
     {
         /// <summary>
-        /// Gets or Sets ProductTypes
+        ///     Gets or Sets ProductTypes
         /// </summary>
         [DataMember(Name = "productTypes", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "productTypes")]
@@ -21,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -34,13 +33,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

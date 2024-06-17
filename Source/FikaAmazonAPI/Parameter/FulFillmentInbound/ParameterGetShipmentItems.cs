@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System;
+﻿using System;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.FulFillmentInbound

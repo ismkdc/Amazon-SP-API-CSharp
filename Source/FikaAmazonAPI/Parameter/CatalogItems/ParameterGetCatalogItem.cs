@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.CatalogItems

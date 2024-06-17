@@ -1,19 +1,19 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
 {
-
     /// <summary>
-    /// A property group represents a logical grouping of schema properties that can be used for display or informational purposes.
+    ///     A property group represents a logical grouping of schema properties that can be used for display or informational
+    ///     purposes.
     /// </summary>
     [DataContract]
     public class PropertyGroup
     {
         /// <summary>
-        /// The display label of the property group.
+        ///     The display label of the property group.
         /// </summary>
         /// <value>The display label of the property group.</value>
         [DataMember(Name = "title", EmitDefaultValue = false)]
@@ -21,7 +21,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         public string Title { get; set; }
 
         /// <summary>
-        /// The description of the property group.
+        ///     The description of the property group.
         /// </summary>
         /// <value>The description of the property group.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
@@ -29,7 +29,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         public string Description { get; set; }
 
         /// <summary>
-        /// The names of the schema properties for the property group.
+        ///     The names of the schema properties for the property group.
         /// </summary>
         /// <value>The names of the schema properties for the property group.</value>
         [DataMember(Name = "propertyNames", EmitDefaultValue = false)]
@@ -38,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -53,13 +53,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

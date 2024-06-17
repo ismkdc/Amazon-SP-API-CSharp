@@ -4,7 +4,6 @@
     {
         public ServicesService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-
         }
     }
 }

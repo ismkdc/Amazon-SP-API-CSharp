@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Report
@@ -10,6 +10,7 @@ namespace FikaAmazonAPI.Parameter.Report
         {
             reportTypes = new List<ReportTypes>();
         }
+
         public ICollection<ReportTypes> reportTypes { get; set; }
     }
 }

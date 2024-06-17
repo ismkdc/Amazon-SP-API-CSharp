@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Sales
@@ -15,6 +15,5 @@ namespace FikaAmazonAPI.Parameter.Sales
         public string asin { get; set; }
         public string sku { get; set; }
         public FirstDayOfWeek firstDayOfWeek { get; set; }
-
     }
 }

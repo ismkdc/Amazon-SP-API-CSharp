@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 {
-
     /// <summary>
-    /// The weight of the scheduled package
+    ///     The weight of the scheduled package
     /// </summary>
     [DataContract]
     public class Weight
     {
         /// <summary>
-        /// Gets or Sets Value
+        ///     Gets or Sets Value
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "value")]
         public decimal Value { get; set; }
 
         /// <summary>
-        /// Gets or Sets Unit
+        ///     Gets or Sets Unit
         /// </summary>
         [DataMember(Name = "unit", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "unit")]
@@ -27,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -41,13 +40,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

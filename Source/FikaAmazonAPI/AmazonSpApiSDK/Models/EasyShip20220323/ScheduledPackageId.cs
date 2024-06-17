@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 {
-
     /// <summary>
-    /// Identifies the scheduled package to be updated.
+    ///     Identifies the scheduled package to be updated.
     /// </summary>
     [DataContract]
     public class ScheduledPackageId
     {
         /// <summary>
-        /// Gets or Sets AmazonOrderId
+        ///     Gets or Sets AmazonOrderId
         /// </summary>
         [DataMember(Name = "amazonOrderId", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "amazonOrderId")]
         public string AmazonOrderId { get; set; }
 
         /// <summary>
-        /// Gets or Sets PackageId
+        ///     Gets or Sets PackageId
         /// </summary>
         [DataMember(Name = "packageId", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "packageId")]
@@ -27,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -41,13 +40,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

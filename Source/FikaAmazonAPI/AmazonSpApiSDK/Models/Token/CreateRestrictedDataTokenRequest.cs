@@ -7,6 +7,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Token
         public IList<RestrictedResource> restrictedResources { get; set; }
 
         public string targetApplication { get; set; }
-
     }
 }

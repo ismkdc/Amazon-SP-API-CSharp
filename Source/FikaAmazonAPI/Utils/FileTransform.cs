@@ -9,51 +9,48 @@ namespace FikaAmazonAPI.Utils
     {
         public static string DecryptString(byte[] key, byte[] iv, byte[] cipherText)
         {
-            byte[] buffer = cipherText;
+            var buffer = cipherText;
 
-            using (Aes aes = Aes.Create())
+            using (var aes = Aes.Create())
             {
                 aes.Key = key;
                 aes.IV = iv;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                using (var memoryStream = new MemoryStream(buffer))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                    using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
                     {
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+                        using (var streamReader = new StreamReader(cryptoStream))
                         {
                             return streamReader.ReadToEnd();
                         }
                     }
                 }
             }
-
         }
-
 
 
         public static string Decompress(string fileName)
         {
-            FileInfo fileInfo = new FileInfo(fileName);
+            var fileInfo = new FileInfo(fileName);
 
-            using (FileStream originalFileStream = fileInfo.OpenRead())
+            using (var originalFileStream = fileInfo.OpenRead())
             {
-                string currentFileName = fileInfo.FullName;
-                string newFileName = currentFileName.Remove(currentFileName.Length - fileInfo.Extension.Length);
+                var currentFileName = fileInfo.FullName;
+                var newFileName = currentFileName.Remove(currentFileName.Length - fileInfo.Extension.Length);
 
-                using (FileStream decompressedFileStream = File.Create(newFileName))
+                using (var decompressedFileStream = File.Create(newFileName))
                 {
-                    using (GZipStream decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
+                    using (var decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
                     {
                         decompressionStream.CopyTo(decompressedFileStream);
                         Console.WriteLine($"Decompressed: {fileInfo.Name}");
                     }
+
                     return decompressedFileStream.Name;
                 }
             }
         }
-
-
     }
 }

@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class OrderAcknowledgementMessage
+    public class OrderAcknowledgementMessage
     {
         [XmlElement(ElementName = "AmazonOrderID")]
         public string AmazonOrderID;
@@ -14,13 +14,11 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         [XmlElement(ElementName = "StatusCode")]
         public OrderAcknowledgementStatusCode StatusCode;
 
-        [XmlElement(ElementName = "Item")]
-        public List<OrderAcknowledgementItem> Item;
+        [XmlElement(ElementName = "Item")] public List<OrderAcknowledgementItem> Item;
     }
 
     public class OrderAcknowledgementItem
     {
-
         [XmlElement(ElementName = "AmazonOrderItemCode")]
         public string AmazonOrderItemCode;
 
@@ -30,17 +28,16 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         [XmlElement(ElementName = "CancelReason")]
         public OrderAcknowledgementItemCancelReason CancelReason;
 
-        [XmlElement(ElementName = "Quantity")]
-        public string Quantity;
+        [XmlIgnore] public bool CancelReasonSpecified;
 
-        [XmlIgnore()]
-        public bool CancelReasonSpecified;
+
+        [XmlElement(ElementName = "Quantity")] public string Quantity;
     }
 
     public enum OrderAcknowledgementStatusCode
     {
         Success,
-        Failure,
+        Failure
     }
 
     public enum OrderAcknowledgementItemCancelReason
@@ -58,6 +55,6 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
         CannotVerifyInformation,
         PricingError,
         RejectOrder,
-        WeatherDelay,
+        WeatherDelay
     }
 }

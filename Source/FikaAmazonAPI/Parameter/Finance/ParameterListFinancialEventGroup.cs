@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System;
+﻿using System;
+using FikaAmazonAPI.Search;
 
 namespace FikaAmazonAPI.Parameter.Finance
 {

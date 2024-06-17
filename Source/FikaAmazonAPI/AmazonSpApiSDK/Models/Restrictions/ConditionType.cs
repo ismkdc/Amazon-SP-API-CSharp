@@ -3,57 +3,68 @@
     public enum ConditionType
     {
         /// <summary>
-        /// New
+        ///     New
         /// </summary>
         new_new,
+
         /// <summary>
-        /// New - Open Box.
+        ///     New - Open Box.
         /// </summary>
         new_open_box,
+
         /// <summary>
-        /// New - OEM.
+        ///     New - OEM.
         /// </summary>
         new_oem,
+
         /// <summary>
-        /// Refurbished
+        ///     Refurbished
         /// </summary>
         refurbished_refurbished,
+
         /// <summary>
-        /// Used - Like New.
+        ///     Used - Like New.
         /// </summary>
         used_like_new,
+
         /// <summary>
-        /// Used - Very Good.
+        ///     Used - Very Good.
         /// </summary>
         used_very_good,
+
         /// <summary>
-        /// Used - Good.
+        ///     Used - Good.
         /// </summary>
         used_good,
+
         /// <summary>
-        /// Used - Acceptable.
+        ///     Used - Acceptable.
         /// </summary>
         used_acceptable,
+
         /// <summary>
-        /// Collectible - Like New.
+        ///     Collectible - Like New.
         /// </summary>
         collectible_like_new,
+
         /// <summary>
-        /// Collectible - Very Good.
+        ///     Collectible - Very Good.
         /// </summary>
         collectible_very_good,
+
         /// <summary>
-        /// Collectible - Good.
+        ///     Collectible - Good.
         /// </summary>
         collectible_good,
+
         /// <summary>
-        /// Collectible - Acceptable.
+        ///     Collectible - Acceptable.
         /// </summary>
         collectible_acceptable,
+
         /// <summary>
-        /// Club
+        ///     Club
         /// </summary>
         club_club
-
     }
 }

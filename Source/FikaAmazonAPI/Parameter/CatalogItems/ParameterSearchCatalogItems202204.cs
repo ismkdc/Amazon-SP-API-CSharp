@@ -1,5 +1,4 @@
-﻿using FikaAmazonAPI.Search;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.CatalogItems
@@ -16,6 +15,6 @@ namespace FikaAmazonAPI.Parameter.CatalogItems
         public ICollection<string> brandNames { get; set; } = new List<string>();
         public ICollection<string> classificationIds { get; set; } = new List<string>();
         public string pageToken { get; set; }
-        public string keywordsLocale { get; set; }        
+        public string keywordsLocale { get; set; }
     }
 }

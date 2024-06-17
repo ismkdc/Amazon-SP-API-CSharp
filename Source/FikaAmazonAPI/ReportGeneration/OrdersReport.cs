@@ -7,20 +7,20 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class OrdersReport
     {
-        public List<OrdersRow> Data { get; set; }=new List<OrdersRow>();
         public OrdersReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
             var values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => OrdersRow.FromCsv(v, refNumber))
-                                           .ToList();
+                .Skip(1)
+                .Select(v => OrdersRow.FromCsv(v, refNumber))
+                .ToList();
             Data = values;
         }
 
-
+        public List<OrdersRow> Data { get; set; } = new List<OrdersRow>();
     }
+
     public class OrdersRow
     {
         public string AmazonOrderId { get; set; }
@@ -55,7 +55,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public static OrdersRow FromCsv(string csvLine, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
+            var values = csvLine.Split('\t');
             var row = new OrdersRow();
             row.AmazonOrderId = values[0];
             row.MerchantOrderId = values[1];

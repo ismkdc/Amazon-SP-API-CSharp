@@ -5,154 +5,188 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
     public enum LocaleEnum
     {
         /// <summary>
-        /// Arabic
+        ///     Arabic
         /// </summary>
-        [EnumMember(Value = "ar")]
-        ar,
+        [EnumMember(Value = "ar")] ar,
+
         /// <summary>
-        /// Arabic (U.A.E.)
+        ///     Arabic (U.A.E.)
         /// </summary>
         [EnumMember(Value = "ar_AE")] ar_AE,
+
         /// <summary>
-        /// German
+        ///     German
         /// </summary>
         [EnumMember(Value = "de")] de,
+
         /// <summary>
-        /// German (Germany)
+        ///     German (Germany)
         /// </summary>
         [EnumMember(Value = "de_DE")] de_DE,
+
         /// <summary>
-        /// English
+        ///     English
         /// </summary>
         [EnumMember(Value = "en")] en,
+
         /// <summary>
-        /// English (U.A.E.)
+        ///     English (U.A.E.)
         /// </summary>
         [EnumMember(Value = "en_AE")] en_AE,
+
         /// <summary>
-        /// English (Australia)
+        ///     English (Australia)
         /// </summary>
         [EnumMember(Value = "en_AU")] en_AU,
+
         /// <summary>
-        /// English (Canada)
+        ///     English (Canada)
         /// </summary>
         [EnumMember(Value = "en_CA")] en_CA,
+
         /// <summary>
-        /// English (United Kingdom)
+        ///     English (United Kingdom)
         /// </summary>
         [EnumMember(Value = "en_GB")] en_GB,
+
         /// <summary>
-        /// English (India)
+        ///     English (India)
         /// </summary>
         [EnumMember(Value = "en_IN")] en_IN,
+
         /// <summary>
-        /// English (Singapore)
+        ///     English (Singapore)
         /// </summary>
         [EnumMember(Value = "en_SG")] en_SG,
+
         /// <summary>
-        /// English (United States)
+        ///     English (United States)
         /// </summary>
         [EnumMember(Value = "en_US")] en_US,
+
         /// <summary>
-        /// Spanish
+        ///     Spanish
         /// </summary>
         [EnumMember(Value = "es")] es,
+
         /// <summary>
-        /// Spanish (Spain)
+        ///     Spanish (Spain)
         /// </summary>
         [EnumMember(Value = "es_ES")] es_ES,
+
         /// <summary>
-        /// Spanish (Mexico)
+        ///     Spanish (Mexico)
         /// </summary>
         [EnumMember(Value = "es_MX")] es_MX,
+
         /// <summary>
-        /// Spanish (United States)
+        ///     Spanish (United States)
         /// </summary>
         [EnumMember(Value = "es_US")] es_US,
+
         /// <summary>
-        /// French
+        ///     French
         /// </summary>
         [EnumMember(Value = "fr")] fr,
+
         /// <summary>
-        /// French (Canada)
+        ///     French (Canada)
         /// </summary>
         [EnumMember(Value = "fr_CA")] fr_CA,
+
         /// <summary>
-        /// French (France)
+        ///     French (France)
         /// </summary>
         [EnumMember(Value = "fr_FR")] fr_FR,
+
         /// <summary>
-        /// Italian
+        ///     Italian
         /// </summary>
         [EnumMember(Value = "it")] it,
+
         /// <summary>
-        /// Italian (Italy)
+        ///     Italian (Italy)
         /// </summary>
         [EnumMember(Value = "it_IT")] it_IT,
+
         /// <summary>
-        /// Japanese
+        ///     Japanese
         /// </summary>
         [EnumMember(Value = "ja")] ja,
+
         /// <summary>
-        /// Japanese (Japan)
+        ///     Japanese (Japan)
         /// </summary>
         [EnumMember(Value = "ja_JP")] ja_JP,
+
         /// <summary>
-        /// Dutch
+        ///     Dutch
         /// </summary>
         [EnumMember(Value = "nl")] nl,
+
         /// <summary>
-        /// Dutch (Netherlands)
+        ///     Dutch (Netherlands)
         /// </summary>
         [EnumMember(Value = "nl_NL")] nl_NL,
+
         /// <summary>
-        /// Polish
+        ///     Polish
         /// </summary>
         [EnumMember(Value = "pl")] pl,
+
         /// <summary>
-        /// Polish (Poland)
+        ///     Polish (Poland)
         /// </summary>
         [EnumMember(Value = "pl_PL")] pl_PL,
+
         /// <summary>
-        /// Portuguese
+        ///     Portuguese
         /// </summary>
         [EnumMember(Value = "pt")] pt,
+
         /// <summary>
-        /// Portuguese (Brazil)
+        ///     Portuguese (Brazil)
         /// </summary>
         [EnumMember(Value = "pt_BR")] pt_BR,
+
         /// <summary>
-        /// Portuguese (Portugal)
+        ///     Portuguese (Portugal)
         /// </summary>
         [EnumMember(Value = "pt_PT")] pt_PT,
+
         /// <summary>
-        /// Swedish
+        ///     Swedish
         /// </summary>
         [EnumMember(Value = "sv")] sv,
+
         /// <summary>
-        /// Swedish (Sweden)
+        ///     Swedish (Sweden)
         /// </summary>
         [EnumMember(Value = "sv_SE")] sv_SE,
+
         /// <summary>
-        /// Turkish
+        ///     Turkish
         /// </summary>
         [EnumMember(Value = "tr")] tr,
+
         /// <summary>
-        /// Turkish (Turkey)
+        ///     Turkish (Turkey)
         /// </summary>
         [EnumMember(Value = "tr_TR")] tr_TR,
+
         /// <summary>
-        /// Chinese
+        ///     Chinese
         /// </summary>
         [EnumMember(Value = "zh")] zh,
+
         /// <summary>
-        /// Chinese (Simplified)
+        ///     Chinese (Simplified)
         /// </summary>
         [EnumMember(Value = "zh_CN")] zh_CN,
-        /// <summary>
-        /// Chinese (Traditional)
-        /// </summary>
-        [EnumMember(Value = "zh_TW")] zh_TW,
 
+        /// <summary>
+        ///     Chinese (Traditional)
+        /// </summary>
+        [EnumMember(Value = "zh_TW")] zh_TW
     }
 }

@@ -1,103 +1,157 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     /// <summary>
-    /// OrderItem
+    ///     OrderItem
     /// </summary>
     [DataContract]
-    public partial class OrderItem : IEquatable<OrderItem>, IValidatableObject
+    public class OrderItem : IEquatable<OrderItem>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrderItem" /> class.
+        ///     Initializes a new instance of the <see cref="OrderItem" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public OrderItem() { }
-        public OrderItem(string itemSequenceNumber = default(string), string amazonProductIdentifier = default(string), string vendorProductIdentifier = default(string), ItemQuantity orderedQuantity = default(ItemQuantity), bool isBackOrderAllowed = default(bool), Money netCost = default(Money), Money listPrice = default(Money))
+        public OrderItem()
+        {
+        }
+
+        public OrderItem(string itemSequenceNumber = default, string amazonProductIdentifier = default,
+            string vendorProductIdentifier = default, ItemQuantity orderedQuantity = default,
+            bool isBackOrderAllowed = default, Money netCost = default, Money listPrice = default)
         {
             // to ensure "itemSequenceNumber" is required (not null)
             if (itemSequenceNumber == null)
-            {
-                throw new InvalidDataException("itemSequenceNumber is a required property for OrderItem and cannot be null");
-            }
-            else
-            {
-                this.ItemSequenceNumber = itemSequenceNumber;
-            }
-            this.AmazonProductIdentifier = amazonProductIdentifier;
-            this.VendorProductIdentifier = vendorProductIdentifier;
+                throw new InvalidDataException(
+                    "itemSequenceNumber is a required property for OrderItem and cannot be null");
+            ItemSequenceNumber = itemSequenceNumber;
+            AmazonProductIdentifier = amazonProductIdentifier;
+            VendorProductIdentifier = vendorProductIdentifier;
             // to ensure "orderedQuantity" is required (not null)
             if (orderedQuantity == null)
-            {
-                throw new InvalidDataException("orderedQuantity is a required property for OrderItem and cannot be null");
-            }
-            else
-            {
-                this.OrderedQuantity = orderedQuantity;
-            }
-            this.IsBackOrderAllowed = isBackOrderAllowed;
-            this.NetCost = netCost;
-            this.ListPrice = listPrice;
+                throw new InvalidDataException(
+                    "orderedQuantity is a required property for OrderItem and cannot be null");
+            OrderedQuantity = orderedQuantity;
+            IsBackOrderAllowed = isBackOrderAllowed;
+            NetCost = netCost;
+            ListPrice = listPrice;
         }
 
         /// <summary>
-        /// Numbering of the item on the purchase order. The first item will be 1, the second 2, and so on.
+        ///     Numbering of the item on the purchase order. The first item will be 1, the second 2, and so on.
         /// </summary>
         /// <value>Numbering of the item on the purchase order. The first item will be 1, the second 2, and so on.</value>
         [DataMember(Name = "itemSequenceNumber", EmitDefaultValue = false)]
         public string ItemSequenceNumber { get; set; }
 
         /// <summary>
-        /// Buyer&#39;s standard identification number (ASIN) of an item.
+        ///     Buyer&#39;s standard identification number (ASIN) of an item.
         /// </summary>
         /// <value>Buyer&#39;s standard identification number (ASIN) of an item.</value>
         [DataMember(Name = "amazonProductIdentifier", EmitDefaultValue = false)]
         public string AmazonProductIdentifier { get; set; }
 
         /// <summary>
-        /// The vendor selected product identification of the item.
+        ///     The vendor selected product identification of the item.
         /// </summary>
         /// <value>The vendor selected product identification of the item.</value>
         [DataMember(Name = "vendorProductIdentifier", EmitDefaultValue = false)]
         public string VendorProductIdentifier { get; set; }
 
         /// <summary>
-        /// Item quantity ordered.
+        ///     Item quantity ordered.
         /// </summary>
         /// <value>Item quantity ordered.</value>
         [DataMember(Name = "orderedQuantity", EmitDefaultValue = false)]
         public ItemQuantity OrderedQuantity { get; set; }
 
         /// <summary>
-        /// Is back order allowed?
+        ///     Is back order allowed?
         /// </summary>
         /// <value>Is back order allowed?.</value>
         [DataMember(Name = "isBackOrderAllowed", EmitDefaultValue = false)]
         public bool IsBackOrderAllowed { get; set; }
 
         /// <summary>
-        /// The price to Amazon each (cost).
+        ///     The price to Amazon each (cost).
         /// </summary>
         /// <value>The price to Amazon each (cost).</value>
         [DataMember(Name = "netCost", EmitDefaultValue = false)]
         public Money NetCost { get; set; }
 
         /// <summary>
-        /// The list price each.
+        ///     The list price each.
         /// </summary>
         /// <value>The list price each.</value>
         [DataMember(Name = "listPrice", EmitDefaultValue = false)]
         public Money ListPrice { get; set; }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     Returns true if OrderItem instances are equal
+        /// </summary>
+        /// <param name="input">Instance of OrderItem to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(OrderItem input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    ItemSequenceNumber == input.ItemSequenceNumber ||
+                    (ItemSequenceNumber != null &&
+                     ItemSequenceNumber.Equals(input.ItemSequenceNumber))
+                ) &&
+                (
+                    AmazonProductIdentifier == input.AmazonProductIdentifier ||
+                    (AmazonProductIdentifier != null &&
+                     AmazonProductIdentifier.Equals(input.AmazonProductIdentifier))
+                ) &&
+                (
+                    VendorProductIdentifier == input.VendorProductIdentifier ||
+                    (VendorProductIdentifier != null &&
+                     VendorProductIdentifier.Equals(input.VendorProductIdentifier))
+                ) &&
+                (
+                    OrderedQuantity == input.OrderedQuantity ||
+                    (OrderedQuantity != null &&
+                     OrderedQuantity.Equals(input.OrderedQuantity))
+                ) &&
+                (
+                    IsBackOrderAllowed == input.IsBackOrderAllowed ||
+                    IsBackOrderAllowed.Equals(input.IsBackOrderAllowed)
+                ) &&
+                (
+                    NetCost == input.NetCost ||
+                    (NetCost != null &&
+                     NetCost.Equals(input.NetCost))
+                ) &&
+                (
+                    ListPrice == input.ListPrice ||
+                    (ListPrice != null &&
+                     ListPrice.Equals(input.ListPrice))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -116,7 +170,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -125,97 +179,39 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as OrderItem);
+            return Equals(input as OrderItem);
         }
 
         /// <summary>
-        /// Returns true if OrderItem instances are equal
-        /// </summary>
-        /// <param name="input">Instance of OrderItem to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(OrderItem input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.ItemSequenceNumber == input.ItemSequenceNumber ||
-                    (this.ItemSequenceNumber != null &&
-                    this.ItemSequenceNumber.Equals(input.ItemSequenceNumber))
-                ) &&
-                (
-                    this.AmazonProductIdentifier == input.AmazonProductIdentifier ||
-                    (this.AmazonProductIdentifier != null &&
-                    this.AmazonProductIdentifier.Equals(input.AmazonProductIdentifier))
-                ) &&
-                (
-                    this.VendorProductIdentifier == input.VendorProductIdentifier ||
-                    (this.VendorProductIdentifier != null &&
-                    this.VendorProductIdentifier.Equals(input.VendorProductIdentifier))
-                ) &&
-                (
-                    this.OrderedQuantity == input.OrderedQuantity ||
-                    (this.OrderedQuantity != null &&
-                    this.OrderedQuantity.Equals(input.OrderedQuantity))
-                ) &&
-                (
-                    this.IsBackOrderAllowed == input.IsBackOrderAllowed ||
-                    (this.IsBackOrderAllowed.Equals(input.IsBackOrderAllowed))
-                ) &&
-                (
-                    this.NetCost == input.NetCost ||
-                    (this.NetCost != null &&
-                    this.NetCost.Equals(input.NetCost))
-                ) &&
-                (
-                    this.ListPrice == input.ListPrice ||
-                    (this.ListPrice != null &&
-                    this.ListPrice.Equals(input.ListPrice))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.ItemSequenceNumber != null)
-                    hashCode = hashCode * 59 + this.ItemSequenceNumber.GetHashCode();
-                if (this.AmazonProductIdentifier != null)
-                    hashCode = hashCode * 59 + this.AmazonProductIdentifier.GetHashCode();
-                if (this.VendorProductIdentifier != null)
-                    hashCode = hashCode * 59 + this.VendorProductIdentifier.GetHashCode();
-                if (this.OrderedQuantity != null)
-                    hashCode = hashCode * 59 + this.OrderedQuantity.GetHashCode();
-                hashCode = hashCode * 59 + this.IsBackOrderAllowed.GetHashCode();
-                if (this.NetCost != null)
-                    hashCode = hashCode * 59 + this.NetCost.GetHashCode();
-                if (this.ListPrice != null)
-                    hashCode = hashCode * 59 + this.ListPrice.GetHashCode();
+                var hashCode = 41;
+                if (ItemSequenceNumber != null)
+                    hashCode = hashCode * 59 + ItemSequenceNumber.GetHashCode();
+                if (AmazonProductIdentifier != null)
+                    hashCode = hashCode * 59 + AmazonProductIdentifier.GetHashCode();
+                if (VendorProductIdentifier != null)
+                    hashCode = hashCode * 59 + VendorProductIdentifier.GetHashCode();
+                if (OrderedQuantity != null)
+                    hashCode = hashCode * 59 + OrderedQuantity.GetHashCode();
+                hashCode = hashCode * 59 + IsBackOrderAllowed.GetHashCode();
+                if (NetCost != null)
+                    hashCode = hashCode * 59 + NetCost.GetHashCode();
+                if (ListPrice != null)
+                    hashCode = hashCode * 59 + ListPrice.GetHashCode();
                 return hashCode;
             }
         }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
-
 }

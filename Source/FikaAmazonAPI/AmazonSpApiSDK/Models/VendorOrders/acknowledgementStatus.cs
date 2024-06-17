@@ -1,27 +1,31 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders.Constants;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class AcknowledgementStatus : IEquatable<AcknowledgementStatus>, IValidatableObject
+    public class AcknowledgementStatus : IEquatable<AcknowledgementStatus>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public AcknowledgementStatus() { }
+        public AcknowledgementStatus()
+        {
+        }
+
         public AcknowledgementStatus(
-            ItemConfirmationStatus? confirmationStatus = default(ItemConfirmationStatus?), ItemQuantity acceptedQuantity = default(ItemQuantity), ItemQuantity rejectedQuantity = default(ItemQuantity), 
-            List<AcknowledgementStatusDetails> acknowledgementStatusDetails = default(List<AcknowledgementStatusDetails>)
+            ItemConfirmationStatus? confirmationStatus = default, ItemQuantity acceptedQuantity = default,
+            ItemQuantity rejectedQuantity = default,
+            List<AcknowledgementStatusDetails> acknowledgementStatusDetails = default
         )
         {
-            this.ConfirmationStatus = confirmationStatus;
-            this.AcceptedQuantity = acceptedQuantity;
-            this.RejectedQuantity = rejectedQuantity;
-            this.AcknowledgementStatusDetails = acknowledgementStatusDetails;
+            ConfirmationStatus = confirmationStatus;
+            AcceptedQuantity = acceptedQuantity;
+            RejectedQuantity = rejectedQuantity;
+            AcknowledgementStatusDetails = acknowledgementStatusDetails;
         }
 
         [DataMember(Name = "confirmationStatus", EmitDefaultValue = false)]
@@ -36,9 +40,52 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         [DataMember(Name = "acknowledgementStatusDetails", EmitDefaultValue = false)]
         public List<AcknowledgementStatusDetails> AcknowledgementStatusDetails { get; set; }
 
+        /// <summary>
+        ///     Returns true if ItemQuantity instances are equal
+        /// </summary>
+        /// <param name="input">Instance of ItemQuantity to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(AcknowledgementStatus input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    ConfirmationStatus == input.ConfirmationStatus ||
+                    (ConfirmationStatus != null &&
+                     ConfirmationStatus.Equals(input.ConfirmationStatus))
+                ) &&
+                (
+                    AcceptedQuantity == input.AcceptedQuantity ||
+                    (AcceptedQuantity != null &&
+                     AcceptedQuantity.Equals(input.AcceptedQuantity))
+                ) &&
+                (
+                    RejectedQuantity == input.RejectedQuantity ||
+                    (RejectedQuantity != null &&
+                     RejectedQuantity.Equals(input.RejectedQuantity))
+                ) &&
+                (
+                    AcknowledgementStatusDetails == input.AcknowledgementStatusDetails ||
+                    (AcknowledgementStatusDetails != null &&
+                     AcknowledgementStatusDetails.Equals(input.AcknowledgementStatusDetails))
+                );
+        }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -54,7 +101,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -63,77 +110,34 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AcknowledgementStatus);
+            return Equals(input as AcknowledgementStatus);
         }
 
         /// <summary>
-        /// Returns true if ItemQuantity instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ItemQuantity to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AcknowledgementStatus input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.ConfirmationStatus == input.ConfirmationStatus ||
-                    (this.ConfirmationStatus != null &&
-                    this.ConfirmationStatus.Equals(input.ConfirmationStatus))
-                ) &&
-                (
-                    this.AcceptedQuantity == input.AcceptedQuantity ||
-                    (this.AcceptedQuantity != null &&
-                    this.AcceptedQuantity.Equals(input.AcceptedQuantity))
-                ) &&
-                (
-                    this.RejectedQuantity == input.RejectedQuantity ||
-                    (this.RejectedQuantity != null &&
-                    this.RejectedQuantity.Equals(input.RejectedQuantity))
-                ) &&
-                (
-                    this.AcknowledgementStatusDetails == input.AcknowledgementStatusDetails ||
-                    (this.AcknowledgementStatusDetails != null &&
-                    this.AcknowledgementStatusDetails.Equals(input.AcknowledgementStatusDetails))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.ConfirmationStatus != null)
-                    hashCode = hashCode * 59 + this.ConfirmationStatus.GetHashCode();
-                if (this.AcceptedQuantity != null)
-                    hashCode = hashCode * 59 + this.AcceptedQuantity.GetHashCode();
-                if (this.RejectedQuantity != null)
-                    hashCode = hashCode * 59 + this.RejectedQuantity.GetHashCode();
-                if (this.AcknowledgementStatusDetails != null)
-                    hashCode = hashCode * 59 + this.AcknowledgementStatusDetails.GetHashCode();
+                var hashCode = 41;
+                if (ConfirmationStatus != null)
+                    hashCode = hashCode * 59 + ConfirmationStatus.GetHashCode();
+                if (AcceptedQuantity != null)
+                    hashCode = hashCode * 59 + AcceptedQuantity.GetHashCode();
+                if (RejectedQuantity != null)
+                    hashCode = hashCode * 59 + RejectedQuantity.GetHashCode();
+                if (AcknowledgementStatusDetails != null)
+                    hashCode = hashCode * 59 + AcknowledgementStatusDetails.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

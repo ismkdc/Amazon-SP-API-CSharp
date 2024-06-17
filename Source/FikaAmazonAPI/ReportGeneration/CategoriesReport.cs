@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -6,8 +7,6 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class CategoriesReport
     {
-        public CategoriesData Data { get; set; } = new CategoriesData();
-
         public CategoriesReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -18,61 +17,54 @@ namespace FikaAmazonAPI.ReportGeneration
 
             try
             {
-                using (StringReader reader = new StringReader(xml))
+                using (var reader = new StringReader(xml))
                 {
                     Data = (CategoriesData)serializer.Deserialize(reader);
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
         }
+
+        public CategoriesData Data { get; set; } = new CategoriesData();
     }
 
     [XmlRoot(ElementName = "attribute")]
     public class CategoryAttribute
     {
+        [XmlAttribute(AttributeName = "name")] public string Name { get; set; }
 
-        [XmlAttribute(AttributeName = "name")]
-        public string Name { get; set; }
-
-        [XmlText]
-        public string Text { get; set; }
+        [XmlText] public string Text { get; set; }
     }
 
     [XmlRoot(ElementName = "browseNodeAttributes")]
     public class CategoryBrowseNodeAttributes
     {
-
         [XmlElement(ElementName = "attribute")]
         public CategoryAttribute Attribute { get; set; }
 
         [XmlAttribute(AttributeName = "count")]
         public string Count { get; set; }
 
-        [XmlText]
-        public string Text { get; set; }
+        [XmlText] public string Text { get; set; }
     }
 
     [XmlRoot(ElementName = "childNodes")]
     public class ChildNodes
     {
-
-        [XmlElement(ElementName = "id")]
-        public List<string> Id { get; set; }
+        [XmlElement(ElementName = "id")] public List<string> Id { get; set; }
 
         [XmlAttribute(AttributeName = "count")]
         public string Count { get; set; }
 
-        [XmlText]
-        public string Text { get; set; }
+        [XmlText] public string Text { get; set; }
     }
 
     [XmlRoot(ElementName = "refinementsInformation")]
     public class RefinementsInformation
     {
-
         [XmlAttribute(AttributeName = "count")]
         public string Count { get; set; }
     }
@@ -80,7 +72,6 @@ namespace FikaAmazonAPI.ReportGeneration
     [XmlRoot(ElementName = "Node")]
     public class CategoriesRow
     {
-
         [XmlElement(ElementName = "browseNodeId")]
         public string BrowseNodeId { get; set; }
 
@@ -115,8 +106,6 @@ namespace FikaAmazonAPI.ReportGeneration
     [XmlRoot(ElementName = "Result")]
     public class CategoriesData
     {
-
-        [XmlElement(ElementName = "Node")]
-        public List<CategoriesRow> Node { get; set; }
+        [XmlElement(ElementName = "Node")] public List<CategoriesRow> Node { get; set; }
     }
 }

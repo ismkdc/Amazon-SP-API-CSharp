@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class RichContentMessage
+    public class RichContentMessage
     {
     }
 }

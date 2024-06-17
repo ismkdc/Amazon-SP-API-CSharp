@@ -1,32 +1,31 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// The payload for the getRates operation.
+    ///     The payload for the getRates operation.
     /// </summary>
     [DataContract]
     public class GetRatesResult
     {
         /// <summary>
-        /// Gets or Sets RequestToken
+        ///     Gets or Sets RequestToken
         /// </summary>
         [DataMember(Name = "requestToken", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "requestToken")]
         public string RequestToken { get; set; }
 
         /// <summary>
-        /// Gets or Sets Rates
+        ///     Gets or Sets Rates
         /// </summary>
         [DataMember(Name = "rates", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "rates")]
         public RateList Rates { get; set; }
 
         /// <summary>
-        /// Gets or Sets IneligibleRates
+        ///     Gets or Sets IneligibleRates
         /// </summary>
         [DataMember(Name = "ineligibleRates", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "ineligibleRates")]
@@ -34,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -49,13 +48,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

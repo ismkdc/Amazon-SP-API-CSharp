@@ -1,12 +1,11 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReferralFeeReport
     {
-        public List<ReferralFeeReportRow> Data { get; set; } = new List<ReferralFeeReportRow>();
         public ReferralFeeReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -14,14 +13,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<ReferralFeeReportRow> values = new List<ReferralFeeReportRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(ReferralFeeReportRow.FromRow(row, refNumber));
-            }
+            var values = new List<ReferralFeeReportRow>();
+            foreach (var row in table.Rows) values.Add(ReferralFeeReportRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<ReferralFeeReportRow> Data { get; set; } = new List<ReferralFeeReportRow>();
     }
+
     public class ReferralFeeReportRow
     {
         public string sellerSku { get; set; }
@@ -34,19 +33,19 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             get
             {
-
                 try
                 {
-                    decimal? priceP = estimatedReferralFeePerItem * 100 / price;
+                    var priceP = estimatedReferralFeePerItem * 100 / price;
                     return Math.Round(priceP.Value);
                 }
-                catch { return default(decimal?); }
+                catch
+                {
+                    return default;
+                }
             }
         }
 
         public string refNumber { get; set; }
-
-
 
 
         public static ReferralFeeReportRow FromRow(TableRow rowData, string refNumber)
@@ -58,7 +57,8 @@ namespace FikaAmazonAPI.ReportGeneration
             row.itemName = rowData.GetString("item-name");
 
             row.price = DataConverter.GetDecimal(rowData.GetString("price"));
-            row.estimatedReferralFeePerItem = DataConverter.GetDecimal(rowData.GetString("estimated-referral-fee-per-item"));
+            row.estimatedReferralFeePerItem =
+                DataConverter.GetDecimal(rowData.GetString("estimated-referral-fee-per-item"));
 
 
             row.refNumber = refNumber;

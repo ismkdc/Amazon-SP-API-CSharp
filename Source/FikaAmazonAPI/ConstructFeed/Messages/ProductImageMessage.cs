@@ -1,9 +1,6 @@
-﻿using System.Xml.Serialization;
-using static FikaAmazonAPI.Utils.Constants;
-
-namespace FikaAmazonAPI.ConstructFeed.Messages
+﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class ProductImageMessage
+    public class ProductImageMessage
     {
         public string SKU { get; set; }
         public ImageType ImageType { get; set; }

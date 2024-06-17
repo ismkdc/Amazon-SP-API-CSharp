@@ -12,7 +12,7 @@
         // don't serialize null properties
         public bool ShouldSerializelanguage_tag()
         {
-            return (language_tag != null);
+            return language_tag != null;
         }
     }
 }

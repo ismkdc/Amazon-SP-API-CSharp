@@ -1,18 +1,17 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 {
-
     /// <summary>
-    /// Representation of tracking metadata.
+    ///     Representation of tracking metadata.
     /// </summary>
     [DataContract]
     public class TrackingDetails
     {
         /// <summary>
-        /// The tracking identifier for the scheduled package.
+        ///     The tracking identifier for the scheduled package.
         /// </summary>
         /// <value>The tracking identifier for the scheduled package.</value>
         [DataMember(Name = "trackingId", EmitDefaultValue = false)]
@@ -21,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -34,13 +33,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

@@ -1,56 +1,48 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 
 namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 {
     public class TableRow : IDictionary<string, string>
     {
-        private readonly Table table;
         private readonly string[] items;
+        private readonly Table table;
 
         internal TableRow(Table table, string[] items)
         {
-            for (int colIndex = 0; colIndex < items.Length; colIndex++)
+            for (var colIndex = 0; colIndex < items.Length; colIndex++)
                 items[colIndex] = items[colIndex] ?? string.Empty;
 
             this.table = table;
             this.items = items;
         }
 
+        public string this[int index] => items[index];
+
         public string this[string header]
         {
             get
             {
-                int itemIndex = table.GetHeaderIndex(header);
+                var itemIndex = table.GetHeaderIndex(header);
                 return items[itemIndex];
             }
             set
             {
-                int keyIndex = table.GetHeaderIndex(header, true);
+                var keyIndex = table.GetHeaderIndex(header);
                 items[keyIndex] = value;
             }
         }
 
-        public string this[int index]
-        {
-            get
-            {
-                return items[index];
-            }
-        }
-
-        public int Count
-        {
-            get { return items.Length; }
-        }
+        public int Count => items.Length;
 
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
         {
-            System.Diagnostics.Debug.Assert(items.Length == table.Header.Count());
-            int itemIndex = 0;
-            foreach (string header in table.Header)
+            Debug.Assert(items.Length == table.Header.Count());
+            var itemIndex = 0;
+            foreach (var header in table.Header)
             {
                 yield return new KeyValuePair<string, string>(header, items[itemIndex]);
                 itemIndex++;
@@ -59,7 +51,8 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         private AmazonException ThrowTableStructureCannotBeModified()
         {
-            return new AmazonException("The table rows must contain the same number of items as the header count of the table. The structure cannot be modified.");
+            return new AmazonException(
+                "The table rows must contain the same number of items as the header count of the table. The structure cannot be modified.");
         }
 
         #region Implementation of ICollection<KeyValuePair<string,string>>
@@ -76,7 +69,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         bool ICollection<KeyValuePair<string, string>>.Contains(KeyValuePair<string, string> item)
         {
-            int keyIndex = table.GetHeaderIndex(item.Key, false);
+            var keyIndex = table.GetHeaderIndex(item.Key, false);
             if (keyIndex < 0)
                 return false;
             return items[keyIndex].Equals(item.Value);
@@ -92,10 +85,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
             throw ThrowTableStructureCannotBeModified();
         }
 
-        bool ICollection<KeyValuePair<string, string>>.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool ICollection<KeyValuePair<string, string>>.IsReadOnly => false;
 
         #endregion
 
@@ -118,7 +108,7 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
 
         public bool TryGetValue(string key, out string value)
         {
-            int keyIndex = table.GetHeaderIndex(key, false);
+            var keyIndex = table.GetHeaderIndex(key, false);
             if (keyIndex < 0)
             {
                 value = null;
@@ -134,15 +124,9 @@ namespace FikaAmazonAPI.ReportGeneration.ReportDataTable
             return GetEnumerator();
         }
 
-        public ICollection<string> Keys
-        {
-            get { return table.Header; }
-        }
+        public ICollection<string> Keys => table.Header;
 
-        public ICollection<string> Values
-        {
-            get { return items; }
-        }
+        public ICollection<string> Values => items;
 
         #endregion
     }

@@ -1,12 +1,11 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class InventoryAgingReport
     {
-        public List<InventoryAgingRow> Data { get; set; } = new List<InventoryAgingRow>();
         public InventoryAgingReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -14,14 +13,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<InventoryAgingRow> values = new List<InventoryAgingRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(InventoryAgingRow.FromRow(row, refNumber));
-            }
+            var values = new List<InventoryAgingRow>();
+            foreach (var row in table.Rows) values.Add(InventoryAgingRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<InventoryAgingRow> Data { get; set; } = new List<InventoryAgingRow>();
     }
+
     public class InventoryAgingRow
     {
         public DateTime? SnapshotDate { get; set; }
@@ -55,7 +54,8 @@ namespace FikaAmazonAPI.ReportGeneration
         public static InventoryAgingRow FromRow(TableRow rowData, string refNumber)
         {
             var row = new InventoryAgingRow();
-            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"), DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
+            row.SnapshotDate = DataConverter.GetDate(rowData.GetString("snapshot-date"),
+                DataConverter.DateTimeFormat.DATE_AGING_FORMAT);
             row.SKU = rowData.GetString("sku");
             row.FNSKU = rowData.GetString("fnsku");
             row.ASIN = rowData.GetString("asin");

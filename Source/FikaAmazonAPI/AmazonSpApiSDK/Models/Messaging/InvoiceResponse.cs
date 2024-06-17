@@ -1,27 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
+
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 {
-    using System;
-    using System.Text;
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.ComponentModel.DataAnnotations;
-
     [DataContract]
-    public partial class InvoiceResponse : IEquatable<InvoiceResponse>, IValidatableObject
+    public class InvoiceResponse : IEquatable<InvoiceResponse>, IValidatableObject
     {
-        public InvoiceResponse(ErrorList errors = default(ErrorList))
+        public InvoiceResponse(ErrorList errors = default)
         {
-            this.Errors = errors;
+            Errors = errors;
         }
 
         public InvoiceResponse()
         {
-            this.Errors = default(ErrorList);
+            Errors = default;
         }
 
         [DataMember(Name = "errors", EmitDefaultValue = false)]
         public ErrorList Errors { get; set; }
+
+        public bool Equals(InvoiceResponse input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                Errors == input.Errors ||
+                (Errors != null &&
+                 Errors.Equals(input.Errors));
+        }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
 
         public override string ToString()
         {
@@ -39,36 +55,18 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging
 
         public override bool Equals(object input)
         {
-            return this.Equals(input as InvoiceResponse);
-        }
-
-        public bool Equals(InvoiceResponse input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.Errors == input.Errors ||
-                    (this.Errors != null &&
-                    this.Errors.Equals(input.Errors))
-                );
+            return Equals(input as InvoiceResponse);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                int hashCode = 41;
-                if (this.Errors != null)
-                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
+                var hashCode = 41;
+                if (Errors != null)
+                    hashCode = hashCode * 59 + Errors.GetHashCode();
                 return hashCode;
             }
-        }
-
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
+﻿using System;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Reports;
 using FikaAmazonAPI.Search;
 using FikaAmazonAPI.Utils;
-using System;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Report

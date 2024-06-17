@@ -1,19 +1,18 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
 {
-
     /// <summary>
-    /// A listing restriction, optionally qualified by a condition, with a list of reasons for the restriction.
+    ///     A listing restriction, optionally qualified by a condition, with a list of reasons for the restriction.
     /// </summary>
     [DataContract]
     public class Restriction
     {
         /// <summary>
-        /// A marketplace identifier. Identifies the Amazon marketplace where the restriction is enforced.
+        ///     A marketplace identifier. Identifies the Amazon marketplace where the restriction is enforced.
         /// </summary>
         /// <value>A marketplace identifier. Identifies the Amazon marketplace where the restriction is enforced.</value>
         [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
@@ -21,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         public string MarketplaceId { get; set; }
 
         /// <summary>
-        /// The condition that applies to the restriction.
+        ///     The condition that applies to the restriction.
         /// </summary>
         /// <value>The condition that applies to the restriction.</value>
         [DataMember(Name = "conditionType", EmitDefaultValue = false)]
@@ -29,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         public string ConditionType { get; set; }
 
         /// <summary>
-        /// A list of reasons for the restriction.
+        ///     A list of reasons for the restriction.
         /// </summary>
         /// <value>A list of reasons for the restriction.</value>
         [DataMember(Name = "reasons", EmitDefaultValue = false)]
@@ -38,7 +37,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -53,13 +52,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

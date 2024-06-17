@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 {
@@ -11,7 +11,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
     public class AggregationSettings
     {
         /// <summary>
-        /// The supported time period to use to perform marketplace-ASIN level aggregation.
+        ///     The supported time period to use to perform marketplace-ASIN level aggregation.
         /// </summary>
         /// <value>The supported time period to use to perform marketplace-ASIN level aggregation.</value>
         [DataMember(Name = "aggregationTimePeriod", EmitDefaultValue = false)]
@@ -20,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -33,13 +33,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

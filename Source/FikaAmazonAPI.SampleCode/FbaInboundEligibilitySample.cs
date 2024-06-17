@@ -1,30 +1,26 @@
-﻿using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound;
+using FikaAmazonAPI.Parameter.FbaInboundEligibility;
+using FikaAmazonAPI.Utils;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+public class FbaInboundEligibilitySample
 {
-    public class FbaInboundEligibilitySample
+    private readonly AmazonConnection amazonConnection;
+
+    public FbaInboundEligibilitySample(AmazonConnection amazonConnection)
     {
-        AmazonConnection amazonConnection;
-        public FbaInboundEligibilitySample(AmazonConnection amazonConnection)
-        {
-            this.amazonConnection = amazonConnection;
-        }
+        this.amazonConnection = amazonConnection;
+    }
 
-        public void GetItemEligibilityPreview()
-        {
-
-
-            var all = amazonConnection.FbaInboundEligibility.GetItemEligibilityPreview(new Parameter.FbaInboundEligibility.ParameterGetItemEligibilityPreview()
+    public void GetItemEligibilityPreview()
+    {
+        var all = amazonConnection.FbaInboundEligibility.GetItemEligibilityPreview(
+            new ParameterGetItemEligibilityPreview
             {
                 marketplaceIds = new List<string> { MarketPlace.UnitedArabEmirates.ID },
                 asin = "B07Q2R45XG",
-                program = FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound.ItemEligibilityPreview.ProgramEnum.INBOUND
+                program = ItemEligibilityPreview.ProgramEnum.INBOUND
             });
-        }
     }
 }

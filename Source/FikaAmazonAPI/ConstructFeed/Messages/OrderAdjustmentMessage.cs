@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using FikaAmazonAPI.ConstructFeed.Messages;
 using static FikaAmazonAPI.ConstructFeed.BaseXML;
 
 namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class OrderAdjustmentMessage
+    public class OrderAdjustmentMessage
     {
         [XmlElement(ElementName = "AmazonOrderID")]
         public string AmazonOrderID { get; set; }
+
         [XmlElement(ElementName = "MerchantFulfillmentID")]
         public string MerchantFulfillmentID { get; set; }
 
@@ -26,6 +26,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     {
         [XmlElement(ElementName = "AmazonOrderItemCode")]
         public string AmazonOrderItemCode { get; set; }
+
         [XmlElement(ElementName = "MerchantOrderItemID")]
         public string MerchantOrderItemID { get; set; }
 
@@ -47,11 +48,9 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
 
     public class AdjustmentBuyerPrice
     {
-        [XmlElement(ElementName = "Type")]
-        public AdjustmentBuyerTypePrice BuyerPriceType { get; set; }
+        [XmlElement(ElementName = "Type")] public AdjustmentBuyerTypePrice BuyerPriceType { get; set; }
 
-        [XmlElement(ElementName = "Amount")]
-        public CurrencyAmount Amount { get; set; }
+        [XmlElement(ElementName = "Amount")] public CurrencyAmount Amount { get; set; }
     }
 
     public class PromotionAdjustments
@@ -68,8 +67,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
 
     public class PromotionAdjustmentComponent
     {
-        [XmlElement(ElementName = "Type")]
-        public PromotionApplicationType PromotionType { get; set; }
+        [XmlElement(ElementName = "Type")] public PromotionApplicationType PromotionType { get; set; }
 
         [XmlElement(ElementName = "AdjustmentCurrencyAmount")]
         public CurrencyAmount Amount { get; set; }
@@ -77,8 +75,7 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
 
     public class DirectPaymentAdjustmentsComponent
     {
-        [XmlElement(ElementName = "Type")]
-        public string DirectPaymentType { get; set; }
+        [XmlElement(ElementName = "Type")] public string DirectPaymentType { get; set; }
 
         [XmlElement(ElementName = "AdjustmentCurrencyAmount")]
         public CurrencyAmount Amount { get; set; }

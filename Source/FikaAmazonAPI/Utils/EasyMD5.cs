@@ -15,9 +15,9 @@ namespace FikaAmazonAPI.Utils
             if (File.Exists(filepath) == false)
                 throw new InvalidOperationException("file '" + filepath + "' doesn't exist");
 
-            FileStream file = new FileStream(filepath, FileMode.Open);
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] bytes = md5.ComputeHash(file);
+            var file = new FileStream(filepath, FileMode.Open);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            var bytes = md5.ComputeHash(file);
             file.Close();
 
             return GetMD5HashFromBytes(bytes);
@@ -25,14 +25,10 @@ namespace FikaAmazonAPI.Utils
 
         private static string GetMD5HashFromBytes(byte[] bytes)
         {
-
             using var md5 = MD5.Create();
             var hash = md5.ComputeHash(bytes);
             var hashString = new StringBuilder();
-            foreach (var t in hash)
-            {
-                hashString.Append(t.ToString("x2", CultureInfo.InvariantCulture));
-            }
+            foreach (var t in hash) hashString.Append(t.ToString("x2", CultureInfo.InvariantCulture));
 
             return hashString.ToString();
         }

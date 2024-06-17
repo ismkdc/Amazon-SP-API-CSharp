@@ -6,13 +6,13 @@ using RestSharp.Serializers.NewtonsoftJson;
 namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
     /// <summary>
-    /// Get Singleton HttpClient
-    /// to fixed: RestClient not properly disposed causes memory / socket leaks
-    /// <see cref="https://github.com/abuzuhri/Amazon-SP-API-CSharp/issues/523"/>
+    ///     Get Singleton HttpClient
+    ///     to fixed: RestClient not properly disposed causes memory / socket leaks
+    ///     <see cref="https://github.com/abuzuhri/Amazon-SP-API-CSharp/issues/523" />
     /// </summary>
     public static class RestClientSingleton
     {
-        private static readonly HttpClient _httpClient = null;
+        private static readonly HttpClient _httpClient;
 
         static RestClientSingleton()
         {
@@ -23,7 +23,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         }
 
         /// <summary>
-        /// Get RestClient By Singleton HttpClient
+        ///     Get RestClient By Singleton HttpClient
         /// </summary>
         /// <param name="baseUrl"></param>
         /// <returns></returns>
@@ -31,13 +31,11 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public static RestClient GetRestClient(string baseUrl)
         {
             if (!Uri.TryCreate(baseUrl, UriKind.Absolute, out var baseUri))
-            {
                 throw new ArgumentException($"argument of {baseUrl} is illegal");
-            }
 
             var restClientOption = new RestClientOptions
             {
-                BaseUrl = baseUri,
+                BaseUrl = baseUri
             };
             return new RestClient(_httpClient, restClientOption,
                 configureSerialization: s => s.UseNewtonsoftJson());

@@ -1,33 +1,31 @@
-﻿using FikaAmazonAPI.Parameter;
-using FikaAmazonAPI.Utils;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using FikaAmazonAPI.Parameter;
+using FikaAmazonAPI.Utils;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.Search
 {
     public class ParameterBased
     {
-        [IgnoreToAddParameter]
-        [JsonIgnore]
-        public string TestCase { get; set; }
+        [IgnoreToAddParameter] [JsonIgnore] public string TestCase { get; set; }
 
         [IgnoreToAddParameter]
         internal Dictionary<string, List<KeyValuePair<string, string>>> SandboxQueryParameters { get; private set; }
 
         public virtual List<KeyValuePair<string, string>> getParameters()
         {
-            List<KeyValuePair<string, string>> queryParameters = new List<KeyValuePair<string, string>>();
+            var queryParameters = new List<KeyValuePair<string, string>>();
             if (!string.IsNullOrEmpty(TestCase))
             {
                 SandboxQueryParameters = Sandbox.SandboxQueryParameters(this, TestCase);
                 return SandboxQueryParameters[TestCase];
             }
-            PropertyInfo[] pi = this.GetType().GetProperties();
-            foreach (PropertyInfo p in pi)
+
+            var pi = GetType().GetProperties();
+            foreach (var p in pi)
             {
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(IgnoreToAddParameterAttribute))) continue;
                 if (p.CustomAttributes.Any(x => x.AttributeType == typeof(PathParameterAttribute))) continue;
@@ -41,12 +39,12 @@ namespace FikaAmazonAPI.Search
                     if (propTypeName == "IsNeedRestrictedDataToken" || propTypeName == "RestrictedDataTokenRequest")
                         continue;
 
-                    string output = "";
-                    if (PropertyType == typeof(DateTime) || PropertyType == typeof(Nullable<DateTime>))
+                    var output = "";
+                    if (PropertyType == typeof(DateTime) || PropertyType == typeof(DateTime?))
                     {
                         output = ((DateTime)value).ToString(Constants.DateISO8601Format);
                     }
-                    else if (propTypeName == typeof(String).Name)
+                    else if (propTypeName == typeof(string).Name)
                     {
                         output = value.ToString();
                     }
@@ -62,8 +60,10 @@ namespace FikaAmazonAPI.Search
                             var result = data.ToArray();
                             output = string.Join(",", result);
                         }
-                        else continue;
-
+                        else
+                        {
+                            continue;
+                        }
                     }
                     else
                     {
@@ -75,7 +75,6 @@ namespace FikaAmazonAPI.Search
 
                     queryParameters.Add(new KeyValuePair<string, string>(propName, output));
                 }
-
             }
 
             return queryParameters;
@@ -83,9 +82,10 @@ namespace FikaAmazonAPI.Search
 
         private static bool IsNullableEnum(Type t)
         {
-            Type u = Nullable.GetUnderlyingType(t);
-            return (u != null) && u.IsEnum;
+            var u = Nullable.GetUnderlyingType(t);
+            return u != null && u.IsEnum;
         }
+
         private static bool IsEnumerableOfEnum(Type type)
         {
             return GetEnumerableTypes(type).Any(t => t.IsEnum);
@@ -94,38 +94,26 @@ namespace FikaAmazonAPI.Search
         private static bool IsEnumerable(Type type)
         {
             if (type.IsInterface)
-            {
                 if (type.IsGenericType
                     && (type.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                         || type.GetGenericTypeDefinition() == typeof(ICollection<>)
                         || type.GetGenericTypeDefinition() == typeof(IList<>)
                         || type.GetGenericTypeDefinition() == typeof(List<>)))
-                {
                     return true;
-                }
-            }
 
             return false;
         }
+
         private static IEnumerable<Type> GetEnumerableTypes(Type type)
         {
             if (type.IsInterface)
-            {
                 if (type.IsGenericType
                     && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-                {
                     yield return type.GetGenericArguments()[0];
-                }
-            }
-            foreach (Type intType in type.GetInterfaces())
-            {
+            foreach (var intType in type.GetInterfaces())
                 if (intType.IsGenericType
                     && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-                {
                     yield return intType.GetGenericArguments()[0];
-                }
-            }
         }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.NotificationMessages
 {
-    public partial class Info
+    public class Info
     {
         public long PackageNumber { get; set; }
         public string CarrierCode { get; set; }

@@ -1,6 +1,6 @@
-﻿using FikaAmazonAPI.Search;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory.Granularity;
 
 namespace FikaAmazonAPI.Parameter.FbaInventory

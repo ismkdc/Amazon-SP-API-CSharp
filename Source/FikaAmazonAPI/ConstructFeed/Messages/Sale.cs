@@ -6,8 +6,9 @@ namespace FikaAmazonAPI.ConstructFeed.Messages
     {
         [XmlElement(ElementName = "StartDate")]
         public string StartDate { get; set; }
-        [XmlElement(ElementName = "EndDate")]
-        public string EndDate { get; set; }
+
+        [XmlElement(ElementName = "EndDate")] public string EndDate { get; set; }
+
         [XmlElement(ElementName = "SalePrice")]
         public StandardPrice SalePrice { get; set; }
     }

@@ -1,18 +1,17 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
 {
-
     /// <summary>
-    /// A link to resources related to a listing restriction.
+    ///     A link to resources related to a listing restriction.
     /// </summary>
     [DataContract]
     public class Link
     {
         /// <summary>
-        /// The URI of the related resource.
+        ///     The URI of the related resource.
         /// </summary>
         /// <value>The URI of the related resource.</value>
         [DataMember(Name = "resource", EmitDefaultValue = false)]
@@ -20,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         public string Resource { get; set; }
 
         /// <summary>
-        /// The HTTP verb used to interact with the related resource.
+        ///     The HTTP verb used to interact with the related resource.
         /// </summary>
         /// <value>The HTTP verb used to interact with the related resource.</value>
         [DataMember(Name = "verb", EmitDefaultValue = false)]
@@ -28,7 +27,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         public string Verb { get; set; }
 
         /// <summary>
-        /// The title of the related resource.
+        ///     The title of the related resource.
         /// </summary>
         /// <value>The title of the related resource.</value>
         [DataMember(Name = "title", EmitDefaultValue = false)]
@@ -36,7 +35,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         public string Title { get; set; }
 
         /// <summary>
-        /// The media type of the related resource.
+        ///     The media type of the related resource.
         /// </summary>
         /// <value>The media type of the related resource.</value>
         [DataMember(Name = "type", EmitDefaultValue = false)]
@@ -45,7 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -61,13 +60,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

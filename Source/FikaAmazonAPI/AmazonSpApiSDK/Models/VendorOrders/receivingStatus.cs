@@ -1,23 +1,27 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders.Constants;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class receivingStatus : IEquatable<receivingStatus>, IValidatableObject
+    public class receivingStatus : IEquatable<receivingStatus>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public receivingStatus() { }
-        public receivingStatus(ItemReceiveStatus? receiveStatus = default(ItemReceiveStatus?), ItemQuantity receivedQuantity = default(ItemQuantity), DateTime? lastReceiveDate = default(DateTime?))
+        public receivingStatus()
         {
-            this.ReceiveStatus = receiveStatus;
-            this.ReceivedQuantity = receivedQuantity;
-            this.LastReceiveDate = lastReceiveDate;
+        }
+
+        public receivingStatus(ItemReceiveStatus? receiveStatus = default, ItemQuantity receivedQuantity = default,
+            DateTime? lastReceiveDate = default)
+        {
+            ReceiveStatus = receiveStatus;
+            ReceivedQuantity = receivedQuantity;
+            LastReceiveDate = lastReceiveDate;
         }
 
         [DataMember(Name = "receiveStatus", EmitDefaultValue = false)]
@@ -30,7 +34,45 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         public DateTime? LastReceiveDate { get; set; }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     Returns true if ItemQuantity instances are equal
+        /// </summary>
+        /// <param name="input">Instance of ItemQuantity to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(receivingStatus input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    ReceiveStatus == input.ReceiveStatus ||
+                    (ReceiveStatus != null &&
+                     ReceiveStatus.Equals(input.ReceiveStatus))
+                ) &&
+                (
+                    ReceivedQuantity == input.ReceivedQuantity ||
+                    (ReceivedQuantity != null &&
+                     ReceivedQuantity.Equals(input.ReceivedQuantity))
+                ) &&
+                (
+                    LastReceiveDate == input.LastReceiveDate ||
+                    (LastReceiveDate != null &&
+                     LastReceiveDate.Equals(input.LastReceiveDate))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -45,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -54,70 +96,32 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as receivingStatus);
+            return Equals(input as receivingStatus);
         }
 
         /// <summary>
-        /// Returns true if ItemQuantity instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ItemQuantity to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(receivingStatus input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.ReceiveStatus == input.ReceiveStatus ||
-                    (this.ReceiveStatus != null &&
-                    this.ReceiveStatus.Equals(input.ReceiveStatus))
-                ) &&
-                (
-                    this.ReceivedQuantity == input.ReceivedQuantity ||
-                    (this.ReceivedQuantity != null &&
-                    this.ReceivedQuantity.Equals(input.ReceivedQuantity))
-                ) &&
-                (
-                    this.LastReceiveDate == input.LastReceiveDate ||
-                    (this.LastReceiveDate != null &&
-                    this.LastReceiveDate.Equals(input.LastReceiveDate))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.ReceiveStatus != null)
-                    hashCode = hashCode * 59 + this.ReceiveStatus.GetHashCode();
-                if (this.ReceivedQuantity != null)
-                    hashCode = hashCode * 59 + this.ReceivedQuantity.GetHashCode();
-                if (this.LastReceiveDate != null)
-                    hashCode = hashCode * 59 + this.LastReceiveDate.GetHashCode();
+                var hashCode = 41;
+                if (ReceiveStatus != null)
+                    hashCode = hashCode * 59 + ReceiveStatus.GetHashCode();
+                if (ReceivedQuantity != null)
+                    hashCode = hashCode * 59 + ReceivedQuantity.GetHashCode();
+                if (LastReceiveDate != null)
+                    hashCode = hashCode * 59 + LastReceiveDate.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

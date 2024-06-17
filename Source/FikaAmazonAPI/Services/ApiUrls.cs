@@ -2,606 +2,863 @@
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Services
 {
-
     public static class EnvironemntManager
     {
-        public static Environments Environemnt { get; set; } = Environments.Production;
         public enum Environments
         {
-            Sandbox, Production
+            Sandbox,
+            Production
         }
+
+        public static Environments Environemnt { get; set; } = Environments.Production;
     }
 
     public class ApiUrls
     {
-
         protected class OAuthUrls
         {
-            public static string TokenUrl
-            {
-                get => $"identity/v1/oauth2/token";
-            }
-            public static string RefreshTokenUrl
-            {
-                get => $"identity/v1/oauth2/token";
-            }
+            public static string TokenUrl => "identity/v1/oauth2/token";
+
+            public static string RefreshTokenUrl => "identity/v1/oauth2/token";
         }
+
         protected class TaxonomyApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/commerce/taxonomy/v1_beta";
-            public static string getDefaultCategoryTreeIdUrl
-            {
-                get => $"{_resourceBaseUrl}/get_default_category_tree_id";
-            }
-            public static string CategoryTreeUrl
-            {
-                get => $"{_resourceBaseUrl}/category_tree";
-            }
-            public static string GetItemAspectsForCategory
-            {
-                get => $"/get_item_aspects_for_category";
-            }
+            private static readonly string _resourceBaseUrl = "/commerce/taxonomy/v1_beta";
+
+            public static string getDefaultCategoryTreeIdUrl => $"{_resourceBaseUrl}/get_default_category_tree_id";
+
+            public static string CategoryTreeUrl => $"{_resourceBaseUrl}/category_tree";
+
+            public static string GetItemAspectsForCategory => "/get_item_aspects_for_category";
         }
+
         protected class FBAInboundEligibiltyApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/fba/inbound/v1";
-            public static string GetItemEligibilityPreview
-            {
-                get => $"{_resourceBaseUrl}/eligibility/itemPreview";
-            }
+            private static readonly string _resourceBaseUrl = "/fba/inbound/v1";
+
+            public static string GetItemEligibilityPreview => $"{_resourceBaseUrl}/eligibility/itemPreview";
         }
+
         protected class FulFillmentOutboundApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/fba/outbound/2020-07-01";
-            public static string GetFulfillmentPreview
+            private static readonly string _resourceBaseUrl = "/fba/outbound/2020-07-01";
+
+            public static string GetFulfillmentPreview => $"{_resourceBaseUrl}/fulfillmentOrders/preview";
+
+            public static string ListAllFulfillmentOrders => $"{_resourceBaseUrl}/fulfillmentOrders";
+
+            public static string CreateFulfillmentOrder => $"{_resourceBaseUrl}/fulfillmentOrders";
+
+            public static string GetPackageTrackingDetails => $"{_resourceBaseUrl}/tracking";
+
+            public static string ListReturnReasonCodes => $"{_resourceBaseUrl}/returnReasonCodes";
+
+            public static string GetFeatures => $"{_resourceBaseUrl}/features";
+
+            public static string CreateFulfillmentReturn(string sellerFulfillmentOrderId)
             {
-                get => $"{_resourceBaseUrl}/fulfillmentOrders/preview";
+                return $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}/return";
             }
-            public static string ListAllFulfillmentOrders
+
+            public static string GetFulfillmentOrder(string sellerFulfillmentOrderId)
             {
-                get => $"{_resourceBaseUrl}/fulfillmentOrders";
+                return $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}";
             }
-            public static string CreateFulfillmentOrder
+
+            public static string UpdateFulfillmentOrder(string sellerFulfillmentOrderId)
             {
-                get => $"{_resourceBaseUrl}/fulfillmentOrders";
+                return $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}";
             }
-            public static string GetPackageTrackingDetails
+
+            public static string CancelFulfillmentOrder(string sellerFulfillmentOrderId)
             {
-                get => $"{_resourceBaseUrl}/tracking";
+                return $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}/cancel";
             }
-            public static string ListReturnReasonCodes
+
+            public static string GetFeatureInventory(string featureName)
             {
-                get => $"{_resourceBaseUrl}/returnReasonCodes";
+                return $"{_resourceBaseUrl}/features/inventory/{featureName}";
             }
-            public static string CreateFulfillmentReturn(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}/return";
-            public static string GetFulfillmentOrder(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}";
-            public static string UpdateFulfillmentOrder(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}";
-            public static string CancelFulfillmentOrder(string sellerFulfillmentOrderId) => $"{_resourceBaseUrl}/fulfillmentOrders/{sellerFulfillmentOrderId}/cancel";
-            public static string GetFeatures
+
+            public static string GetFeatureSKU(string featureName, string sellerSku)
             {
-                get => $"{_resourceBaseUrl}/features";
+                return $"{_resourceBaseUrl}/features/inventory/{featureName}/{sellerSku}";
             }
-            public static string GetFeatureInventory(string featureName) => $"{_resourceBaseUrl}/features/inventory/{featureName}";
-            public static string GetFeatureSKU(string featureName, string sellerSku) => $"{_resourceBaseUrl}/features/inventory/{featureName}/{sellerSku}";
         }
+
         protected class FulFillmentInboundApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/fba/inbound/v0";
-            public static string GetInboundGuidance
+            private static readonly string _resourceBaseUrl = "/fba/inbound/v0";
+
+            public static string GetInboundGuidance => $"{_resourceBaseUrl}/itemsGuidance";
+
+            public static string CreateInboundShipmentPlan => $"{_resourceBaseUrl}/plans";
+
+            public static string GetPrepInstructions => $"{_resourceBaseUrl}/prepInstructions";
+
+            public static string GetShipments => $"{_resourceBaseUrl}/shipments";
+
+            public static string GetShipmentItems => $"{_resourceBaseUrl}/shipmentItems";
+
+            public static string UpdateInboundShipment(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/itemsGuidance";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}";
             }
-            public static string CreateInboundShipmentPlan
+
+            public static string CreateInboundShipment(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/plans";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}";
             }
-            public static string UpdateInboundShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string CreateInboundShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string GetPreorderInfo(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder";
-            public static string ConfirmPreorder(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder/confirm";
-            public static string GetPrepInstructions
+
+            public static string GetPreorderInfo(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/prepInstructions";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder";
             }
-            public static string GetTransportDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
-            public static string PutTransportDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
-            public static string VoidTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/void";
-            public static string EstimateTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/estimate";
-            public static string ConfirmTransport(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/confirm";
-            public static string GetLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/labels";
-            public static string GetBillOfLading(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/billOfLading";
-            public static string GetShipments
+
+            public static string ConfirmPreorder(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/shipments";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/preorder/confirm";
             }
-            public static string GetShipmentItemsByShipmentId(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/items";
-            public static string GetShipmentItems
+
+            public static string GetTransportDetails(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/shipmentItems";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
+            }
+
+            public static string PutTransportDetails(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/transport";
+            }
+
+            public static string VoidTransport(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/void";
+            }
+
+            public static string EstimateTransport(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/estimate";
+            }
+
+            public static string ConfirmTransport(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/transport/confirm";
+            }
+
+            public static string GetLabels(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/labels";
+            }
+
+            public static string GetBillOfLading(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/billOfLading";
+            }
+
+            public static string GetShipmentItemsByShipmentId(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/items";
             }
         }
+
         protected class ShippingApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/shipping/v1";
-            public static string CreateShipment
+            private static readonly string _resourceBaseUrl = "/shipping/v1";
+
+            public static string CreateShipment => $"{_resourceBaseUrl}/shipments";
+
+            public static string PurchaseShipment => $"{_resourceBaseUrl}/purchaseShipment";
+
+            public static string GetRates => $"{_resourceBaseUrl}/rates";
+
+            public static string GetAccount => $"{_resourceBaseUrl}/account";
+
+            public static string GetShipment(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/shipments";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}";
             }
-            public static string PurchaseShipment
+
+            public static string CancelShipment(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/purchaseShipment";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
             }
-            public static string GetRates
+
+            public static string PurchaseLabels(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/rates";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/purchaseLabels";
             }
-            public static string GetAccount
+
+            public static string RetrieveShippingLabel(string shipmentId, string trackingId)
             {
-                get => $"{_resourceBaseUrl}/account";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
             }
-            public static string GetShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
-            public static string PurchaseLabels(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/purchaseLabels";
-            public static string RetrieveShippingLabel(string shipmentId, string trackingId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/containers/{trackingId}/label";
-            public static string GetTrackingInformation(string trackingId) => $"{_resourceBaseUrl}/tracking/{trackingId}";
+
+            public static string GetTrackingInformation(string trackingId)
+            {
+                return $"{_resourceBaseUrl}/tracking/{trackingId}";
+            }
         }
 
         protected class ShippingApiV2Urls
         {
-            private readonly static string _resourceBaseUrl = "/shipping/v2";
-            public static string GetRates
+            private static readonly string _resourceBaseUrl = "/shipping/v2";
+
+            public static string GetRates => $"{_resourceBaseUrl}/shipments/rates";
+
+            public static string PurchaseShipment => $"{_resourceBaseUrl}/shipments";
+
+            public static string GetTracking(string carrierId, string trackingId)
             {
-                get => $"{_resourceBaseUrl}/shipments/rates";
+                return $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
             }
-            public static string PurchaseShipment
+
+            public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format)
             {
-                get => $"{_resourceBaseUrl}/shipments";
+                return
+                    $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
             }
-            public static string GetTracking(string carrierId, string trackingId) => $"{_resourceBaseUrl}/tracking?carrierId={carrierId}&trackingId={trackingId}";
-            public static string GetShipmentDocuments(string shipmentId, string packageClientReferenceId, string format) => $"{_resourceBaseUrl}/shipments/{shipmentId}/documents?packageClientReferenceId={packageClientReferenceId}&format={format}";
-            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
+
+            public static string CancelShipment(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
+            }
         }
+
         protected class MessaginApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/messaging/v1";
+            private static readonly string _resourceBaseUrl = "/messaging/v1";
 
-            public static string GetMessagingActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
-            public static string ConfirmCustomizationDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmCustomizationDetails";
-            public static string CreateConfirmDeliveryDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmDeliveryDetails";
-            public static string CreateLegalDisclosure(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/legalDisclosure";
-            public static string CreateNegativeFeedbackRemoval(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/negativeFeedbackRemoval";
-            public static string CreateConfirmOrderDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmOrderDetails";
-            public static string CreateConfirmServiceDetails(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmServiceDetails";
-            public static string CreateAmazonMotors(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/amazonMotors";
-            public static string CreateWarranty(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/warranty";
-            public static string GetAttributes(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/attributes";
-            public static string CreateDigitalAccessKey(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
-            public static string CreateUnexpectedProblem(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
-            public static string SendInvoice(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/invoice";
+            public static string GetMessagingActionsForOrder(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}";
+            }
+
+            public static string ConfirmCustomizationDetails(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmCustomizationDetails";
+            }
+
+            public static string CreateConfirmDeliveryDetails(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmDeliveryDetails";
+            }
+
+            public static string CreateLegalDisclosure(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/legalDisclosure";
+            }
+
+            public static string CreateNegativeFeedbackRemoval(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/negativeFeedbackRemoval";
+            }
+
+            public static string CreateConfirmOrderDetails(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmOrderDetails";
+            }
+
+            public static string CreateConfirmServiceDetails(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/confirmServiceDetails";
+            }
+
+            public static string CreateAmazonMotors(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/amazonMotors";
+            }
+
+            public static string CreateWarranty(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/warranty";
+            }
+
+            public static string GetAttributes(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/attributes";
+            }
+
+            public static string CreateDigitalAccessKey(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/digitalAccessKey";
+            }
+
+            public static string CreateUnexpectedProblem(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/unexpectedProblem";
+            }
+
+            public static string SendInvoice(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/messages/invoice";
+            }
         }
+
         protected class EasyShip20220323
         {
-            private readonly static string _resourceBaseUrl = "/easyShip/2022-03-23";
-            public static string ListHandoverSlots
-            {
-                get => $"{_resourceBaseUrl}/timeSlot";
-            }
-            public static string GetScheduledPackage
-            {
-                get => $"{_resourceBaseUrl}/package";
-            }
-            public static string CreateScheduledPackage
-            {
-                get => $"{_resourceBaseUrl}/package";
-            }
-            public static string UpdateScheduledPackages
-            {
-                get => $"{_resourceBaseUrl}/package";
-            }
+            private static readonly string _resourceBaseUrl = "/easyShip/2022-03-23";
+
+            public static string ListHandoverSlots => $"{_resourceBaseUrl}/timeSlot";
+
+            public static string GetScheduledPackage => $"{_resourceBaseUrl}/package";
+
+            public static string CreateScheduledPackage => $"{_resourceBaseUrl}/package";
+
+            public static string UpdateScheduledPackages => $"{_resourceBaseUrl}/package";
         }
+
         protected class FBASmallAndLightApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/fba/smallAndLight/v1";
+            private static readonly string _resourceBaseUrl = "/fba/smallAndLight/v1";
 
-            public static string GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
-            public static string PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
-            public static string DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
-            public static string GetSmallAndLightEligibilityBySellerSKU(string sellerSKU) => $"{_resourceBaseUrl}/eligibilities/{Uri.EscapeDataString(sellerSKU)}";
-            public static string GetSmallAndLightFeePreview
+            public static string GetSmallAndLightFeePreview => $"{_resourceBaseUrl}/feePreviews";
+
+            public static string GetSmallAndLightEnrollmentBySellerSKU(string sellerSKU)
             {
-                get => $"{_resourceBaseUrl}/feePreviews";
+                return $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
+            }
+
+            public static string PutSmallAndLightEnrollmentBySellerSKU(string sellerSKU)
+            {
+                return $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
+            }
+
+            public static string DeleteSmallAndLightEnrollmentBySellerSKU(string sellerSKU)
+            {
+                return $"{_resourceBaseUrl}/enrollments/{Uri.EscapeDataString(sellerSKU)}";
+            }
+
+            public static string GetSmallAndLightEligibilityBySellerSKU(string sellerSKU)
+            {
+                return $"{_resourceBaseUrl}/eligibilities/{Uri.EscapeDataString(sellerSKU)}";
             }
         }
+
         protected class MerchantFulfillmentApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/mfn/v0";
+            private static readonly string _resourceBaseUrl = "/mfn/v0";
 
-            public static string GetEligibleShipmentServicesOld
+            public static string GetEligibleShipmentServicesOld => $"{_resourceBaseUrl}/eligibleServices";
+
+            public static string GetEligibleShipmentServices => $"{_resourceBaseUrl}/eligibleShippingServices";
+
+            public static string CreateShipment => $"{_resourceBaseUrl}/shipments";
+
+            public static string GetAdditionalSellerInputsOld => $"{_resourceBaseUrl}/sellerInputs";
+
+            public static string GetAdditionalSellerInputs => $"{_resourceBaseUrl}/additionalSellerInputs";
+
+            public static string GetShipment(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/eligibleServices";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}";
             }
-            public static string GetEligibleShipmentServices
+
+            public static string CancelShipment(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/eligibleShippingServices";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}";
             }
-            public static string CreateShipment
+
+            public static string CancelShipmentOld(string shipmentId)
             {
-                get => $"{_resourceBaseUrl}/shipments";
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
             }
-            public static string GetAdditionalSellerInputsOld
-            {
-                get => $"{_resourceBaseUrl}/sellerInputs";
-            }
-            public static string GetAdditionalSellerInputs
-            {
-                get => $"{_resourceBaseUrl}/additionalSellerInputs";
-            }
-            public static string GetShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string CancelShipment(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string CancelShipmentOld(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/cancel";
         }
+
         protected class NotificationApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/notifications/v1";
-            public static string GetSubscription(string notificationType) => $"{_resourceBaseUrl}/subscriptions/{notificationType}";
-            public static string CreateSubscription(string notificationType) => $"{_resourceBaseUrl}/subscriptions/{notificationType}";
-            public static string GetSubscriptionById(string notificationType, string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
-            public static string DeleteSubscriptionById(string notificationType, string subscriptionId) => $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+            private static readonly string _resourceBaseUrl = "/notifications/v1";
 
-            public static string GetDestinations
+            public static string GetDestinations => $"{_resourceBaseUrl}/destinations";
+
+            public static string CreateDestination => $"{_resourceBaseUrl}/destinations";
+
+            public static string GetSubscription(string notificationType)
             {
-                get => $"{_resourceBaseUrl}/destinations";
+                return $"{_resourceBaseUrl}/subscriptions/{notificationType}";
             }
-            public static string CreateDestination
+
+            public static string CreateSubscription(string notificationType)
             {
-                get => $"{_resourceBaseUrl}/destinations";
+                return $"{_resourceBaseUrl}/subscriptions/{notificationType}";
             }
-            public static string GetDestination(string destinationId) => $"{_resourceBaseUrl}/destinations/{destinationId}";
-            public static string DeleteDestination(string destinationId) => $"{_resourceBaseUrl}/destinations/{destinationId}";
+
+            public static string GetSubscriptionById(string notificationType, string subscriptionId)
+            {
+                return $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+            }
+
+            public static string DeleteSubscriptionById(string notificationType, string subscriptionId)
+            {
+                return $"{_resourceBaseUrl}/subscriptions/{notificationType}/{subscriptionId}";
+            }
+
+            public static string GetDestination(string destinationId)
+            {
+                return $"{_resourceBaseUrl}/destinations/{destinationId}";
+            }
+
+            public static string DeleteDestination(string destinationId)
+            {
+                return $"{_resourceBaseUrl}/destinations/{destinationId}";
+            }
         }
 
         protected class SalesApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/sales/v1";
-            public static string GetOrderMetrics
-            {
-                get => $"{_resourceBaseUrl}/orderMetrics";
-            }
+            private static readonly string _resourceBaseUrl = "/sales/v1";
+
+            public static string GetOrderMetrics => $"{_resourceBaseUrl}/orderMetrics";
         }
+
         protected class RestrictionsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
-            public static string GetListingsRestrictions
-            {
-                get => $"{_resourceBaseUrl}/restrictions";
-            }
+            private static readonly string _resourceBaseUrl = "/listings/2021-08-01";
+
+            public static string GetListingsRestrictions => $"{_resourceBaseUrl}/restrictions";
         }
+
         protected class AuthorizationsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/authorization/v1";
-            public static string GetAuthorizationCode
-            {
-                get => $"{_resourceBaseUrl}/authorizationCode";
-            }
+            private static readonly string _resourceBaseUrl = "/authorization/v1";
+
+            public static string GetAuthorizationCode => $"{_resourceBaseUrl}/authorizationCode";
         }
+
         protected class SellersApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/sellers/v1";
-            public static string GetMarketplaceParticipations
-            {
-                get => $"{_resourceBaseUrl}/marketplaceParticipations";
-            }
+            private static readonly string _resourceBaseUrl = "/sellers/v1";
+
+            public static string GetMarketplaceParticipations => $"{_resourceBaseUrl}/marketplaceParticipations";
         }
+
         internal class ProductPricingApiUrls
         {
             private static readonly string _resourceBaseUrl = "/products/pricing/v0";
-            public static string GetPricing
-            {
-                get => $"{_resourceBaseUrl}/price";
-            }
-            public static string GetCompetitivePricing
-            {
-                get => $"{_resourceBaseUrl}/competitivePrice";
-            }
 
-            public static string GetListingOffersBySellerSku(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/offers";
-            public static string GetItemOffers(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/offers";
-            public static string GetListingOffers(string sellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(sellerSKU)}/offers";
+            public static string GetPricing => $"{_resourceBaseUrl}/price";
+
+            public static string GetCompetitivePricing => $"{_resourceBaseUrl}/competitivePrice";
 
             public static string GetBatchItemOffers => $"/batches{_resourceBaseUrl}/itemOffers";
 
             public static string GetBatchListingOffers => $"/batches{_resourceBaseUrl}/listingOffers";
 
-            #region v2022-05-01
-            private static readonly string _resourceBaseUrl_v20220501 = "/products/pricing/2022-05-01";
-            public static string FeaturedOfferExpectedPriceUri => $"{_resourceBaseUrl_v20220501}/offer/featuredOfferExpectedPrice";
-            public static string GetFeaturedOfferExpectedPriceBatch => $"/batches{FeaturedOfferExpectedPriceUri}";
-            #endregion
-        }
-        protected class ProductTypeApiUrls
-        {
-            private readonly static string _resourceBaseUrl = "/definitions/2020-09-01";
-            public static string SearchDefinitionsProductTypes
+            public static string GetListingOffersBySellerSku(string SellerSKU)
             {
-                get => $"{_resourceBaseUrl}/productTypes";
+                return $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/offers";
             }
 
-            public static string GetDefinitionsProductType(string productType) => $"{_resourceBaseUrl}/productTypes/{productType}";
+            public static string GetItemOffers(string Asin)
+            {
+                return $"{_resourceBaseUrl}/items/{Asin}/offers";
+            }
+
+            public static string GetListingOffers(string sellerSKU)
+            {
+                return $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(sellerSKU)}/offers";
+            }
+
+            #region v2022-05-01
+
+            private static readonly string _resourceBaseUrl_v20220501 = "/products/pricing/2022-05-01";
+
+            public static string FeaturedOfferExpectedPriceUri =>
+                $"{_resourceBaseUrl_v20220501}/offer/featuredOfferExpectedPrice";
+
+            public static string GetFeaturedOfferExpectedPriceBatch => $"/batches{FeaturedOfferExpectedPriceUri}";
+
+            #endregion
+        }
+
+        protected class ProductTypeApiUrls
+        {
+            private static readonly string _resourceBaseUrl = "/definitions/2020-09-01";
+
+            public static string SearchDefinitionsProductTypes => $"{_resourceBaseUrl}/productTypes";
+
+            public static string GetDefinitionsProductType(string productType)
+            {
+                return $"{_resourceBaseUrl}/productTypes/{productType}";
+            }
         }
 
         protected class ReportApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/reports/2021-06-30";
-            public static string CreateReport
+            private static readonly string _resourceBaseUrl = "/reports/2021-06-30";
+
+            public static string CreateReport => $"{_resourceBaseUrl}/reports";
+
+            public static string GetReports => $"{_resourceBaseUrl}/reports";
+
+            public static string GetReportSchedules => $"{_resourceBaseUrl}/schedules";
+
+            public static string CreateReportSchedule => $"{_resourceBaseUrl}/schedules";
+
+            public static string GetReport(string reportId)
             {
-                get => $"{_resourceBaseUrl}/reports";
-            }
-            public static string GetReports
-            {
-                get => $"{_resourceBaseUrl}/reports";
-            }
-            public static string GetReport(string reportId) => $"{_resourceBaseUrl}/reports/{reportId}";
-            public static string CancelReport(string reportId) => $"{_resourceBaseUrl}/reports/{reportId}";
-            public static string GetReportSchedules
-            {
-                get => $"{_resourceBaseUrl}/schedules";
-            }
-            public static string CreateReportSchedule
-            {
-                get => $"{_resourceBaseUrl}/schedules";
+                return $"{_resourceBaseUrl}/reports/{reportId}";
             }
 
-            public static string GetReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
-            public static string CancelReportSchedule(string reportScheduleId) => $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
-            public static string GetReportDocument(string reportDocumentId) => $"{_resourceBaseUrl}/documents/{reportDocumentId}";
+            public static string CancelReport(string reportId)
+            {
+                return $"{_resourceBaseUrl}/reports/{reportId}";
+            }
+
+            public static string GetReportSchedule(string reportScheduleId)
+            {
+                return $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
+            }
+
+            public static string CancelReportSchedule(string reportScheduleId)
+            {
+                return $"{_resourceBaseUrl}/schedules/{reportScheduleId}";
+            }
+
+            public static string GetReportDocument(string reportDocumentId)
+            {
+                return $"{_resourceBaseUrl}/documents/{reportDocumentId}";
+            }
         }
+
         protected class VendorDirectFulfillmentOrdersApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/vendor/directFulfillment/orders/v1";
-            public static string GetOrders
+            private static readonly string _resourceBaseUrl = "/vendor/directFulfillment/orders/v1";
+
+            public static string GetOrders => $"{_resourceBaseUrl}/purchaseOrders";
+
+            public static string SubmitAcknowledgement => $"{_resourceBaseUrl}/acknowledgements";
+
+            public static string GetOrder(string purchaseOrderNumber)
             {
-                get => $"{_resourceBaseUrl}/purchaseOrders";
+                return $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
             }
-            public static string SubmitAcknowledgement
-            {
-                get => $"{_resourceBaseUrl}/acknowledgements";
-            }
-            public static string GetOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
         }
+
         protected class VendorOrdersApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/vendor/orders/v1";
-            public static string GetPurchaseOrders
+            private static readonly string _resourceBaseUrl = "/vendor/orders/v1";
+
+            public static string GetPurchaseOrders => $"{_resourceBaseUrl}/purchaseOrders";
+
+            public static string SubmitAcknowledgement => $"{_resourceBaseUrl}/acknowledgements";
+
+            public static string GetPurchaseOrdersStatus => $"{_resourceBaseUrl}/purchaseOrdersStatus";
+
+            public static string GetPurchaseOrder(string purchaseOrderNumber)
             {
-                get => $"{_resourceBaseUrl}/purchaseOrders";
-            }
-            public static string GetPurchaseOrder(string purchaseOrderNumber) => $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
-            public static string SubmitAcknowledgement
-            {
-                get => $"{_resourceBaseUrl}/acknowledgements";
-            }
-            public static string GetPurchaseOrdersStatus
-            {
-                get => $"{_resourceBaseUrl}/purchaseOrdersStatus";
+                return $"{_resourceBaseUrl}/purchaseOrders/{purchaseOrderNumber}";
             }
         }
+
         protected class VendorTransactionStatusApiUrls
-		{
-			private readonly static string _resourceBaseUrl = "/vendor/transactions/v1";
-			public static string GetTransaction(string transactionId) => $"{_resourceBaseUrl}/transactions/{transactionId}";
+        {
+            private static readonly string _resourceBaseUrl = "/vendor/transactions/v1";
+
+            public static string GetTransaction(string transactionId)
+            {
+                return $"{_resourceBaseUrl}/transactions/{transactionId}";
+            }
         }
+
         protected class UploadApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/uploads/2020-11-01";
-            public static string CreateUploadDestinationForResource(string resource) => $"{_resourceBaseUrl}/uploadDestinations/{resource}";
+            private static readonly string _resourceBaseUrl = "/uploads/2020-11-01";
+
+            public static string CreateUploadDestinationForResource(string resource)
+            {
+                return $"{_resourceBaseUrl}/uploadDestinations/{resource}";
+            }
         }
+
         protected class InventoryApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/sell/inventory/v1";
-            public static string bulkCreateOrReplaceInventoryItemUrl
-            {
-                get => $"{_resourceBaseUrl}/bulk_create_or_replace_inventory_item";
-            }
-            public static string InventoryItemUrl
-            {
-                get => $"{_resourceBaseUrl}/inventory_item";
-            }
-            public static string InventoryItemGroupUrl
-            {
-                get => $"{_resourceBaseUrl}/inventory_item_group";
-            }
-            public static string Offer
-            {
-                get => $"{_resourceBaseUrl}/offer";
-            }
-            public static string BulkCreateOffer
-            {
-                get => $"{_resourceBaseUrl}/bulk_create_offer";
-            }
-            public static string BulkPublishOffer
-            {
-                get => $"{_resourceBaseUrl}/bulk_publish_offer";
-            }
-            public static string PublishByInventoryItemGroup
-            {
-                get => $"{_resourceBaseUrl}/publish_by_inventory_item_group";
-            }
-            public static string WithdrawByInventoryItemGroup
-            {
-                get => $"{_resourceBaseUrl}/withdraw_by_inventory_item_group";
-            }
-            public static string Location
-            {
-                get => $"{_resourceBaseUrl}/location";
-            }
+            private static readonly string _resourceBaseUrl = "/sell/inventory/v1";
+
+            public static string bulkCreateOrReplaceInventoryItemUrl =>
+                $"{_resourceBaseUrl}/bulk_create_or_replace_inventory_item";
+
+            public static string InventoryItemUrl => $"{_resourceBaseUrl}/inventory_item";
+
+            public static string InventoryItemGroupUrl => $"{_resourceBaseUrl}/inventory_item_group";
+
+            public static string Offer => $"{_resourceBaseUrl}/offer";
+
+            public static string BulkCreateOffer => $"{_resourceBaseUrl}/bulk_create_offer";
+
+            public static string BulkPublishOffer => $"{_resourceBaseUrl}/bulk_publish_offer";
+
+            public static string PublishByInventoryItemGroup => $"{_resourceBaseUrl}/publish_by_inventory_item_group";
+
+            public static string WithdrawByInventoryItemGroup => $"{_resourceBaseUrl}/withdraw_by_inventory_item_group";
+
+            public static string Location => $"{_resourceBaseUrl}/location";
         }
+
         protected class FinanceApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/finances/v0";
-            public static string ListFinancialEventGroups
+            private static readonly string _resourceBaseUrl = "/finances/v0";
+
+            public static string ListFinancialEventGroups => $"{_resourceBaseUrl}/financialEventGroups";
+
+            public static string ListFinancialEvents => $"{_resourceBaseUrl}/financialEvents";
+
+            public static string ListFinancialEventsByGroupId(string eventGroupId)
             {
-                get => $"{_resourceBaseUrl}/financialEventGroups";
+                return $"{_resourceBaseUrl}/financialEventGroups/{eventGroupId}/financialEvents";
             }
-            public static string ListFinancialEventsByGroupId(string eventGroupId) => $"{_resourceBaseUrl}/financialEventGroups/{eventGroupId}/financialEvents";
-            public static string ListFinancialEventsByOrderId(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/financialEvents";
-            public static string ListFinancialEvents
+
+            public static string ListFinancialEventsByOrderId(string orderId)
             {
-                get => $"{_resourceBaseUrl}/financialEvents";
+                return $"{_resourceBaseUrl}/orders/{orderId}/financialEvents";
             }
         }
 
         protected class AccountApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/sell/account/v1";
-            public static string returnPolicy
-            {
-                get => $"{_resourceBaseUrl}/return_policy";
-            }
-            public static string FulfillmentPolicy
-            {
-                get => $"{_resourceBaseUrl}/fulfillment_policy";
-            }
-            public static string PayementPolicy
-            {
-                get => $"{_resourceBaseUrl}/payment_policy";
-            }
-            public static string Privilege
-            {
-                get => $"{_resourceBaseUrl}/privilege";
-            }
+            private static readonly string _resourceBaseUrl = "/sell/account/v1";
+
+            public static string returnPolicy => $"{_resourceBaseUrl}/return_policy";
+
+            public static string FulfillmentPolicy => $"{_resourceBaseUrl}/fulfillment_policy";
+
+            public static string PayementPolicy => $"{_resourceBaseUrl}/payment_policy";
+
+            public static string Privilege => $"{_resourceBaseUrl}/privilege";
         }
+
         protected class ShipmentInvoicingApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/fba/outbound/brazil/v0";
-            public static string GetShipmentDetails(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}";
-            public static string SubmitInvoice(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/invoice";
-            public static string GetInvoiceStatus(string shipmentId) => $"{_resourceBaseUrl}/shipments/{shipmentId}/invoice/status";
+            private static readonly string _resourceBaseUrl = "/fba/outbound/brazil/v0";
+
+            public static string GetShipmentDetails(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}";
+            }
+
+            public static string SubmitInvoice(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/invoice";
+            }
+
+            public static string GetInvoiceStatus(string shipmentId)
+            {
+                return $"{_resourceBaseUrl}/shipments/{shipmentId}/invoice/status";
+            }
         }
+
         protected class ProductFeeApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/products/fees/v0";
-            public static string GetMyFeesEstimateForSKU(string SellerSKU) => $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/feesEstimate";
-            public static string GetMyFeesEstimateForASIN(string Asin) => $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
+            private static readonly string _resourceBaseUrl = "/products/fees/v0";
 
             public static string GetMyFeesEstimate => $"{_resourceBaseUrl}/feesEstimate";
+
+            public static string GetMyFeesEstimateForSKU(string SellerSKU)
+            {
+                return $"{_resourceBaseUrl}/listings/{Uri.EscapeDataString(SellerSKU)}/feesEstimate";
+            }
+
+            public static string GetMyFeesEstimateForASIN(string Asin)
+            {
+                return $"{_resourceBaseUrl}/items/{Asin}/feesEstimate";
+            }
         }
+
         protected class TokenApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/tokens/2021-03-01";
-            public static string RestrictedDataToken
-            {
-                get => $"{_resourceBaseUrl}/restrictedDataToken";
-            }
+            private static readonly string _resourceBaseUrl = "/tokens/2021-03-01";
+
+            public static string RestrictedDataToken => $"{_resourceBaseUrl}/restrictedDataToken";
         }
+
         protected class SolicitationsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/solicitations/v1";
-            public static string GetSolicitationActionsForOrder(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}";
-            public static string CreateProductReviewAndSellerFeedbackSolicitation(string amazonOrderId) => $"{_resourceBaseUrl}/orders/{amazonOrderId}/solicitations/productReviewAndSellerFeedback";
+            private static readonly string _resourceBaseUrl = "/solicitations/v1";
+
+            public static string GetSolicitationActionsForOrder(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}";
+            }
+
+            public static string CreateProductReviewAndSellerFeedbackSolicitation(string amazonOrderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{amazonOrderId}/solicitations/productReviewAndSellerFeedback";
+            }
         }
+
         protected class FeedsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/feeds/2021-06-30";
-            public static string GetFeeds
+            private static readonly string _resourceBaseUrl = "/feeds/2021-06-30";
+
+            public static string GetFeeds => $"{_resourceBaseUrl}/feeds";
+
+            public static string CreateFeed => $"{_resourceBaseUrl}/feeds";
+
+            public static string CreateFeedDocument => $"{_resourceBaseUrl}/documents";
+
+            public static string GetFeedDocument(string feedDocumentId)
             {
-                get => $"{_resourceBaseUrl}/feeds";
+                return $"{_resourceBaseUrl}/documents/{feedDocumentId}";
             }
-            public static string CreateFeed
+
+            public static string GetFeed(string feedId)
             {
-                get => $"{_resourceBaseUrl}/feeds";
+                return $"{_resourceBaseUrl}/feeds/{feedId}";
             }
-            public static string CreateFeedDocument
+
+            public static string CancelFeed(string feedId)
             {
-                get => $"{_resourceBaseUrl}/documents";
+                return $"{_resourceBaseUrl}/feeds/{feedId}";
             }
-            public static string GetFeedDocument(string feedDocumentId) => $"{_resourceBaseUrl}/documents/{feedDocumentId}";
-            public static string GetFeed(string feedId) => $"{_resourceBaseUrl}/feeds/{feedId}";
-            public static string CancelFeed(string feedId) => $"{_resourceBaseUrl}/feeds/{feedId}";
         }
+
         protected class FbaInventoriesApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/fba/inventory/v1";
-            public static string GetInventorySummaries
-            {
-                get => $"{_resourceBaseUrl}/summaries";
-            }
+            private static readonly string _resourceBaseUrl = "/fba/inventory/v1";
+
+            public static string GetInventorySummaries => $"{_resourceBaseUrl}/summaries";
         }
+
         public class OrdersApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/orders/v0";
-            public static string Orders
+            private static readonly string _resourceBaseUrl = "/orders/v0";
+
+            public static string Orders => $"{_resourceBaseUrl}/orders";
+
+            public static string Order(string orderId)
             {
-                get => $"{_resourceBaseUrl}/orders";
+                return $"{_resourceBaseUrl}/orders/{orderId}";
             }
-            public static string Order(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}";
-            public static string OrderItems(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems";
-            public static string OrderBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/buyerInfo";
-            public static string OrderItemsBuyerInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/orderItems/buyerInfo";
-            public static string OrderShipmentInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/address";
-            public static string UpdateShipmentStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipment";
-            public static string GetOrderRegulatedInfo(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
-            public static string UpdateVerificationStatus(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
-            public static string GetOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
-            public static string UpdateOrderItemsApprovals(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/approvals";
-            public static string ConfirmShipment(string orderId) => $"{_resourceBaseUrl}/orders/{orderId}/shipmentConfirmation";
+
+            public static string OrderItems(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/orderItems";
+            }
+
+            public static string OrderBuyerInfo(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/buyerInfo";
+            }
+
+            public static string OrderItemsBuyerInfo(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/orderItems/buyerInfo";
+            }
+
+            public static string OrderShipmentInfo(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/address";
+            }
+
+            public static string UpdateShipmentStatus(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/shipment";
+            }
+
+            public static string GetOrderRegulatedInfo(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
+            }
+
+            public static string UpdateVerificationStatus(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/regulatedInfo";
+            }
+
+            public static string GetOrderItemsApprovals(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/approvals";
+            }
+
+            public static string UpdateOrderItemsApprovals(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/approvals";
+            }
+
+            public static string ConfirmShipment(string orderId)
+            {
+                return $"{_resourceBaseUrl}/orders/{orderId}/shipmentConfirmation";
+            }
         }
 
         protected class CategoryApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/catalog/v0";
+            private static readonly string _resourceBaseUrl = "/catalog/v0";
 
-            private readonly static string _202012resourceBaseUrl = "/catalog/2020-12-01";
+            private static readonly string _202012resourceBaseUrl = "/catalog/2020-12-01";
 
-            private readonly static string _202204resourceBaseUrl = "/catalog/2022-04-01";
+            private static readonly string _202204resourceBaseUrl = "/catalog/2022-04-01";
 
 
-            public static string ListCatalogItems
-            {
-                get => $"{_resourceBaseUrl}/items";
-            }
-            public static string ListCatalogCategories
-            {
-                get => $"{_resourceBaseUrl}/categories";
-            }
-            public static string GetCatalogItem(string asin) => $"{_resourceBaseUrl}/items/{asin}";
-            public static string GetCatalogItem202012(string asin) => $"{_202012resourceBaseUrl}/items/{asin}";
+            public static string ListCatalogItems => $"{_resourceBaseUrl}/items";
+
+            public static string ListCatalogCategories => $"{_resourceBaseUrl}/categories";
 
             public static string SearchCatalogItems => $"{_202012resourceBaseUrl}/items";
 
             public static string SearchCatalogItems202204 => $"{_202204resourceBaseUrl}/items";
-            public static string GetCatalogItem202204(string asin) => $"{_202204resourceBaseUrl}/items/{asin}";
+
+            public static string GetCatalogItem(string asin)
+            {
+                return $"{_resourceBaseUrl}/items/{asin}";
+            }
+
+            public static string GetCatalogItem202012(string asin)
+            {
+                return $"{_202012resourceBaseUrl}/items/{asin}";
+            }
+
+            public static string GetCatalogItem202204(string asin)
+            {
+                return $"{_202204resourceBaseUrl}/items/{asin}";
+            }
         }
 
         protected class ListingsItemsApiUrls
         {
-            private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
+            private static readonly string _resourceBaseUrl = "/listings/2021-08-01";
 
             //https://stackoverflow.com/questions/575440/url-encoding-using-c-sharp/21771206#21771206
-            public static string GetListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            public static string GetListingItem(string seller, string sku)
+            {
+                return $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            }
 
-            public static string PutListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            public static string PutListingItem(string seller, string sku)
+            {
+                return $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            }
 
-            public static string DeleteListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            public static string DeleteListingItem(string seller, string sku)
+            {
+                return $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            }
 
-            public static string PatchListingItem(string seller, string sku) => $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            public static string PatchListingItem(string seller, string sku)
+            {
+                return $"{_resourceBaseUrl}/items/{seller}/{Uri.EscapeDataString(sku)}";
+            }
         }
 
         protected class ListingsRestrictionsApi
         {
-            private readonly static string _resourceBaseUrl = "/listings/2021-08-01";
-            public static string GetListingsRestrictions() => $"{_resourceBaseUrl}/restrictions";
+            private static readonly string _resourceBaseUrl = "/listings/2021-08-01";
+
+            public static string GetListingsRestrictions()
+            {
+                return $"{_resourceBaseUrl}/restrictions";
+            }
         }
 
         protected class ProductTypeDefinitionsApi
         {
-            private readonly static string _resourceBaseUrl = "/definitions/2020-09-01/productTypes";
-            public static string GetDefinitionsProductType(string productType) => $"{_resourceBaseUrl}/{productType}";
+            private static readonly string _resourceBaseUrl = "/definitions/2020-09-01/productTypes";
             public static string SearchDefinitionsProductTypes => $"{_resourceBaseUrl}";
+
+            public static string GetDefinitionsProductType(string productType)
+            {
+                return $"{_resourceBaseUrl}/{productType}";
+            }
         }
-
     }
-
-
-
-
 }

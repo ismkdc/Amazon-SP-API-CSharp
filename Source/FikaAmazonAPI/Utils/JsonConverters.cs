@@ -1,10 +1,12 @@
-﻿namespace FikaAmazonAPI.Utils
+﻿using Newtonsoft.Json.Converters;
+
+namespace FikaAmazonAPI.Utils
 {
-    class Iso8601DateTimeConverter : Newtonsoft.Json.Converters.IsoDateTimeConverter
+    internal class Iso8601DateTimeConverter : IsoDateTimeConverter
     {
         public Iso8601DateTimeConverter()
         {
-            base.DateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
+            DateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
         }
     }
 }

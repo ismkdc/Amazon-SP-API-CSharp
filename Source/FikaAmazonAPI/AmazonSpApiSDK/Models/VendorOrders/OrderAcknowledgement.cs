@@ -1,52 +1,44 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class OrderAcknowledgement : IEquatable<OrderAcknowledgement>, IValidatableObject
+    public class OrderAcknowledgement : IEquatable<OrderAcknowledgement>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public OrderAcknowledgement() { }
-        public OrderAcknowledgement(string purchaseOrderNumber = default(string), PartyIdentification sellingParty = default(PartyIdentification), DateTime? acknowledgementDate = default(DateTime?), List<OrderAcknowledgementItem> items = default(List<OrderAcknowledgementItem>))
+        public OrderAcknowledgement()
+        {
+        }
+
+        public OrderAcknowledgement(string purchaseOrderNumber = default, PartyIdentification sellingParty = default,
+            DateTime? acknowledgementDate = default, List<OrderAcknowledgementItem> items = default)
         {
             // to ensure "purchaseOrderNumber" is required (not null)
             if (purchaseOrderNumber == null)
-            {
-                throw new InvalidDataException("purchaseOrderNumber is a required property for OrderAcknowledgement and cannot be null");
-            }
-            else
-            {
-                this.PurchaseOrderNumber = purchaseOrderNumber;
-            }
+                throw new InvalidDataException(
+                    "purchaseOrderNumber is a required property for OrderAcknowledgement and cannot be null");
+            PurchaseOrderNumber = purchaseOrderNumber;
             // to ensure "sellingParty" is required (not null)
             if (sellingParty == null)
-            {
-                throw new InvalidDataException("sellingParty is a required property for OrderAcknowledgement and cannot be null");
-            }
-            else
-            {
-                this.SellingParty = sellingParty;
-            }
+                throw new InvalidDataException(
+                    "sellingParty is a required property for OrderAcknowledgement and cannot be null");
+            SellingParty = sellingParty;
             // to ensure "acknowledgementDate" is required (not null)
             if (acknowledgementDate == null)
-            {
-                throw new InvalidDataException("acknowledgementDate is a required property for OrderAcknowledgement and cannot be null");
-            }
-            else
-            {
-                this.AcknowledgementDate = acknowledgementDate;
-            }
+                throw new InvalidDataException(
+                    "acknowledgementDate is a required property for OrderAcknowledgement and cannot be null");
+            AcknowledgementDate = acknowledgementDate;
             Items = items;
         }
 
         /// <summary>
-        /// The purchase order number for this order. Formatting Notes: alpha-numeric code.
+        ///     The purchase order number for this order. Formatting Notes: alpha-numeric code.
         /// </summary>
         /// <value>The purchase order number for this order. Formatting Notes: alpha-numeric code.</value>
         [DataMember(Name = "purchaseOrderNumber", EmitDefaultValue = false)]
@@ -57,9 +49,47 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 
         [DataMember(Name = "acknowledgementDate", EmitDefaultValue = false)]
         public DateTime? AcknowledgementDate { get; set; }
-        
+
         [DataMember(Name = "items", EmitDefaultValue = false)]
         public List<OrderAcknowledgementItem> Items { get; set; }
+
+        public bool Equals(OrderAcknowledgement input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    PurchaseOrderNumber == input.PurchaseOrderNumber ||
+                    (PurchaseOrderNumber != null &&
+                     PurchaseOrderNumber.Equals(input.PurchaseOrderNumber))
+                ) &&
+                (
+                    SellingParty == input.SellingParty ||
+                    (SellingParty != null &&
+                     SellingParty.Equals(input.SellingParty))
+                ) &&
+                (
+                    AcknowledgementDate == input.AcknowledgementDate ||
+                    (AcknowledgementDate != null &&
+                     AcknowledgementDate.Equals(input.AcknowledgementDate))
+                ) &&
+                (
+                    Items == input.Items ||
+                    (Items != null &&
+                     Items.Equals(input.Items))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
 
         public override string ToString()
         {
@@ -74,7 +104,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -83,72 +113,34 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as OrderAcknowledgement);
-        }
-
-        public bool Equals(OrderAcknowledgement input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.PurchaseOrderNumber == input.PurchaseOrderNumber ||
-                    (this.PurchaseOrderNumber != null &&
-                    this.PurchaseOrderNumber.Equals(input.PurchaseOrderNumber))
-                ) &&
-                (
-                    this.SellingParty == input.SellingParty ||
-                    (this.SellingParty != null &&
-                    this.SellingParty.Equals(input.SellingParty))
-                ) &&
-                (
-                    this.AcknowledgementDate == input.AcknowledgementDate ||
-                    (this.AcknowledgementDate != null &&
-                    this.AcknowledgementDate.Equals(input.AcknowledgementDate))
-                ) &&
-                (
-                    this.Items == input.Items ||
-                    (this.Items != null &&
-                    this.Items.Equals(input.Items))
-                );
+            return Equals(input as OrderAcknowledgement);
         }
 
         /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.PurchaseOrderNumber != null)
-                    hashCode = hashCode * 59 + this.PurchaseOrderNumber.GetHashCode();
-                if (this.SellingParty != null)
-                    hashCode = hashCode * 59 + this.SellingParty.GetHashCode();
-                if (this.AcknowledgementDate != null)
-                    hashCode = hashCode * 59 + this.AcknowledgementDate.GetHashCode();
-                if (this.Items != null)
-                    hashCode = hashCode * 59 + this.Items.GetHashCode();
+                var hashCode = 41;
+                if (PurchaseOrderNumber != null)
+                    hashCode = hashCode * 59 + PurchaseOrderNumber.GetHashCode();
+                if (SellingParty != null)
+                    hashCode = hashCode * 59 + SellingParty.GetHashCode();
+                if (AcknowledgementDate != null)
+                    hashCode = hashCode * 59 + AcknowledgementDate.GetHashCode();
+                if (Items != null)
+                    hashCode = hashCode * 59 + Items.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

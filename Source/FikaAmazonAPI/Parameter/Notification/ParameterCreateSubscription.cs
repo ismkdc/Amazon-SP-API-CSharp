@@ -10,6 +10,5 @@ namespace FikaAmazonAPI.Parameter.Notification
         public string destinationId { get; set; }
         public NotificationType notificationType { get; set; }
         public ProcessingDirective processingDirective { get; set; }
-
     }
 }

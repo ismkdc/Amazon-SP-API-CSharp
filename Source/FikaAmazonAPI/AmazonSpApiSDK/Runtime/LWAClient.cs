@@ -1,10 +1,12 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
-using Newtonsoft.Json;
-using RestSharp;
-using System;
+﻿using System;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
+using Newtonsoft.Json;
+using RestSharp;
+using Method = RestSharp.Method;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 {
@@ -13,60 +15,60 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public const string AccessTokenKey = "access_token";
         public const string JsonMediaType = "application/json";
 
-        public RestClient RestClient { get; set; }
-        public LWAAccessTokenRequestMetaBuilder LWAAccessTokenRequestMetaBuilder { get; set; }
-        public LWAAuthorizationCredentials LWAAuthorizationCredentials { get; private set; }
-
 
         public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, string proxyAddress = null)
         {
-
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;
             LWAAccessTokenRequestMetaBuilder = new LWAAccessTokenRequestMetaBuilder();
             // RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
             if (string.IsNullOrWhiteSpace(proxyAddress))
             {
                 RestClient = new RestClient(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority));
-            }else
+            }
+            else
             {
-                var options = new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
-                {
-                    Proxy = new System.Net.WebProxy()
+                var options =
+                    new RestClientOptions(LWAAuthorizationCredentials.Endpoint.GetLeftPart(UriPartial.Authority))
                     {
-                        Address = new Uri(proxyAddress)
-                    }
-                };
+                        Proxy = new WebProxy
+                        {
+                            Address = new Uri(proxyAddress)
+                        }
+                    };
 
                 RestClient = new RestClient(options);
             }
         }
 
+        public RestClient RestClient { get; set; }
+        public LWAAccessTokenRequestMetaBuilder LWAAccessTokenRequestMetaBuilder { get; set; }
+        public LWAAuthorizationCredentials LWAAuthorizationCredentials { get; }
+
 
         /// <summary>
-        /// Retrieves access token from LWA
+        ///     Retrieves access token from LWA
         /// </summary>
         /// <param name="lwaAccessTokenRequestMeta">LWA AccessTokenRequest metadata</param>
         /// <returns>LWA Access Token</returns>
         public virtual async Task<TokenResponse> GetAccessTokenAsync(CancellationToken cancellationToken = default)
         {
-            LWAAccessTokenRequestMeta lwaAccessTokenRequestMeta = LWAAccessTokenRequestMetaBuilder.Build(LWAAuthorizationCredentials);
-            var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath, RestSharp.Method.Post);
+            var lwaAccessTokenRequestMeta = LWAAccessTokenRequestMetaBuilder.Build(LWAAuthorizationCredentials);
+            var accessTokenRequest = new RestRequest(LWAAuthorizationCredentials.Endpoint.AbsolutePath, Method.Post);
 
-            string jsonRequestBody = JsonConvert.SerializeObject(lwaAccessTokenRequestMeta);
+            var jsonRequestBody = JsonConvert.SerializeObject(lwaAccessTokenRequestMeta);
 
             //accessTokenRequest.AddParameter(JsonMediaType, jsonRequestBody, ParameterType.RequestBody);
             accessTokenRequest.AddJsonBody(jsonRequestBody);
 
             try
             {
-                var response = await RestClient.ExecuteAsync(accessTokenRequest, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.ExecuteAsync(accessTokenRequest, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (!IsSuccessful(response))
-                {
                     throw new IOException("Unsuccessful LWA token exchange", response.ErrorException);
-                }
 
-                TokenResponse tokenService = new TokenResponse();
+                var tokenService = new TokenResponse();
 
                 var tokenRespoce = JsonConvert.DeserializeObject<TokenResponse>(response.Content);
                 return tokenRespoce;
@@ -79,7 +81,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
 
         private bool IsSuccessful(RestResponse response)
         {
-            int statusCode = (int)response.StatusCode;
+            var statusCode = (int)response.StatusCode;
             return statusCode >= 200 && statusCode <= 299 && response.ResponseStatus == ResponseStatus.Completed;
         }
     }

@@ -7,20 +7,20 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class ReturnFBMOrderReport
     {
-        public List<ReturnFBMOrderRow> Data { get; set; }=new List<ReturnFBMOrderRow>();
         public ReturnFBMOrderReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            List<ReturnFBMOrderRow> values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => ReturnFBMOrderRow.FromCsv(v, refNumber))
-                                           .ToList();
+            var values = File.ReadAllLines(path)
+                .Skip(1)
+                .Select(v => ReturnFBMOrderRow.FromCsv(v, refNumber))
+                .ToList();
             Data = values;
         }
 
-
+        public List<ReturnFBMOrderRow> Data { get; set; } = new List<ReturnFBMOrderRow>();
     }
+
     public class ReturnFBMOrderRow
     {
         public string OrderID { get; set; }
@@ -61,8 +61,8 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public static ReturnFBMOrderRow FromCsv(string csvLine, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
-            ReturnFBMOrderRow row = new ReturnFBMOrderRow();
+            var values = csvLine.Split('\t');
+            var row = new ReturnFBMOrderRow();
             row.OrderID = values[0];
             row.OrderDate = DataConverter.GetDate(values[1], DataConverter.DateTimeFormat.DATE_MMM_FORMAT);
             row.ReturnRequestDate = DataConverter.GetDate(values[2], DataConverter.DateTimeFormat.DATE_MMM_FORMAT);
@@ -100,9 +100,7 @@ namespace FikaAmazonAPI.ReportGeneration
             row.refNumber = refNumber;
 
 
-
             return row;
         }
-
     }
 }

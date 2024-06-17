@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class FulfillmentOrderRequestMessage
+    public class FulfillmentOrderRequestMessage
     {
     }
 }

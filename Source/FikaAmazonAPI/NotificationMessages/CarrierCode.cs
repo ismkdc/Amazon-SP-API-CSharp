@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.NotificationMessages
 {
-    class CarrierCode
+    internal class CarrierCode
     {
     }
 }

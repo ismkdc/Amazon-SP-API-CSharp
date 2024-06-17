@@ -1,33 +1,42 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 {
     /// <summary>
-    /// A notificationType specific filter. This object contains all of the currently available filters and properties that you can use to define a notificationType specific filter.
+    ///     A notificationType specific filter. This object contains all of the currently available filters and properties that
+    ///     you can use to define a notificationType specific filter.
     /// </summary>
     [DataContract]
     public class EventFilter : AggregationFilter
     {
         /// <summary>
-        /// Gets or Sets MarketplaceIds
+        ///     Gets or Sets MarketplaceIds
         /// </summary>
         [DataMember(Name = "marketplaceIds", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "marketplaceIds")]
         public IList<string> MarketplaceIds { get; set; }
 
         /// <summary>
-        /// An eventFilterType value that is supported by the specific notificationType. This is used by the subscription service to determine the type of event filter. Refer to the section of the [Notifications Use Case Guide](doc:notifications-api-v1-use-case-guide) that describes the specific notificationType to determine if an eventFilterType is supported.
+        ///     An eventFilterType value that is supported by the specific notificationType. This is used by the subscription
+        ///     service to determine the type of event filter. Refer to the section of the [Notifications Use Case
+        ///     Guide](doc:notifications-api-v1-use-case-guide) that describes the specific notificationType to determine if an
+        ///     eventFilterType is supported.
         /// </summary>
-        /// <value>An eventFilterType value that is supported by the specific notificationType. This is used by the subscription service to determine the type of event filter. Refer to the section of the [Notifications Use Case Guide](doc:notifications-api-v1-use-case-guide) that describes the specific notificationType to determine if an eventFilterType is supported.</value>
+        /// <value>
+        ///     An eventFilterType value that is supported by the specific notificationType. This is used by the subscription
+        ///     service to determine the type of event filter. Refer to the section of the [Notifications Use Case
+        ///     Guide](doc:notifications-api-v1-use-case-guide) that describes the specific notificationType to determine if an
+        ///     eventFilterType is supported.
+        /// </value>
         [DataMember(Name = "eventFilterType", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "eventFilterType")]
         public string EventFilterType { get; set; }
 
         /// <summary>
-        /// Gets or Sets OrderChangeTypes
+        ///     Gets or Sets OrderChangeTypes
         /// </summary>
         [DataMember(Name = "orderChangeTypes", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "orderChangeTypes")]
@@ -35,7 +44,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -50,13 +59,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.Notifications
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public new string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

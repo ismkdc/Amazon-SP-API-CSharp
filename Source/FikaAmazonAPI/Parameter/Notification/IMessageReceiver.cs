@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.NotificationMessages;
-using System;
+﻿using System;
+using FikaAmazonAPI.NotificationMessages;
 
 namespace FikaAmazonAPI.Parameter.Notification
 {

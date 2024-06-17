@@ -3,10 +3,8 @@ using Newtonsoft.Json.Converters;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// Reasons that make a shipment service offering ineligible.
-
+    ///     Reasons that make a shipment service offering ineligible.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum IneligibilityReasonCode

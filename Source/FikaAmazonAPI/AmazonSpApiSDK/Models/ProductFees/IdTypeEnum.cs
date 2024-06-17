@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
 {
@@ -11,15 +8,13 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees
     public enum IdTypeEnum
     {
         /// <summary>
-        /// An Amazon Standard Identification Number (ASIN) of a listings item.
+        ///     An Amazon Standard Identification Number (ASIN) of a listings item.
         /// </summary>
-        [EnumMember(Value = "ASIN")]
-        ASIN,
+        [EnumMember(Value = "ASIN")] ASIN,
 
         /// <summary>
-        /// A selling partner provided identifier for an Amazon listing.
+        ///     A selling partner provided identifier for an Amazon listing.
         /// </summary>
-        [EnumMember(Value = "SellerSKU")]
-        SellerSKU,
+        [EnumMember(Value = "SellerSKU")] SellerSKU
     }
 }

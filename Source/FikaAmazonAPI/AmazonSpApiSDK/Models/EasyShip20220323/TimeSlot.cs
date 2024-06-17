@@ -1,19 +1,18 @@
-using Newtonsoft.Json;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 {
-
     /// <summary>
-    /// A time window to hand over an Easy Ship package to Amazon Logistics.
+    ///     A time window to hand over an Easy Ship package to Amazon Logistics.
     /// </summary>
     [DataContract]
     public class TimeSlot
     {
         /// <summary>
-        /// An Amazon-defined identifier for a time slot.
+        ///     An Amazon-defined identifier for a time slot.
         /// </summary>
         /// <value>An Amazon-defined identifier for a time slot.</value>
         [DataMember(Name = "slotId", EmitDefaultValue = false)]
@@ -21,7 +20,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         public string SlotId { get; set; }
 
         /// <summary>
-        /// The start date and time of the time slot.
+        ///     The start date and time of the time slot.
         /// </summary>
         /// <value>The start date and time of the time slot.</value>
         [DataMember(Name = "startTime", EmitDefaultValue = false)]
@@ -29,7 +28,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         public DateTime? StartTime { get; set; }
 
         /// <summary>
-        /// The end date and time of the time slot.
+        ///     The end date and time of the time slot.
         /// </summary>
         /// <value>The end date and time of the time slot.</value>
         [DataMember(Name = "endTime", EmitDefaultValue = false)]
@@ -37,7 +36,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         public DateTime? EndTime { get; set; }
 
         /// <summary>
-        /// The method by which a seller will hand a package over to Amazon Logistics.
+        ///     The method by which a seller will hand a package over to Amazon Logistics.
         /// </summary>
         /// <value>The method by which a seller will hand a package over to Amazon Logistics.</value>
         [DataMember(Name = "handoverMethod", EmitDefaultValue = false)]
@@ -46,7 +45,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -62,13 +61,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

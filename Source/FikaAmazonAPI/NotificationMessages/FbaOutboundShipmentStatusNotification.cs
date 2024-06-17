@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.NotificationMessages
 {
-    public partial class FbaOutboundShipmentStatusNotification
+    public class FbaOutboundShipmentStatusNotification
     {
         public string SellerId { get; set; }
         public string AmazonOrderId { get; set; }

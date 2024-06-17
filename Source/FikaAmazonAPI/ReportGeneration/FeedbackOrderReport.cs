@@ -7,20 +7,20 @@ namespace FikaAmazonAPI.ReportGeneration
 {
     public class FeedbackOrderReport
     {
-        public List<FeedbackOrderRow> Data { get; set; }=new List<FeedbackOrderRow>();
         public FeedbackOrderReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
-            List<FeedbackOrderRow> values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => FeedbackOrderRow.FromCsv(v, refNumber))
-                                           .ToList();
+            var values = File.ReadAllLines(path)
+                .Skip(1)
+                .Select(v => FeedbackOrderRow.FromCsv(v, refNumber))
+                .ToList();
             Data = values;
         }
 
-
+        public List<FeedbackOrderRow> Data { get; set; } = new List<FeedbackOrderRow>();
     }
+
     public class FeedbackOrderRow
     {
         public string refNumber { get; set; }
@@ -33,8 +33,8 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public static FeedbackOrderRow FromCsv(string csvLine, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
-            FeedbackOrderRow row = new FeedbackOrderRow();
+            var values = csvLine.Split('\t');
+            var row = new FeedbackOrderRow();
             row.Date = DataConverter.GetDate(values[0], DataConverter.DateTimeFormat.DATE_BACKSLASH_FORMAT);
             row.Rating = Convert.ToInt32(values[1]);
             row.Comments = values[2];
@@ -45,6 +45,5 @@ namespace FikaAmazonAPI.ReportGeneration
 
             return row;
         }
-
     }
 }

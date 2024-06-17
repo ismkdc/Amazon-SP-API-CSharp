@@ -1,12 +1,8 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
-using FikaAmazonAPI.Search;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Parameter.ProductFee
 {
-    public class ParameterGetMyFeesEstimatesRequest: List<FeesEstimateByIdRequest>
+    public class ParameterGetMyFeesEstimatesRequest : List<FeesEstimateByIdRequest>
     {
     }
 }

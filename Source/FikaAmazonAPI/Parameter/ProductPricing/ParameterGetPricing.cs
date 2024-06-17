@@ -1,6 +1,6 @@
-﻿using FikaAmazonAPI.Search;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.ProductPricing
@@ -10,6 +10,7 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
         public string MarketplaceId { get; set; }
         public ICollection<string> Asins { get; set; }
         public ICollection<string> Skus { get; set; }
+
         public ItemType ItemType
         {
             get
@@ -21,9 +22,11 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
                 if (Skus != null && Skus.Count > 0)
                     return ItemType.Sku;
 
-                throw new ArgumentException("You cant request without fill Skus or Asins , you need to fill only of them only");
+                throw new ArgumentException(
+                    "You cant request without fill Skus or Asins , you need to fill only of them only");
             }
         }
+
         public ItemCondition? ItemCondition { get; set; }
         public OfferTypeEnum? OfferType { get; set; } = OfferTypeEnum.B2C;
     }

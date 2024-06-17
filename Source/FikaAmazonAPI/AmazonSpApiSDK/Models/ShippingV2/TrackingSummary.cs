@@ -1,18 +1,17 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// A package status summary.
+    ///     A package status summary.
     /// </summary>
     [DataContract]
     public class TrackingSummary
     {
         /// <summary>
-        /// Gets or Sets Status
+        ///     Gets or Sets Status
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "status")]
@@ -20,7 +19,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -33,13 +32,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

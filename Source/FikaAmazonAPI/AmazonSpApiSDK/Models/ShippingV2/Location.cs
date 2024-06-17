@@ -1,39 +1,38 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// The location where the person, business or institution is located.
+    ///     The location where the person, business or institution is located.
     /// </summary>
     [DataContract]
     public class Location
     {
         /// <summary>
-        /// Gets or Sets StateOrRegion
+        ///     Gets or Sets StateOrRegion
         /// </summary>
         [DataMember(Name = "stateOrRegion", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "stateOrRegion")]
         public string StateOrRegion { get; set; }
 
         /// <summary>
-        /// Gets or Sets City
+        ///     Gets or Sets City
         /// </summary>
         [DataMember(Name = "city", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "city")]
         public string City { get; set; }
 
         /// <summary>
-        /// Gets or Sets CountryCode
+        ///     Gets or Sets CountryCode
         /// </summary>
         [DataMember(Name = "countryCode", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "countryCode")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Gets or Sets PostalCode
+        ///     Gets or Sets PostalCode
         /// </summary>
         [DataMember(Name = "postalCode", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "postalCode")]
@@ -41,7 +40,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -57,13 +56,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

@@ -1,21 +1,25 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class orderedQuantity : IEquatable<orderedQuantity>, IValidatableObject
+    public class orderedQuantity : IEquatable<orderedQuantity>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public orderedQuantity() { }
-        public orderedQuantity(ItemQuantity orderedQuantity = default(ItemQuantity), List<OrderedQuantityDetails> orderedQuantityDetails = default(List<OrderedQuantityDetails>))
+        public orderedQuantity()
         {
-            this.OrderedQuantity = orderedQuantity;
-            this.OrderedQuantityDetails = orderedQuantityDetails;
+        }
+
+        public orderedQuantity(ItemQuantity orderedQuantity = default,
+            List<OrderedQuantityDetails> orderedQuantityDetails = default)
+        {
+            OrderedQuantity = orderedQuantity;
+            OrderedQuantityDetails = orderedQuantityDetails;
         }
 
         [DataMember(Name = "orderedQuantity", EmitDefaultValue = false)]
@@ -24,9 +28,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         [DataMember(Name = "orderedQuantityDetails", EmitDefaultValue = false)]
         public List<OrderedQuantityDetails> OrderedQuantityDetails { get; set; }
 
+        /// <summary>
+        ///     Returns true if ItemQuantity instances are equal
+        /// </summary>
+        /// <param name="input">Instance of ItemQuantity to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(orderedQuantity input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    OrderedQuantity == input.OrderedQuantity ||
+                    (OrderedQuantity != null &&
+                     OrderedQuantity.Equals(input.OrderedQuantity))
+                ) &&
+                (
+                    OrderedQuantityDetails == input.OrderedQuantityDetails ||
+                    (OrderedQuantityDetails != null &&
+                     OrderedQuantityDetails.Equals(input.OrderedQuantityDetails))
+                );
+        }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -40,7 +77,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -49,63 +86,30 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as orderedQuantity);
+            return Equals(input as orderedQuantity);
         }
 
         /// <summary>
-        /// Returns true if ItemQuantity instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ItemQuantity to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(orderedQuantity input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.OrderedQuantity == input.OrderedQuantity ||
-                    (this.OrderedQuantity != null &&
-                    this.OrderedQuantity.Equals(input.OrderedQuantity))
-                ) &&
-                (
-                    this.OrderedQuantityDetails == input.OrderedQuantityDetails ||
-                    (this.OrderedQuantityDetails != null &&
-                    this.OrderedQuantityDetails.Equals(input.OrderedQuantityDetails))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.OrderedQuantity != null)
-                    hashCode = hashCode * 59 + this.OrderedQuantity.GetHashCode();
-                if (this.OrderedQuantityDetails != null)
-                    hashCode = hashCode * 59 + this.OrderedQuantityDetails.GetHashCode();
+                var hashCode = 41;
+                if (OrderedQuantity != null)
+                    hashCode = hashCode * 59 + OrderedQuantity.GetHashCode();
+                if (OrderedQuantityDetails != null)
+                    hashCode = hashCode * 59 + OrderedQuantityDetails.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

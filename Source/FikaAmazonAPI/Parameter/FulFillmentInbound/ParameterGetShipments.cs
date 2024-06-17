@@ -1,8 +1,8 @@
-using FikaAmazonAPI.Search;
 using System;
 using System.Collections.Generic;
-using static FikaAmazonAPI.Utils.Constants;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentInbound;
+using FikaAmazonAPI.Search;
+using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.FulFillmentInbound
 {

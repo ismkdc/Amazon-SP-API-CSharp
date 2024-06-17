@@ -1,72 +1,78 @@
-﻿using FikaAmazonAPI.Utils;
-using System.ComponentModel;
+﻿using FikaAmazonAPI.Parameter.CatalogItems;
+using FikaAmazonAPI.Utils;
 using static FikaAmazonAPI.Utils.Constants;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+public class CatalogItemsSample
 {
-    public class CatalogItemsSample
+    private readonly AmazonConnection amazonConnection;
+
+    public CatalogItemsSample(AmazonConnection amazonConnection)
     {
-        AmazonConnection amazonConnection;
-        public CatalogItemsSample(AmazonConnection amazonConnection)
+        this.amazonConnection = amazonConnection;
+    }
+
+    [Obsolete(
+        "This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.",
+        true)]
+    public void GetCatalogItemAsync()
+    {
+        var item = amazonConnection.CatalogItem.GetCatalogItem("B00CZC5F0G");
+    }
+
+    public void ListCatalogCategories()
+    {
+        var item = amazonConnection.CatalogItem.ListCatalogCategories("B00CZC5F0G");
+    }
+
+    [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", true)]
+    public void ListCatalogItems()
+    {
+        var items = amazonConnection.CatalogItem.ListCatalogItems(new ParameterListCatalogItems
         {
-            this.amazonConnection = amazonConnection;
-        }
+            MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
+            Query = "740985280133"
+        });
+    }
 
-        [Obsolete("This method deprecated in June 2022. Please use GetCatalogItem(ParameterGetCatalogItem parameterListCatalogItem) instead.", true)]
-		public void GetCatalogItemAsync()
-        {
-            var item = amazonConnection.CatalogItem.GetCatalogItem("B00CZC5F0G");
-
-        }
-
-        public void ListCatalogCategories()
-        {
-            var item = amazonConnection.CatalogItem.ListCatalogCategories("B00CZC5F0G");
-
-        }
-
-        [Obsolete("This method deprecated in June 2022. Please use SearchCatalogItems202204 instead.", true)]
-		public void ListCatalogItems()
-        {
-            var items = amazonConnection.CatalogItem.ListCatalogItems(new Parameter.CatalogItems.ParameterListCatalogItems()
+    public async Task GetCatalogItem()
+    {
+        var data = await amazonConnection.CatalogItem.GetCatalogItem202204Async(
+            new ParameterGetCatalogItem
             {
-                MarketplaceId = MarketPlace.UnitedArabEmirates.ID,
-                Query = "740985280133"
-            });
-        }
-
-        public async Task GetCatalogItem()
-        {
-            var data = await amazonConnection.CatalogItem.GetCatalogItem202204Async(
-                    new Parameter.CatalogItems.ParameterGetCatalogItem
-                    {
-                        ASIN = "B00JK2YANC",
-                        includedData = new[] { IncludedData.attributes,
-                                                       IncludedData.salesRanks,
-                                                       IncludedData.summaries,
-                                                       IncludedData.productTypes,
-                                                       IncludedData.relationships,
-                                                       IncludedData.dimensions,
-                                                       IncludedData.identifiers,
-                                                       IncludedData.images }
-                    });
-        }
-
-        public async Task SearchCatalogItems()
-        {
-            var data = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
-                new Parameter.CatalogItems.ParameterSearchCatalogItems202204
+                ASIN = "B00JK2YANC",
+                includedData = new[]
                 {
-                    keywords = new[] { "vitamin c" },
-                    includedData = new[] { IncludedData.attributes,
-                                                   IncludedData.salesRanks,
-                                                   IncludedData.summaries,
-                                                   IncludedData.productTypes,
-                                                   IncludedData.relationships,
-                                                   IncludedData.dimensions,
-                                                   IncludedData.identifiers,
-                                                   IncludedData.images }
-                });
-        }
+                    IncludedData.attributes,
+                    IncludedData.salesRanks,
+                    IncludedData.summaries,
+                    IncludedData.productTypes,
+                    IncludedData.relationships,
+                    IncludedData.dimensions,
+                    IncludedData.identifiers,
+                    IncludedData.images
+                }
+            });
+    }
+
+    public async Task SearchCatalogItems()
+    {
+        var data = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
+            new ParameterSearchCatalogItems202204
+            {
+                keywords = new[] { "vitamin c" },
+                includedData = new[]
+                {
+                    IncludedData.attributes,
+                    IncludedData.salesRanks,
+                    IncludedData.summaries,
+                    IncludedData.productTypes,
+                    IncludedData.relationships,
+                    IncludedData.dimensions,
+                    IncludedData.identifiers,
+                    IncludedData.images
+                }
+            });
     }
 }

@@ -4,7 +4,6 @@
     {
         public FbaOutboundService(AmazonCredential amazonCredential) : base(amazonCredential)
         {
-
         }
     }
 }

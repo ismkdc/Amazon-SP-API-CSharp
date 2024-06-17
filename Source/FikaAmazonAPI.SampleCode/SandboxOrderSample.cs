@@ -1,29 +1,25 @@
-﻿using FikaAmazonAPI.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FikaAmazonAPI.Parameter.Order;
+using FikaAmazonAPI.Utils;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+public class SandboxOrderSample
 {
-    public class SandboxOrderSample
-    {
-        AmazonConnection amazonConnection;
-        public SandboxOrderSample(AmazonConnection amazonConnection)
-        {
-            this.amazonConnection = amazonConnection;
-        }
+    private readonly AmazonConnection amazonConnection;
 
-        public void GetOrderTestCase200()
-        {
-            var orders = amazonConnection.Orders.GetOrders
-            (
-                 new FikaAmazonAPI.Parameter.Order.ParameterOrderList
-                 {
-                     TestCase = Constants.TestCase200
-                 }
-            );
-        }
+    public SandboxOrderSample(AmazonConnection amazonConnection)
+    {
+        this.amazonConnection = amazonConnection;
+    }
+
+    public void GetOrderTestCase200()
+    {
+        var orders = amazonConnection.Orders.GetOrders
+        (
+            new ParameterOrderList
+            {
+                TestCase = Constants.TestCase200
+            }
+        );
     }
 }

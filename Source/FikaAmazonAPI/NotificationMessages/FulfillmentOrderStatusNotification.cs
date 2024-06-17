@@ -2,7 +2,7 @@
 
 namespace FikaAmazonAPI.NotificationMessages
 {
-    public partial class FulfillmentOrderStatusNotification
+    public class FulfillmentOrderStatusNotification
     {
         public string SellerId { get; set; }
         public string EventType { get; set; }
@@ -12,5 +12,4 @@ namespace FikaAmazonAPI.NotificationMessages
         public FulfillmentShipment FulfillmentShipment { get; set; }
         public FulfillmentReturnItem FulfillmentReturnItem { get; set; }
     }
-
 }

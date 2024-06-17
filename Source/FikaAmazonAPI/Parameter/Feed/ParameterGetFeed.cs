@@ -1,6 +1,6 @@
-﻿using FikaAmazonAPI.Search;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.Utils.Constants;
 
 namespace FikaAmazonAPI.Parameter.Feed
@@ -14,6 +14,5 @@ namespace FikaAmazonAPI.Parameter.Feed
         public DateTime? createdSince { get; set; }
         public DateTime? createdUntil { get; set; }
         public string nextToken { get; set; }
-
     }
 }

@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace FikaAmazonAPI.Parameter.ProductPricing
 {
@@ -11,33 +8,28 @@ namespace FikaAmazonAPI.Parameter.ProductPricing
     public enum HttpMethodEnum
     {
         /// <summary>
-        /// GET
+        ///     GET
         /// </summary>
-        [EnumMember(Value = "GET")]
-        GET,
+        [EnumMember(Value = "GET")] GET,
 
         /// <summary>
-        /// PUT
+        ///     PUT
         /// </summary>
-        [EnumMember(Value = "PUT")]
-        PUT,
+        [EnumMember(Value = "PUT")] PUT,
 
         /// <summary>
-        /// PATCH
+        ///     PATCH
         /// </summary>
-        [EnumMember(Value = "PATCH")]
-        PATCH,
+        [EnumMember(Value = "PATCH")] PATCH,
 
         /// <summary>
-        /// DELETE
+        ///     DELETE
         /// </summary>
-        [EnumMember(Value = "DELETE")]
-        DELETE,
+        [EnumMember(Value = "DELETE")] DELETE,
 
         /// <summary>
-        /// POST
+        ///     POST
         /// </summary>
-        [EnumMember(Value = "POST")]
-        POST,
+        [EnumMember(Value = "POST")] POST
     }
 }

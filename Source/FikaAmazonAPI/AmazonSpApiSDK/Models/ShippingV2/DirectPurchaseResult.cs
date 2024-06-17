@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// The payload for the directPurchaseShipment operation.
+    ///     The payload for the directPurchaseShipment operation.
     /// </summary>
     [DataContract]
     public class DirectPurchaseResult
     {
         /// <summary>
-        /// Gets or Sets ShipmentId
+        ///     Gets or Sets ShipmentId
         /// </summary>
         [DataMember(Name = "shipmentId", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "shipmentId")]
         public string ShipmentId { get; set; }
 
         /// <summary>
-        /// Gets or Sets PackageDocumentDetailList
+        ///     Gets or Sets PackageDocumentDetailList
         /// </summary>
         [DataMember(Name = "packageDocumentDetailList", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "packageDocumentDetailList")]
@@ -27,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -41,13 +40,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

@@ -1,32 +1,31 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// The payload for the purchaseShipment operation.
+    ///     The payload for the purchaseShipment operation.
     /// </summary>
     [DataContract]
     public class PurchaseShipmentResult
     {
         /// <summary>
-        /// Gets or Sets ShipmentId
+        ///     Gets or Sets ShipmentId
         /// </summary>
         [DataMember(Name = "shipmentId", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "shipmentId")]
         public string ShipmentId { get; set; }
 
         /// <summary>
-        /// Gets or Sets PackageDocumentDetails
+        ///     Gets or Sets PackageDocumentDetails
         /// </summary>
         [DataMember(Name = "packageDocumentDetails", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "packageDocumentDetails")]
         public PackageDocumentDetailList PackageDocumentDetails { get; set; }
 
         /// <summary>
-        /// Gets or Sets Promise
+        ///     Gets or Sets Promise
         /// </summary>
         [DataMember(Name = "promise", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "promise")]
@@ -34,7 +33,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -49,13 +48,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

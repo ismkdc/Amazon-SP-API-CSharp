@@ -1,5 +1,5 @@
-﻿using FikaAmazonAPI.Search;
-using System;
+﻿using System;
+using FikaAmazonAPI.Search;
 using static FikaAmazonAPI.AmazonSpApiSDK.Models.VendorDirectFulfillmentOrders.OrderDetails;
 using static FikaAmazonAPI.Utils.Constants;
 
@@ -15,7 +15,5 @@ namespace FikaAmazonAPI.Parameter.VendorDirectFulfillmentOrders
         public SortOrderEnum SortOrder { get; set; }
         public string NextToken { get; set; }
         public bool? IncludeDetails { get; set; }
-
-
     }
 }

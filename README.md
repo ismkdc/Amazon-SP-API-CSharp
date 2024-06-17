@@ -1,14 +1,18 @@
 # ☕Amazon Selling Partner API C# 🚀 [![.NET](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/abuzuhri/Amazon-SP-API-CSharp/actions/workflows/dotnet.yml) [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/) [![Gitter Chat](https://badges.gitter.im/bitwarden/Lobby.svg)](https://gitter.im/Amazon-SP-API-CSharp/community)
 
-
 This is an API Binding in .Net C# for the new Amazon Selling Partner API.
 
-This library is based on the output of [swagger-codegen](https://app.swaggerhub.com/home) with the [OpenAPI files provided by Amazon (Models)](https://github.com/amzn/selling-partner-api-models/tree/main/models) and has been modified by the contributors.
+This library is based on the output of [swagger-codegen](https://app.swaggerhub.com/home) with
+the [OpenAPI files provided by Amazon (Models)](https://github.com/amzn/selling-partner-api-models/tree/main/models) and
+has been modified by the contributors.
 
-The purpose of this package is to have an easy way of getting started with the Amazon Selling Partner API using C#, you can watch this 📷 [Youtube](https://www.youtube.com/watch?v=1gZJBCoMr70) 📣 video for easy start your project
+The purpose of this package is to have an easy way of getting started with the Amazon Selling Partner API using C#, you
+can watch this 📷 [Youtube](https://www.youtube.com/watch?v=1gZJBCoMr70) 📣 video for easy start your project
 
 ---
+
 ### Requirements
+
 - [AWSSDK.SecurityToken](https://www.nuget.org/packages/AWSSDK.SecurityToken/)
 - [AWSSDK.SQS](https://www.nuget.org/packages/AWSSDK.SQS/)
 - [Microsoft.CSharp](https://www.nuget.org/packages/Microsoft.CSharp/)
@@ -17,8 +21,8 @@ The purpose of this package is to have an easy way of getting started with the A
 - [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations/)
 - [System.Reflection](https://www.nuget.org/packages/System.Reflection/)
 
-
 ---
+
 ## Installation [![NuGet](https://img.shields.io/nuget/v/CSharpAmazonSpAPI.svg)](https://www.nuget.org/packages/CSharpAmazonSpAPI/)
 
 ```powershell
@@ -26,7 +30,9 @@ Install-Package CSharpAmazonSpAPI
 ```
 
 ---
+
 ### Tasks
+
 #### Seller
 
 - [x] [OrdersV0](https://developer-docs.amazon.com/sp-api/docs/orders-api-v0-reference)
@@ -61,8 +67,7 @@ Install-Package CSharpAmazonSpAPI
 - [ ] [A+ Content](https://developer-docs.amazon.com/sp-api/docs/selling-partner-api-for-a-content-management)
 - [ ] [Replenishment](https://developer-docs.amazon.com/sp-api/docs/replenishment-api-v2022-11-07-reference)
 
-
-#### Vendor 
+#### Vendor
 
 - [ ] [VendorDirectFulfillmentInventoryV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-inventory-api-v1-reference)
 - [x] [VendorDirectFulfillmentOrdersV1](https://developer-docs.amazon.com/sp-api/docs/vendor-direct-fulfillment-orders-api-v1-reference)
@@ -74,31 +79,42 @@ Install-Package CSharpAmazonSpAPI
 - [ ] [VendorShipments](https://developer-docs.amazon.com/sp-api/docs/vendor-shipments-api-v1-reference)
 - [ ] [VendorTransactionStatus](https://developer-docs.amazon.com/sp-api/docs/vendor-transaction-status-api-v1-reference)
 
-
-
 ---
+
 ## Keys
-To get all keys needed you need to follow this step [Creating and configuring IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) and then you need to [Registering your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application) then [Authorizing Selling Partner API applications
+
+To get all keys needed you need to follow this
+step [Creating and configuring IAM policies and entities](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
+and then you need
+to [Registering your Application](https://developer-docs.amazon.com/sp-api/docs/registering-your-application)
+then [Authorizing Selling Partner API applications
 ](https://developer-docs.amazon.com/sp-api/docs/authorizing-selling-partner-api-applications#step-1-request-a-login-with-amazon-access-token)
 
-
-| Name | Description |
-| --- | --- |
-| Marketplace | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)|
-| ClientId | Your amazon app id |
-| ClientSecret | Your amazon app secret |
+| Name         | Description                                                                                                                                                                    |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Marketplace  | Marketplace region [List of Marketplaces](https://developer-docs.amazon.com/sp-api/docs/marketplace-ids)                                                                       |
+| ClientId     | Your amazon app id                                                                                                                                                             |
+| ClientSecret | Your amazon app secret                                                                                                                                                         |
 | RefreshToken | Check how to get [RefreshToken](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/developer-guide/SellingPartnerApiDeveloperGuide.md#Self-authorization) |
 
-
-For more information about keys please check [New Amazon doc for create keys Developer ](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) , If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create application. 
+For more information about keys please
+check [New Amazon doc for create keys Developer ](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities) ,
+If you are not registered as developer please [Register](https://developer.amazonservices.com/) to be able to create
+application.
 
 ---
+
 ## Usage
 
-> ### Please be aware there has been a change to the _Orders.GetOrderAddress()_ method please reference the new sample code for more details.
+> ### Please be aware there has been a change to the
+_Orders.GetOrderAddress()_ method please reference the new sample code for more details.
 
 ### Configuration
-You can configure a connection like so please see [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
+
+You can configure a connection like so please
+see [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for
+the relevant code file.
+
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -121,8 +137,10 @@ AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 ```
 
 ### Configuration using a proxy
-Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs) for the relevant code file.
->```csharp
+
+Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/Program.cs)
+for the relevant code file.
+> ```csharp
 >AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 >{
 >     ClientId = "amzn1.application-XXX-client.XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -132,11 +150,12 @@ Please see [here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Sou
 >     ProxyAddress = "http(s)://xxx.xxx.xxx.xxx:xxxx",
 >});
 >```
->> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account. 
+>> * Assign your proxy address to the ProxyAddress Property and you'll be able to use a proxy account.
 >>
 >> ***This is not required and will operate normally without the ProxyAddress being set.***
 
 ### Order List, For more orders sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ReportsSample.cs).
+
 ```CSharp
 ParameterOrderList serachOrderList = new ParameterOrderList();
 serachOrderList.CreatedAfter = DateTime.UtcNow.AddMinutes(-600000);
@@ -146,8 +165,8 @@ var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
 ```
 
-
 ### Order List with parameter
+
 ```CSharp
 ParameterOrderList serachOrderList = new ParameterOrderList();
 serachOrderList.CreatedAfter = DateTime.UtcNow.AddHours(-24);
@@ -159,8 +178,8 @@ var orders = amazonConnection.Orders.GetOrders(serachOrderList);
 
 ```
 
-
 ### Order List with parameter including PII data Simple
+
 ```CSharp
 var parameterOrderList = new ParameterOrderList
         {
@@ -175,6 +194,7 @@ var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
 ```
 
 ### Order List with parameter including PII data Advance (if you want to get specific data Elements object only)
+
 ```CSharp
 var parameterOrderList = new ParameterOrderList
         {
@@ -201,6 +221,7 @@ var orders = _amazonConnection.Orders.GetOrders(parameterOrderList);
 ```
 
 ### Order List data from Sandbox
+
 ```CSharp
 AmazonConnection amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -220,6 +241,7 @@ var orders = amazonConnection.Orders.GetOrders
 ```
 
 ### Report List, For more report sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/OrdersSample.cs).
+
 ```CSharp
 var parameters = new ParameterReportList();
 parameters.pageSize = 100;
@@ -231,6 +253,7 @@ var reports=amazonConnection.Reports.GetReports(parameters);
 ```
 
 ### Custom Report
+
 ```CSharp
 var parameters = new ParameterCreateReportSpecification();
 parameters.reportType = ReportTypes.GET_FLAT_FILE_ALL_ORDERS_DATA_BY_LAST_UPDATE_GENERAL;
@@ -255,9 +278,12 @@ var data2 = amazonConnection.Reports.CreateReportAndDownloadFile(ReportTypes.GET
 var data = amazonConnection.Reports.GetReportDocument("50039018869997",true);
 ```
 
-
 ### Report Manager 🚀🧑‍🚀✨
-Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready for some reports as its will take much times to finish for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  .... 
+
+Easy way to get the report you need and convert the file return from amazon to class or list, this feature only ready
+for some reports as its will take much times to finish
+for  [All report type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/reports-api/reporttype-values.md)  ....
+
 ```CSharp
 ReportManager reportManager = new ReportManager(amazonConnection);
 var products = reportManager.GetProducts(); //GET_MERCHANT_LISTINGS_ALL_DATA
@@ -273,8 +299,8 @@ var LedgerDetails = reportManager.GetLedgerDetailAsync(10); //GET_LEDGER_DETAIL_
 var UnsuppressedInventory = reportManager.GetUnsuppressedInventoryDataAsync().ConfigureAwait(false).GetAwaiter().GetResult(); //GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA
 ```
 
-
 ### Report GET_MERCHANT_LISTINGS_ALL_DATA sample
+
 ```CSharp
 var parameters = new ParameterCreateReportSpecification();
 parameters.reportType = ReportTypes.GET_MERCHANT_LISTINGS_ALL_DATA;
@@ -303,6 +329,7 @@ while (string.IsNullOrEmpty(ReportDocumentId))
 ```
 
 ### Product GetCatalogItem Version 2022-04-01
+
 ```CSharp
 var data = await amazonConnection.CatalogItem.GetCatalogItem202204Async(
     new Parameter.CatalogItems.ParameterGetCatalogItem
@@ -320,6 +347,7 @@ var data = await amazonConnection.CatalogItem.GetCatalogItem202204Async(
 ```
 
 ### Product SearchCatalogItems Version 2022-04-01
+
 ```CSharp
 var data = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
     new Parameter.CatalogItems.ParameterSearchCatalogItems202204
@@ -336,9 +364,8 @@ var data = await amazonConnection.CatalogItem.SearchCatalogItems202204Async(
             });
 ```
 
-
-
 ### Product Pricing, For more Pricing sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/ProductPricingSample.cs).
+
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetPricing(
@@ -351,6 +378,7 @@ var data = amazonConnection.ProductPricing.GetPricing(
 ```
 
 ### Product Competitive Price
+
 ```CSharp
 
 var data = amazonConnection.ProductPricing.GetCompetitivePricing(
@@ -362,14 +390,15 @@ var data = amazonConnection.ProductPricing.GetCompetitivePricing(
 ```
 
 ### GetFeaturedOfferExpectedPriceBatch
+
 ```CSharp
 
  var priceDemo = new ProductPricingSample(amazonConnection);
  await priceDemo.GetFeaturedOfferExpectedPriceBatch();
 ```
 
-
 ### Notifications Create Destination, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
+
 ```CSharp
 
 //EventBridge
@@ -396,6 +425,7 @@ var dataSqs = amazonConnection.Notification.CreateDestination(
 ```
 
 ### Notifications Create Subscription, For more Notifications sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/NotificationsSample.cs).
+
 ```CSharp
 
 //SQS
@@ -409,6 +439,7 @@ var result = amazonConnection.Notification.CreateSubscription(
 ```
 
 ### Notifications read messages
+
 ```CSharp
 
 var SQS_URL = "https://sqs.us-east-2.amazonaws.com/9999999999999/IUSER_SQS";
@@ -437,10 +468,18 @@ public class CustomMessageReceiver : IMessageReceiver
 ```
 
 ### Feed Submit
-Here full sample for submit feed to change price and generate XML and get final report for result same as in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
-Notes: not all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md) finished as it's big work and effort but all classes are partial for easy change and you can generate XML outside and use our library to get data, now we support only submit existing product, change quantity and change price , I list most of XSD here Source\FikaAmazonAPI\ConstructFeed\xsd its will help you easy generate class and add it in your app to generate final feed xml.
+
+Here full sample for submit feed to change price and generate XML and get final report for result same as
+in [doc](https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/use-case-guides/feeds-api-use-case-guide/feeds-api-use-case-guide_2021-06-30.md).
+Notes: not
+all [feed type](https://github.com/amzn/selling-partner-api-docs/blob/main/references/feeds-api/feedtype-values.md)
+finished as it's big work and effort but all classes are partial for easy change and you can generate XML outside and
+use our library to get data, now we support only submit existing product, change quantity and change price , I list most
+of XSD here Source\FikaAmazonAPI\ConstructFeed\xsd its will help you easy generate class and add it in your app to
+generate final feed xml.
 
 #### Feed Submit for change price , For more Feed sample please check [Here](https://github.com/abuzuhri/Amazon-SP-API-CSharp/blob/main/Source/FikaAmazonAPI.SampleCode/FeedsSample.cs).
+
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
 
@@ -472,8 +511,8 @@ var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(out
 
 ```
 
-
 #### Feed Submit for change Quantity
+
 ```CSharp
 ConstructFeedService createDocument = new ConstructFeedService("{SellerID}", "1.02");
 
@@ -504,6 +543,7 @@ var processingReport = amazonConnection.Feed.GetFeedDocumentProcessingReport(out
 ```
 
 #### Feed Submit for change ProdcutImage
+
 ```CSharp
 public void SubmitFeedProductImage()
 {
@@ -524,6 +564,7 @@ public void SubmitFeedProductImage()
 ```
 
 #### Feed Submit for change FULFILLMENT DATA (add tracking number for shipment)
+
 ```CSharp
 
 ConstructFeedService createDocument = new ConstructFeedService("{sellerId}", "1.02");
@@ -548,8 +589,8 @@ list.Add(new OrderFulfillmentMessage()
 
 ```
 
-
 #### Feed Submit for change Order Adjustments
+
 ```CSharp
 public void SubmitFeedOrderAdjustment()
 {
@@ -588,18 +629,21 @@ public void SubmitFeedOrderAdjustment()
             var feedID = amazonConnection.Feed.SubmitFeed(xml, FeedType.POST_PAYMENT_ADJUSTMENT_DATA);
 }
 ```
+
  
 ---
+
 ## Usage Plans and Rate Limits in the Selling Partner API
 
 Please read this doc to get all information about this limitation
 https://github.com/amzn/selling-partner-api-docs/blob/main/guides/en-US/usage-plans-rate-limits/Usage-Plans-and-Rate-Limits.md
 
-we calc waiting time by read x-amzn-RateLimit-Limit header 
+we calc waiting time by read x-amzn-RateLimit-Limit header
 
 `int sleepTime = (int)((1 / header["x-amzn-RateLimit-Limit"] ) * 1000);`
 
 You can also disable libary from handelling limitaion by set IsActiveLimitRate=false in AmazonCredential
+
 ```CSharp
 var amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -612,7 +656,9 @@ var amazonConnection = new AmazonConnection(new AmazonCredential()
 ---
 
 ## Enable debug mode
+
 You can also enable log for all http request and response you can set IsDebugMode=true in AmazonCredential
+
 ```CSharp
 var amazonConnection = new AmazonConnection(new AmazonCredential()
 {
@@ -634,7 +680,9 @@ var result = amazonConnection.Restrictions.GetListingsRestrictions(
                 sellerId = "AXXXXXXXXXXXX"
             });
 ```
+
 ---
+
 ## Create shipment operation from MerchantFulfillment
 
 ```CSharp
@@ -712,6 +760,7 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
 ```
 
 ---
+
 ## Sales Performance Sample
 
 ```CSharp
@@ -726,29 +775,41 @@ var def = amazonConnection.ProductType.GetDefinitionsProductType(
 
      var sales = amazonConnection.Sales.GetOrderMetrics(parameters);
 ```
+
 ---
+
 ## Q & A
 
-If you have questions, please ask in GitHub discussions 
+If you have questions, please ask in GitHub discussions
 
 [![discussions](https://img.shields.io/badge/github-discussions-brightgreen?style=for-the-badge&logo=github)](https://github.com/abuzuhri/Amazon-SP-API-CSharp/discussions)
 
 ---
+
 ## ToDo
 
 - Improve documentation
 
 ---
+
 ### Useful links
+
 ##### [Selling Partner API](https://developer-docs.amazon.com/sp-api)
+
 ##### [Amazon MWS to SP-API Migration Guide](https://developer-docs.amazon.com/sp-api/docs/amazon-mws-to-sp-api-migration-guide#mapping-apis-from-amazon-mws-to-the-selling-partner-api)
+
 ##### [SP-API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
+
 ##### [Using Postman for Selling Partner API models](https://developer-docs.amazon.com/sp-api/page/sp-api-models)
+
 ##### [Test Project with pure C# code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Others/PureCodeSampleForTest)
+
 ##### [Sample Code](https://github.com/abuzuhri/Amazon-SP-API-CSharp/tree/main/Source/FikaAmazonAPI.SampleCode)
+
 ##### [Creating And Configuring AWS](https://developer-docs.amazon.com/sp-api/docs/creating-and-configuring-iam-policies-and-entities)
 
 ---
+
 ## Contributing
 
 1. Fork it (https://github.com/abuzuhri/Amazon-SP-API-CSharp/fork)
@@ -759,11 +820,14 @@ If you have questions, please ask in GitHub discussions
 6. Create a new Pull Request
 
 ---
+
 ## Notes
 
-If you are looking for a complete Feedback solution, you might want to consider giving [Soon.se](https://www.soon.se) a shot.
+If you are looking for a complete Feedback solution, you might want to consider giving [Soon.se](https://www.soon.se) a
+shot.
 
 ---
+
 ## Support & Consultation
 
 We offer consultation on everything SP-API related. Book your meeting here:
@@ -771,6 +835,7 @@ We offer consultation on everything SP-API related. Book your meeting here:
 [![Book Meeting](https://img.shields.io/badge/meeting-book%20now-blue?style=for-the-badge)](https://calendly.com/tareq-abuzuhri/)
 
 ---
+
 ## Thanks
 
 Thanks go out to everybody who worked on this package.

@@ -1,37 +1,63 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     /// <summary>
-    /// The request schema for the submitAcknowledgement operation.
+    ///     The request schema for the submitAcknowledgement operation.
     /// </summary>
     [DataContract]
-    public partial class SubmitAcknowledgementRequest : IEquatable<SubmitAcknowledgementRequest>, IValidatableObject
+    public class SubmitAcknowledgementRequest : IEquatable<SubmitAcknowledgementRequest>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SubmitAcknowledgementRequest" /> class.
+        ///     Initializes a new instance of the <see cref="SubmitAcknowledgementRequest" /> class.
         /// </summary>
         /// <param name="acknowledgements">A list of one or more purchase orders..</param>
-        public SubmitAcknowledgementRequest(List<OrderAcknowledgement> acknowledgements = default(List<OrderAcknowledgement>))
+        public SubmitAcknowledgementRequest(List<OrderAcknowledgement> acknowledgements = default)
         {
-            this.Acknowledgements = acknowledgements;
+            Acknowledgements = acknowledgements;
         }
 
         /// <summary>
-        /// A list of one or more purchase orders.
+        ///     A list of one or more purchase orders.
         /// </summary>
         /// <value>A list of one or more purchase orders.</value>
         [DataMember(Name = "acknowledgements", EmitDefaultValue = false)]
         public List<OrderAcknowledgement> Acknowledgements { get; set; }
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     Returns true if SubmitAcknowledgementRequest instances are equal
+        /// </summary>
+        /// <param name="input">Instance of SubmitAcknowledgementRequest to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(SubmitAcknowledgementRequest input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                Acknowledgements == input.Acknowledgements ||
+                (Acknowledgements != null &&
+                 Acknowledgements.SequenceEqual(input.Acknowledgements));
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
+        /// <summary>
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -44,7 +70,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -53,57 +79,28 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SubmitAcknowledgementRequest);
+            return Equals(input as SubmitAcknowledgementRequest);
         }
 
         /// <summary>
-        /// Returns true if SubmitAcknowledgementRequest instances are equal
-        /// </summary>
-        /// <param name="input">Instance of SubmitAcknowledgementRequest to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(SubmitAcknowledgementRequest input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.Acknowledgements == input.Acknowledgements ||
-                    this.Acknowledgements != null &&
-                    this.Acknowledgements.SequenceEqual(input.Acknowledgements)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Acknowledgements != null)
-                    hashCode = hashCode * 59 + this.Acknowledgements.GetHashCode();
+                var hashCode = 41;
+                if (Acknowledgements != null)
+                    hashCode = hashCode * 59 + Acknowledgements.GetHashCode();
                 return hashCode;
             }
         }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
-
 }

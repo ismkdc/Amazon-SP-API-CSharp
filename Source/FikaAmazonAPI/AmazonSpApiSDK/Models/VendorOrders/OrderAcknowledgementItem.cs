@@ -1,46 +1,42 @@
 ﻿using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.ListingsItems;
-using static FikaAmazonAPI.Utils.Constants;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class OrderAcknowledgementItem : IEquatable<OrderAcknowledgementItem>, IValidatableObject
+    public class OrderAcknowledgementItem : IEquatable<OrderAcknowledgementItem>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public OrderAcknowledgementItem() { }
-        public OrderAcknowledgementItem(string itemSequenceNumber = default(string), string amazonProductIdentifier = default(string), string vendorProductIdentifier = default(string), ItemQuantity orderedQuantity = default(ItemQuantity), Money netCost = default(Money), Money listPrice = default(Money), string discountMultiplier = default(string), List<OrderItemAcknowledgement> itemAcknowledgements = default(List<OrderItemAcknowledgement>))
+        public OrderAcknowledgementItem()
+        {
+        }
+
+        public OrderAcknowledgementItem(string itemSequenceNumber = default, string amazonProductIdentifier = default,
+            string vendorProductIdentifier = default, ItemQuantity orderedQuantity = default, Money netCost = default,
+            Money listPrice = default, string discountMultiplier = default,
+            List<OrderItemAcknowledgement> itemAcknowledgements = default)
         {
             // to ensure "purchaseOrderNumber" is required (not null)
             if (orderedQuantity == null)
-            {
-                throw new InvalidDataException("orderedQuantity is a required property for OrderAcknowledgementItem and cannot be null");
-            }
-            else
-            {
-                this.OrderedQuantity = orderedQuantity;
-            }
+                throw new InvalidDataException(
+                    "orderedQuantity is a required property for OrderAcknowledgementItem and cannot be null");
+            OrderedQuantity = orderedQuantity;
             ItemSequenceNumber = itemSequenceNumber;
             AmazonProductIdentifier = amazonProductIdentifier;
             NetCost = netCost;
             ListPrice = listPrice;
             DiscountMultiplier = discountMultiplier;
             if (itemAcknowledgements == null)
-            {
-                throw new InvalidDataException("itemAcknowledgements is a required property for OrderAcknowledgementItem and cannot be null");
-            }
-            else
-            {
-                this.ItemAcknowledgements = itemAcknowledgements;
-            }
+                throw new InvalidDataException(
+                    "itemAcknowledgements is a required property for OrderAcknowledgementItem and cannot be null");
+            ItemAcknowledgements = itemAcknowledgements;
         }
 
         [DataMember(Name = "itemSequenceNumber", EmitDefaultValue = false)]
@@ -67,6 +63,64 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         [DataMember(Name = "itemAcknowledgements", EmitDefaultValue = false)]
         public List<OrderItemAcknowledgement> ItemAcknowledgements { get; set; }
 
+        public bool Equals(OrderAcknowledgementItem input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    ItemSequenceNumber == input.ItemSequenceNumber ||
+                    (ItemSequenceNumber != null &&
+                     ItemSequenceNumber.Equals(input.ItemSequenceNumber))
+                ) &&
+                (
+                    AmazonProductIdentifier == input.AmazonProductIdentifier ||
+                    (AmazonProductIdentifier != null &&
+                     AmazonProductIdentifier.Equals(input.AmazonProductIdentifier))
+                ) &&
+                (
+                    VendorProductIdentifier == input.VendorProductIdentifier ||
+                    (VendorProductIdentifier != null &&
+                     VendorProductIdentifier.Equals(input.VendorProductIdentifier))
+                ) &&
+                (
+                    OrderedQuantity == input.OrderedQuantity ||
+                    (OrderedQuantity != null &&
+                     OrderedQuantity.Equals(input.OrderedQuantity))
+                ) &&
+                (
+                    NetCost == input.NetCost ||
+                    (NetCost != null &&
+                     NetCost.Equals(input.NetCost))
+                ) &&
+                (
+                    ListPrice == input.ListPrice ||
+                    (ListPrice != null &&
+                     ListPrice.Equals(input.ListPrice))
+                ) &&
+                (
+                    DiscountMultiplier == input.DiscountMultiplier ||
+                    (DiscountMultiplier != null &&
+                     DiscountMultiplier.Equals(input.DiscountMultiplier))
+                ) &&
+                (
+                    ItemAcknowledgements == input.ItemAcknowledgements ||
+                    (ItemAcknowledgements != null &&
+                     ItemAcknowledgements.SequenceEqual(input.ItemAcknowledgements))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -84,7 +138,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -93,100 +147,42 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as OrderAcknowledgementItem);
-        }
-
-        public bool Equals(OrderAcknowledgementItem input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.ItemSequenceNumber == input.ItemSequenceNumber ||
-                    (this.ItemSequenceNumber != null &&
-                    this.ItemSequenceNumber.Equals(input.ItemSequenceNumber))
-                ) &&
-                (
-                    this.AmazonProductIdentifier == input.AmazonProductIdentifier ||
-                    (this.AmazonProductIdentifier != null &&
-                    this.AmazonProductIdentifier.Equals(input.AmazonProductIdentifier))
-                ) &&
-                (
-                    this.VendorProductIdentifier == input.VendorProductIdentifier ||
-                    (this.VendorProductIdentifier != null &&
-                    this.VendorProductIdentifier.Equals(input.VendorProductIdentifier))
-                ) &&
-                (
-                    this.OrderedQuantity == input.OrderedQuantity ||
-                    (this.OrderedQuantity != null &&
-                    this.OrderedQuantity.Equals(input.OrderedQuantity))
-                ) &&
-                (
-                    this.NetCost == input.NetCost ||
-                    (this.NetCost != null &&
-                    this.NetCost.Equals(input.NetCost))
-                ) &&
-                (
-                    this.ListPrice == input.ListPrice ||
-                    (this.ListPrice != null &&
-                    this.ListPrice.Equals(input.ListPrice))
-                ) &&
-                (
-                    this.DiscountMultiplier == input.DiscountMultiplier ||
-                    (this.DiscountMultiplier != null &&
-                    this.DiscountMultiplier.Equals(input.DiscountMultiplier))
-                ) &&
-                (
-                    this.ItemAcknowledgements == input.ItemAcknowledgements ||
-                    this.ItemAcknowledgements != null &&
-                    this.ItemAcknowledgements.SequenceEqual(input.ItemAcknowledgements)
-                );
+            return Equals(input as OrderAcknowledgementItem);
         }
 
         /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.ItemSequenceNumber != null)
-                    hashCode = hashCode * 59 + this.ItemSequenceNumber.GetHashCode();
-                if (this.AmazonProductIdentifier != null)
-                    hashCode = hashCode * 59 + this.AmazonProductIdentifier.GetHashCode();
-                if (this.VendorProductIdentifier != null)
-                    hashCode = hashCode * 59 + this.VendorProductIdentifier.GetHashCode();
-                if (this.OrderedQuantity != null)
-                    hashCode = hashCode * 59 + this.OrderedQuantity.GetHashCode();
-                if (this.NetCost != null)
-                    hashCode = hashCode * 59 + this.NetCost.GetHashCode();
-                if (this.ListPrice != null)
-                    hashCode = hashCode * 59 + this.ListPrice.GetHashCode();
-                if (this.DiscountMultiplier != null)
-                    hashCode = hashCode * 59 + this.DiscountMultiplier.GetHashCode();
-                if (this.ItemAcknowledgements != null)
-                    hashCode = hashCode * 59 + this.ItemAcknowledgements.GetHashCode();
+                var hashCode = 41;
+                if (ItemSequenceNumber != null)
+                    hashCode = hashCode * 59 + ItemSequenceNumber.GetHashCode();
+                if (AmazonProductIdentifier != null)
+                    hashCode = hashCode * 59 + AmazonProductIdentifier.GetHashCode();
+                if (VendorProductIdentifier != null)
+                    hashCode = hashCode * 59 + VendorProductIdentifier.GetHashCode();
+                if (OrderedQuantity != null)
+                    hashCode = hashCode * 59 + OrderedQuantity.GetHashCode();
+                if (NetCost != null)
+                    hashCode = hashCode * 59 + NetCost.GetHashCode();
+                if (ListPrice != null)
+                    hashCode = hashCode * 59 + ListPrice.GetHashCode();
+                if (DiscountMultiplier != null)
+                    hashCode = hashCode * 59 + DiscountMultiplier.GetHashCode();
+                if (ItemAcknowledgements != null)
+                    hashCode = hashCode * 59 + ItemAcknowledgements.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

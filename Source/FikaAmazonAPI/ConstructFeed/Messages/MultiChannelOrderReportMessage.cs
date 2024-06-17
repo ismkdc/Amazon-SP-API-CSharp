@@ -1,6 +1,6 @@
 ﻿namespace FikaAmazonAPI.ConstructFeed.Messages
 {
-    public partial class MultiChannelOrderReportMessage
+    public class MultiChannelOrderReportMessage
     {
     }
 }

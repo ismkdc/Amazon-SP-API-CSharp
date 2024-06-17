@@ -1,6 +1,6 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 using FikaAmazonAPI.Search;
-using System.Collections.Generic;
 
 namespace FikaAmazonAPI.Parameter.Order
 {

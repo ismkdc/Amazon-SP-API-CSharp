@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 {
-
     /// <summary>
-    /// The request schema for the &#x60;updateScheduledPackages&#x60; operation.
+    ///     The request schema for the &#x60;updateScheduledPackages&#x60; operation.
     /// </summary>
     [DataContract]
     public class UpdateScheduledPackagesRequest
     {
         /// <summary>
-        /// Gets or Sets MarketplaceId
+        ///     Gets or Sets MarketplaceId
         /// </summary>
         [DataMember(Name = "marketplaceId", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "marketplaceId")]
         public string MarketplaceId { get; set; }
 
         /// <summary>
-        /// Gets or Sets UpdatePackageDetailsList
+        ///     Gets or Sets UpdatePackageDetailsList
         /// </summary>
         [DataMember(Name = "updatePackageDetailsList", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "updatePackageDetailsList")]
@@ -27,7 +26,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -41,13 +40,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

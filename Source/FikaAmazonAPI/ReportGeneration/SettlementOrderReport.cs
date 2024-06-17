@@ -1,29 +1,27 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Finances;
-using FikaAmazonAPI.Utils;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FikaAmazonAPI.Utils;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class SettlementOrderReport
     {
-        public List<SettlementOrderRow> Data { get; set; }=new List<SettlementOrderRow>();
         public SettlementOrderReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
             var values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => SettlementOrderRow.FromCsv(v, refNumber))
-                                           .ToList();
+                .Skip(1)
+                .Select(v => SettlementOrderRow.FromCsv(v, refNumber))
+                .ToList();
             Data = values;
         }
 
-
+        public List<SettlementOrderRow> Data { get; set; } = new List<SettlementOrderRow>();
     }
+
     public class SettlementOrderRow
     {
         public string SettlementId { get; set; }
@@ -54,12 +52,15 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public static SettlementOrderRow FromCsv(string csvLine, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
+            var values = csvLine.Split('\t');
             var row = new SettlementOrderRow();
             row.SettlementId = values.GetElementAtIndexOrDefault(0);
-            row.SettlementStartDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(1), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
-            row.SettlementEndDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(2), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
-            row.DepositDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(3), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.SettlementStartDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(1),
+                DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.SettlementEndDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(2),
+                DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.DepositDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(3),
+                DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
             row.TotalAmount = DataConverter.GetDecimal(values.GetElementAtIndexOrDefault(4));
             row.Currency = values.GetElementAtIndexOrDefault(5);
             row.TransactionType = values.GetElementAtIndexOrDefault(6);
@@ -72,8 +73,10 @@ namespace FikaAmazonAPI.ReportGeneration
             row.AmountDescription = values.GetElementAtIndexOrDefault(13);
             row.Amount = DataConverter.GetDecimal(values.GetElementAtIndexOrDefault(14));
             row.FulfillmentId = values.GetElementAtIndexOrDefault(15);
-            row.PostedDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(16), DataConverter.DateTimeFormat.DATE_FORMAT_DOT);
-            row.PostedDateTime = DataConverter.GetDate(values.GetElementAtIndexOrDefault(17), DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
+            row.PostedDate = DataConverter.GetDate(values.GetElementAtIndexOrDefault(16),
+                DataConverter.DateTimeFormat.DATE_FORMAT_DOT);
+            row.PostedDateTime = DataConverter.GetDate(values.GetElementAtIndexOrDefault(17),
+                DataConverter.DateTimeFormat.DATETIME_FORMAT_UTC_DOT);
             row.OrderItemCode = values.GetElementAtIndexOrDefault(18);
             row.MerchantOrderItemId = values.GetElementAtIndexOrDefault(19);
             row.MerchantAdjustmentItemId = values.GetElementAtIndexOrDefault(20);

@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 {
-
     /// <summary>
-    /// The reason why a shipping service offering is ineligible.
+    ///     The reason why a shipping service offering is ineligible.
     /// </summary>
     [DataContract]
     public class IneligibilityReason
     {
         /// <summary>
-        /// Gets or Sets Code
+        ///     Gets or Sets Code
         /// </summary>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         [JsonProperty(PropertyName = "code")]
         public IneligibilityReasonCode Code { get; set; }
 
         /// <summary>
-        /// The ineligibility reason.
+        ///     The ineligibility reason.
         /// </summary>
         /// <value>The ineligibility reason.</value>
         [DataMember(Name = "message", EmitDefaultValue = false)]
@@ -28,7 +27,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
 
 
         /// <summary>
-        /// Get the string presentation of the object
+        ///     Get the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -42,13 +41,12 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShippingV2
         }
 
         /// <summary>
-        /// Get the JSON string presentation of the object
+        ///     Get the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-
     }
 }

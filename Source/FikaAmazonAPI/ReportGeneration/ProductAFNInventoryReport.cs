@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class ProductAFNInventoryReport
     {
-        public List<ProductAFNInventoryRow> Data { get; set; } = new List<ProductAFNInventoryRow>();
         public ProductAFNInventoryReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
                 return;
             var values = File.ReadAllLines(path)
-                                           .Skip(1)
-                                           .Select(v => ProductAFNInventoryRow.FromCsv(v, refNumber))
-                                           .ToList();
+                .Skip(1)
+                .Select(v => ProductAFNInventoryRow.FromCsv(v, refNumber))
+                .ToList();
             Data = values;
         }
+
+        public List<ProductAFNInventoryRow> Data { get; set; } = new List<ProductAFNInventoryRow>();
     }
 
     public class ProductAFNInventoryRow
@@ -33,7 +32,7 @@ namespace FikaAmazonAPI.ReportGeneration
 
         public static ProductAFNInventoryRow FromCsv(string csvLine, string refNumber)
         {
-            string[] values = csvLine.Split('\t');
+            var values = csvLine.Split('\t');
             var row = new ProductAFNInventoryRow();
             row.SellerSku = values[0];
             row.FulfillmentChannelSku = values[1];

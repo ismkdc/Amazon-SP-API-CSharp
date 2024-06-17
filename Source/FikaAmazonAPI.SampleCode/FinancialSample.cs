@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FikaAmazonAPI.Parameter.Finance;
 
-namespace FikaAmazonAPI.SampleCode
+namespace FikaAmazonAPI.SampleCode;
+
+public class FinancialSample
 {
-    public class FinancialSample
+    private readonly AmazonConnection amazonConnection;
+
+    public FinancialSample(AmazonConnection amazonConnection)
     {
-        AmazonConnection amazonConnection;
-        public FinancialSample(AmazonConnection amazonConnection)
-        {
-            this.amazonConnection = amazonConnection;
-        }
+        this.amazonConnection = amazonConnection;
+    }
 
-        public void ListFinancialEventGroups()
+    public void ListFinancialEventGroups()
+    {
+        amazonConnection.Financial.ListFinancialEventGroups(new ParameterListFinancialEventGroup
         {
-            amazonConnection.Financial.ListFinancialEventGroups(new Parameter.Finance.ParameterListFinancialEventGroup()
-            {
-                FinancialEventGroupStartedAfter = DateTime.UtcNow.AddDays(-10),
-                FinancialEventGroupStartedBefore = DateTime.UtcNow.AddDays(-1),
-                MaxResultsPerPage = 55
-            });
-
-        }
+            FinancialEventGroupStartedAfter = DateTime.UtcNow.AddDays(-10),
+            FinancialEventGroupStartedBefore = DateTime.UtcNow.AddDays(-1),
+            MaxResultsPerPage = 55
+        });
     }
 }

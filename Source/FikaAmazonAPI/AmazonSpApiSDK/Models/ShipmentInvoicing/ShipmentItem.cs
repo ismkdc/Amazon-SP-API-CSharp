@@ -1,9 +1,9 @@
-﻿using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
 {
-    public partial class ShipmentItem
+    public class ShipmentItem
     {
         public string ASIN { get; set; }
         public string SellerSKU { get; set; }
@@ -16,6 +16,5 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing
         public Money ShippingDiscount { get; set; }
         public Money PromotionDiscount { get; set; }
         public IList<string> SerialNumbers { get; set; }
-
     }
 }

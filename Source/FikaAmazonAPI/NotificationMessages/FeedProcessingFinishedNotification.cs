@@ -1,10 +1,7 @@
-﻿using static FikaAmazonAPI.Utils.Constants;
-
-namespace FikaAmazonAPI.NotificationMessages
+﻿namespace FikaAmazonAPI.NotificationMessages
 {
     public class FeedProcessingFinishedNotification
     {
-
         public string sellerId { get; set; }
         public string feedId { get; set; }
         public string feedType { get; set; }

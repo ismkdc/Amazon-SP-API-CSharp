@@ -1,15 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes
 {
     [JsonConverter(typeof(StringEnumConverter))]
     public enum RequirementsEnforcedEnum
     {
-        [EnumMember(Value = "ENFORCED")]
-        ENFORCED,
-        [EnumMember(Value = "NOT_ENFORCED")]
-        NOT_ENFORCED
+        [EnumMember(Value = "ENFORCED")] ENFORCED,
+        [EnumMember(Value = "NOT_ENFORCED")] NOT_ENFORCED
     }
 }

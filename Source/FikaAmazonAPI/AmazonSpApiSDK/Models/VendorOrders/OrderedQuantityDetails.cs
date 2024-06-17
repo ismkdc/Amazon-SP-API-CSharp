@@ -1,22 +1,26 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
 {
     [DataContract]
-    public partial class OrderedQuantityDetails : IEquatable<OrderedQuantityDetails>, IValidatableObject
+    public class OrderedQuantityDetails : IEquatable<OrderedQuantityDetails>, IValidatableObject
     {
         [JsonConstructorAttribute]
-        public OrderedQuantityDetails() { }
-        public OrderedQuantityDetails(DateTime? updatedDate = default(DateTime?), ItemQuantity orderedQuantity = default(ItemQuantity), ItemQuantity cancelledQuantity = default(ItemQuantity))
+        public OrderedQuantityDetails()
         {
-            this.UpdatedDate = updatedDate;
-            this.OrderedQuantity = orderedQuantity;
-            this.CancelledQuantity = cancelledQuantity;
+        }
+
+        public OrderedQuantityDetails(DateTime? updatedDate = default, ItemQuantity orderedQuantity = default,
+            ItemQuantity cancelledQuantity = default)
+        {
+            UpdatedDate = updatedDate;
+            OrderedQuantity = orderedQuantity;
+            CancelledQuantity = cancelledQuantity;
         }
 
         [DataMember(Name = "updatedDate", EmitDefaultValue = false)]
@@ -28,10 +32,47 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         [DataMember(Name = "cancelledQuantity", EmitDefaultValue = false)]
         public ItemQuantity CancelledQuantity { get; set; }
 
+        /// <summary>
+        ///     Returns true if ItemQuantity instances are equal
+        /// </summary>
+        /// <param name="input">Instance of ItemQuantity to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals(OrderedQuantityDetails input)
+        {
+            if (input == null)
+                return false;
+
+            return
+                (
+                    UpdatedDate == input.UpdatedDate ||
+                    (UpdatedDate != null &&
+                     UpdatedDate.Equals(input.UpdatedDate))
+                ) &&
+                (
+                    OrderedQuantity == input.OrderedQuantity ||
+                    (OrderedQuantity != null &&
+                     OrderedQuantity.Equals(input.OrderedQuantity))
+                ) &&
+                (
+                    CancelledQuantity == input.CancelledQuantity ||
+                    (CancelledQuantity != null &&
+                     CancelledQuantity.Equals(input.CancelledQuantity))
+                );
+        }
+
+        /// <summary>
+        ///     To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
 
 
         /// <summary>
-        /// Returns the string presentation of the object
+        ///     Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
@@ -46,7 +87,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns the JSON string presentation of the object
+        ///     Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
@@ -55,70 +96,32 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders
         }
 
         /// <summary>
-        /// Returns true if objects are equal
+        ///     Returns true if objects are equal
         /// </summary>
         /// <param name="input">Object to be compared</param>
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as orderedQuantity);
+            return Equals(input as orderedQuantity);
         }
 
         /// <summary>
-        /// Returns true if ItemQuantity instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ItemQuantity to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(OrderedQuantityDetails input)
-        {
-            if (input == null)
-                return false;
-
-            return
-                (
-                    this.UpdatedDate == input.UpdatedDate ||
-                    (this.UpdatedDate != null &&
-                    this.UpdatedDate.Equals(input.UpdatedDate))
-                ) &&
-                (
-                    this.OrderedQuantity == input.OrderedQuantity ||
-                    (this.OrderedQuantity != null &&
-                    this.OrderedQuantity.Equals(input.OrderedQuantity))
-                ) &&
-                (
-                    this.CancelledQuantity == input.CancelledQuantity ||
-                    (this.CancelledQuantity != null &&
-                    this.CancelledQuantity.Equals(input.CancelledQuantity))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
+        ///     Gets the hash code
         /// </summary>
         /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.UpdatedDate != null)
-                    hashCode = hashCode * 59 + this.UpdatedDate.GetHashCode();
-                if (this.OrderedQuantity != null)
-                    hashCode = hashCode * 59 + this.OrderedQuantity.GetHashCode();
-                if (this.CancelledQuantity != null)
-                    hashCode = hashCode * 59 + this.CancelledQuantity.GetHashCode();
+                var hashCode = 41;
+                if (UpdatedDate != null)
+                    hashCode = hashCode * 59 + UpdatedDate.GetHashCode();
+                if (OrderedQuantity != null)
+                    hashCode = hashCode * 59 + OrderedQuantity.GetHashCode();
+                if (CancelledQuantity != null)
+                    hashCode = hashCode * 59 + CancelledQuantity.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            yield break;
         }
     }
 }

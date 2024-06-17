@@ -1,12 +1,11 @@
-﻿using FikaAmazonAPI.ReportGeneration.ReportDataTable;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FikaAmazonAPI.ReportGeneration.ReportDataTable;
 
 namespace FikaAmazonAPI.ReportGeneration
 {
     public class FbaEstimateFeeReport
     {
-        public List<FbaEstimateFeeReportRow> Data { get; set; } = new List<FbaEstimateFeeReportRow>();
         public FbaEstimateFeeReport(string path, string refNumber)
         {
             if (string.IsNullOrEmpty(path))
@@ -14,14 +13,14 @@ namespace FikaAmazonAPI.ReportGeneration
 
             var table = Table.ConvertFromCSV(path);
 
-            List<FbaEstimateFeeReportRow> values = new List<FbaEstimateFeeReportRow>();
-            foreach (var row in table.Rows)
-            {
-                values.Add(FbaEstimateFeeReportRow.FromRow(row, refNumber));
-            }
+            var values = new List<FbaEstimateFeeReportRow>();
+            foreach (var row in table.Rows) values.Add(FbaEstimateFeeReportRow.FromRow(row, refNumber));
             Data = values;
         }
+
+        public List<FbaEstimateFeeReportRow> Data { get; set; } = new List<FbaEstimateFeeReportRow>();
     }
+
     public class FbaEstimateFeeReportRow
     {
         public string sku { get; set; }
@@ -47,13 +46,15 @@ namespace FikaAmazonAPI.ReportGeneration
         {
             get
             {
-
                 try
                 {
-                    decimal? price = estimatedReferralFeePerUnit * 100 / yourPrice;
+                    var price = estimatedReferralFeePerUnit * 100 / yourPrice;
                     return Math.Round(price.Value);
                 }
-                catch { return default(decimal?); }
+                catch
+                {
+                    return default;
+                }
             }
         }
 
@@ -62,8 +63,6 @@ namespace FikaAmazonAPI.ReportGeneration
         public string unitOfWeight { get; set; }
         public string currency { get; set; }
         public string refNumber { get; set; }
-
-
 
 
         public static FbaEstimateFeeReportRow FromRow(TableRow rowData, string refNumber)
@@ -88,8 +87,10 @@ namespace FikaAmazonAPI.ReportGeneration
             row.lengthAndGirth = DataConverter.GetDecimal(rowData.GetString("length-and-girth"));
             row.itemPackageWeight = DataConverter.GetDecimal(rowData.GetString("item-package-weight"));
             row.estimatedFeeTotal = DataConverter.GetDecimal(rowData.GetString("estimated-fee-total"));
-            row.estimatedReferralFeePerUnit = DataConverter.GetDecimal(rowData.GetString("estimated-referral-fee-per-unit"));
-            row.estimatedPickPackFeePerUnit = DataConverter.GetDecimal(rowData.GetString("estimated-pick-pack-fee-per-unit"));
+            row.estimatedReferralFeePerUnit =
+                DataConverter.GetDecimal(rowData.GetString("estimated-referral-fee-per-unit"));
+            row.estimatedPickPackFeePerUnit =
+                DataConverter.GetDecimal(rowData.GetString("estimated-pick-pack-fee-per-unit"));
 
             row.unitOfDimension = rowData.GetString("unit-of-dimension");
             row.unitOfWeight = rowData.GetString("unit-of-weight");
