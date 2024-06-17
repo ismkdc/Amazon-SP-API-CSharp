@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Messaging;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class MessagingService : RequestService
     {
-        public MessagingService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public MessagingService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

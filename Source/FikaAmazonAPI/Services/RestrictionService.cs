@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Restrictions;
 using FikaAmazonAPI.Parameter.Restrictions;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class RestrictionService : RequestService
     {
-        public RestrictionService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public RestrictionService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

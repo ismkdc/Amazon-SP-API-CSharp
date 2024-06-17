@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
@@ -18,7 +19,8 @@ namespace FikaAmazonAPI.Services
 {
     public class ReportService : RequestService
     {
-        public ReportService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ReportService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

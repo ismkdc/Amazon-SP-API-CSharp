@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInbound;
 using FikaAmazonAPI.Parameter.FbaInboundEligibility;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class FbaInboundEligibilityService : RequestService
     {
-        public FbaInboundEligibilityService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInboundEligibilityService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaInventory;
@@ -10,7 +11,8 @@ namespace FikaAmazonAPI.Services
 {
     public class FbaInventoryService : RequestService
     {
-        public FbaInventoryService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaInventoryService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

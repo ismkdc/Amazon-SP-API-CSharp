@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FulfillmentOutbound;
@@ -11,7 +12,8 @@ namespace FikaAmazonAPI.Services
 {
     public class FulFillmentOutboundService : RequestService
     {
-        public FulFillmentOutboundService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FulFillmentOutboundService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

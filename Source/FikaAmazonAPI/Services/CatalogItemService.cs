@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.CatalogItems;
@@ -15,7 +16,8 @@ namespace FikaAmazonAPI.Services
 {
     public class CatalogItemService : RequestService
     {
-        public CatalogItemService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public CatalogItemService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.SQS;
@@ -18,7 +19,8 @@ namespace FikaAmazonAPI.Services
 {
     public class NotificationService : RequestService
     {
-        public NotificationService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public NotificationService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

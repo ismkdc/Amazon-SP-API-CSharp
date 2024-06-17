@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductFees;
 using FikaAmazonAPI.Parameter.ProductFee;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class ProductFeeService : RequestService
     {
-        public ProductFeeService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ProductFeeService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

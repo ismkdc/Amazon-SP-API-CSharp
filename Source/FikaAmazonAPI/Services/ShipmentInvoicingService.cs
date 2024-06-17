@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.ShipmentInvoicing;
 using FikaAmazonAPI.Parameter;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class ShipmentInvoicingService : RequestService
     {
-        public ShipmentInvoicingService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ShipmentInvoicingService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

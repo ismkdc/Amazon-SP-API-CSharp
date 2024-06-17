@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Orders;
@@ -12,7 +13,8 @@ namespace FikaAmazonAPI.Services
 {
     public class OrderService : RequestService
     {
-        public OrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public OrderService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

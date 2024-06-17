@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Sales;
@@ -10,7 +11,8 @@ namespace FikaAmazonAPI.Services
 {
     public class SalesService : RequestService
     {
-        public SalesService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public SalesService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

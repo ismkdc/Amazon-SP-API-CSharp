@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,8 @@ namespace FikaAmazonAPI.Services
 {
     public class FeedService : RequestService
     {
-        public FeedService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FeedService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

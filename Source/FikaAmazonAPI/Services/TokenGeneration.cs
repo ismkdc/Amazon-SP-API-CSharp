@@ -15,8 +15,12 @@ namespace FikaAmazonAPI.Services
 {
     public static class TokenGeneration
     {
-        public static async Task<TokenResponse> RefreshAccessTokenAsync(AmazonCredential credentials,
-            TokenDataType tokenDataType = TokenDataType.Normal, CancellationToken cancellationToken = default)
+        public static async Task<TokenResponse> RefreshAccessTokenAsync(
+            AmazonCredential credentials,
+            IHttpClientFactory httpClientFactory,
+            TokenDataType tokenDataType = TokenDataType.Normal,
+            CancellationToken cancellationToken = default
+        )
         {
             var lwaCredentials = new LWAAuthorizationCredentials
             {
@@ -30,7 +34,7 @@ namespace FikaAmazonAPI.Services
                 lwaCredentials.Scopes = new List<string>
                     { ScopeConstants.ScopeMigrationAPI, ScopeConstants.ScopeNotificationsAPI };
 
-            var Client = new LWAClient(lwaCredentials, credentials.ProxyAddress);
+            var Client = new LWAClient(lwaCredentials, httpClientFactory, credentials.ProxyAddress);
             var accessToken = await Client.GetAccessTokenAsync(cancellationToken);
 
             return accessToken;

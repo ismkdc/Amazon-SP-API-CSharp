@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.FbaSmallandLight;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class FbaSmallandLightService : RequestService
     {
-        public FbaSmallandLightService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaSmallandLightService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

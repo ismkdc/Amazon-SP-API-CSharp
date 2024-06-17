@@ -1,8 +1,11 @@
-﻿namespace FikaAmazonAPI.Services
+﻿using System.Net.Http;
+
+namespace FikaAmazonAPI.Services
 {
     public class TokenService : RequestService
     {
-        public TokenService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public TokenService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
     }

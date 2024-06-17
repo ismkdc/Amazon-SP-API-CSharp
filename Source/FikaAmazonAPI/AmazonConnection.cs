@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Net.Http;
 using System.Threading;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
 using FikaAmazonAPI.Services;
@@ -12,9 +13,9 @@ namespace FikaAmazonAPI
         private readonly UnauthorizedAccessException _NoCredentials =
             new UnauthorizedAccessException("Error, you cannot make calls to Amazon without credentials!");
 
-        public AmazonConnection(AmazonCredential Credentials, string RefNumber = null, CultureInfo? cultureInfo = null)
+        public AmazonConnection(AmazonCredential Credentials, IHttpClientFactory httpClientFactory, string RefNumber = null, CultureInfo? cultureInfo = null)
         {
-            Authenticate(Credentials);
+            Authenticate(Credentials, httpClientFactory);
             this.RefNumber = RefNumber;
             Thread.CurrentThread.CurrentCulture = cultureInfo ?? CultureInfo.CurrentCulture;
         }
@@ -103,57 +104,57 @@ namespace FikaAmazonAPI
         public MarketPlace GetCurrentMarketplace => Credentials.MarketPlace;
         public string GetCurrentSellerID => Credentials.SellerID;
 
-        private void Authenticate(AmazonCredential Credentials)
+        private void Authenticate(AmazonCredential Credentials, IHttpClientFactory httpClientFactory)
         {
             if (this.Credentials == default(AmazonCredential))
-                Init(Credentials);
+                Init(Credentials, httpClientFactory);
             else
                 throw new InvalidOperationException(
                     "Error, you are already authenticated to amazon in this AmazonConnection, dispose of this connection and create a new one to connect to a different account.");
         }
 
-        private void Init(AmazonCredential Credentials)
+        private void Init(AmazonCredential Credentials, IHttpClientFactory httpClientFactory)
         {
             ValidateCredentials(Credentials);
 
             this.Credentials = Credentials;
 
-            _Authorization = new AuthorizationService(this.Credentials);
-            _Orders = new OrderService(this.Credentials);
-            _Reports = new ReportService(this.Credentials);
-            _Solicitations = new SolicitationService(this.Credentials);
-            _Financials = new FinancialService(this.Credentials);
-            _CatalogItems = new CatalogItemService(this.Credentials);
-            _ProductPricing = new ProductPricingService(this.Credentials);
+            _Authorization = new AuthorizationService(this.Credentials, httpClientFactory);
+            _Orders = new OrderService(this.Credentials, httpClientFactory);
+            _Reports = new ReportService(this.Credentials, httpClientFactory);
+            _Solicitations = new SolicitationService(this.Credentials, httpClientFactory);
+            _Financials = new FinancialService(this.Credentials, httpClientFactory);
+            _CatalogItems = new CatalogItemService(this.Credentials, httpClientFactory);
+            _ProductPricing = new ProductPricingService(this.Credentials, httpClientFactory);
 
-            _FbaInbound = new FbaInboundService(this.Credentials);
-            _FbaInventory = new FbaInventoryService(this.Credentials);
-            _FbaOutbound = new FbaOutboundService(this.Credentials);
-            _FbaSmallandLight = new FbaSmallandLightService(this.Credentials);
-            _FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials);
-            _EasyShip20220323 = new EasyShip20220323Service(this.Credentials);
-            _AplusContent = new AplusContentService(this.Credentials);
-            _Feed = new FeedService(this.Credentials);
-            _ListingsItem = new ListingsItemService(this.Credentials);
-            _Restrictions = new RestrictionService(this.Credentials);
-            _MerchantFulfillment = new MerchantFulfillmentService(this.Credentials);
-            _Messaging = new MessagingService(this.Credentials);
-            _Notification = new NotificationService(this.Credentials);
-            _ProductFee = new ProductFeeService(this.Credentials);
-            _ProductType = new ProductTypeService(this.Credentials);
-            _Sales = new SalesService(this.Credentials);
-            _Seller = new SellerService(this.Credentials);
-            _Services = new ServicesService(this.Credentials);
-            _ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials);
-            _Shipping = new ShippingService(this.Credentials);
-            _ShippingV2 = new ShippingServiceV2(this.Credentials);
-            _Upload = new UploadService(this.Credentials);
-            _Tokens = new TokenService(this.Credentials);
-            _FulFillmentInbound = new FulFillmentInboundService(this.Credentials);
-            _FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials);
-            _VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials);
-            _VendorOrders = new VendorOrderService(this.Credentials);
-            _VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials);
+            _FbaInbound = new FbaInboundService(this.Credentials, httpClientFactory);
+            _FbaInventory = new FbaInventoryService(this.Credentials, httpClientFactory);
+            _FbaOutbound = new FbaOutboundService(this.Credentials, httpClientFactory);
+            _FbaSmallandLight = new FbaSmallandLightService(this.Credentials, httpClientFactory);
+            _FbaInboundEligibility = new FbaInboundEligibilityService(this.Credentials, httpClientFactory);
+            _EasyShip20220323 = new EasyShip20220323Service(this.Credentials, httpClientFactory);
+            _AplusContent = new AplusContentService(this.Credentials, httpClientFactory);
+            _Feed = new FeedService(this.Credentials, httpClientFactory);
+            _ListingsItem = new ListingsItemService(this.Credentials, httpClientFactory);
+            _Restrictions = new RestrictionService(this.Credentials, httpClientFactory);
+            _MerchantFulfillment = new MerchantFulfillmentService(this.Credentials, httpClientFactory);
+            _Messaging = new MessagingService(this.Credentials, httpClientFactory);
+            _Notification = new NotificationService(this.Credentials, httpClientFactory);
+            _ProductFee = new ProductFeeService(this.Credentials, httpClientFactory);
+            _ProductType = new ProductTypeService(this.Credentials, httpClientFactory);
+            _Sales = new SalesService(this.Credentials, httpClientFactory);
+            _Seller = new SellerService(this.Credentials, httpClientFactory);
+            _Services = new ServicesService(this.Credentials, httpClientFactory);
+            _ShipmentInvoicing = new ShipmentInvoicingService(this.Credentials, httpClientFactory);
+            _Shipping = new ShippingService(this.Credentials, httpClientFactory);
+            _ShippingV2 = new ShippingServiceV2(this.Credentials, httpClientFactory);
+            _Upload = new UploadService(this.Credentials, httpClientFactory);
+            _Tokens = new TokenService(this.Credentials, httpClientFactory);
+            _FulFillmentInbound = new FulFillmentInboundService(this.Credentials, httpClientFactory);
+            _FulFillmentOutbound = new FulFillmentOutboundService(this.Credentials, httpClientFactory);
+            _VendorDirectFulfillmentOrders = new VendorDirectFulfillmentOrderService(this.Credentials, httpClientFactory);
+            _VendorOrders = new VendorOrderService(this.Credentials, httpClientFactory);
+            _VendorTransactionStatus = new VendorTransactionStatusService(this.Credentials, httpClientFactory);
 
             AmazonCredential.DebugMode = this.Credentials.IsDebugMode;
         }

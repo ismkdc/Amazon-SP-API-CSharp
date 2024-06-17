@@ -1,8 +1,11 @@
-﻿namespace FikaAmazonAPI.Services
+﻿using System.Net.Http;
+
+namespace FikaAmazonAPI.Services
 {
     public class FbaOutboundService : RequestService
     {
-        public FbaOutboundService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public FbaOutboundService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
     }

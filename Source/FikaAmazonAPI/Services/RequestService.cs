@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Exceptions;
@@ -32,12 +33,15 @@ namespace FikaAmazonAPI.Services
         /// </summary>
         /// <param name="awsCredentials">Contains api clients information</param>
         /// <param name="clientToken">Contains current user's account api keys</param>
-        public RequestService(AmazonCredential amazonCredential)
+        public RequestService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory)
         {
             AmazonCredential = amazonCredential;
             AmazonSandboxUrl = amazonCredential.MarketPlace.Region.SandboxHostUrl;
             AmazonProductionUrl = amazonCredential.MarketPlace.Region.HostUrl;
+            _httpClientFactory = httpClientFactory;
         }
+
+        private readonly IHttpClientFactory _httpClientFactory;
 
         protected RestClient RequestClient { get; set; }
         protected RestRequest Request { get; set; }
@@ -58,8 +62,11 @@ namespace FikaAmazonAPI.Services
             if (string.IsNullOrWhiteSpace(AmazonCredential.ProxyAddress))
             {
                 var options = new RestClientOptions(ApiBaseUrl);
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
+                RequestClient = new RestClient(
+                    _httpClientFactory.CreateClient(nameof(RequestService)),
+                    options,
+                    configureSerialization: s => s.UseNewtonsoftJson()
+                );
             }
             else
             {
@@ -71,8 +78,11 @@ namespace FikaAmazonAPI.Services
                     }
                 };
 
-                RequestClient = new RestClient(options,
-                    configureSerialization: s => s.UseNewtonsoftJson());
+                RequestClient = new RestClient(
+                    _httpClientFactory.CreateClient(nameof(RequestService)),
+                    options,
+                    configureSerialization: s => s.UseNewtonsoftJson()
+                );
             }
 
             Request = new RestRequest(url, method);
@@ -355,7 +365,12 @@ namespace FikaAmazonAPI.Services
                 }
                 else
                 {
-                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType);
+                    token = await TokenGeneration.RefreshAccessTokenAsync
+                    (
+                        AmazonCredential,
+                        _httpClientFactory,
+                        tokenDataType
+                    );
                 }
 
                 AmazonCredential.SetToken(tokenDataType, token);
@@ -385,8 +400,13 @@ namespace FikaAmazonAPI.Services
                 }
                 else
                 {
-                    token = await TokenGeneration.RefreshAccessTokenAsync(AmazonCredential, tokenDataType,
-                        cancellationToken);
+                    token = await TokenGeneration.RefreshAccessTokenAsync
+                    (
+                        AmazonCredential,
+                        _httpClientFactory,
+                        tokenDataType,
+                        cancellationToken
+                    );
                 }
 
                 AmazonCredential.SetToken(tokenDataType, token);

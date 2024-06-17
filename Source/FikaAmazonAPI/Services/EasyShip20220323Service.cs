@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.EasyShip20220323;
 using FikaAmazonAPI.Parameter.EasyShip;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class EasyShip20220323Service : RequestService
     {
-        public EasyShip20220323Service(AmazonCredential amazonCredential) : base(amazonCredential)
+        public EasyShip20220323Service(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

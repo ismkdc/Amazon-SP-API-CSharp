@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.VendorOrders;
@@ -11,7 +12,8 @@ namespace FikaAmazonAPI.Services
 {
     public class VendorOrderService : RequestService
     {
-        public VendorOrderService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public VendorOrderService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

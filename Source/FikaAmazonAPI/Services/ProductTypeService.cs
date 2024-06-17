@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.ProductTypes;
 using FikaAmazonAPI.Parameter.ProductTypes;
@@ -9,7 +10,8 @@ namespace FikaAmazonAPI.Services
 {
     public class ProductTypeService : RequestService
     {
-        public ProductTypeService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public ProductTypeService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

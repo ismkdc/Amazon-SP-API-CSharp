@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.MerchantFulfillment;
@@ -11,7 +12,8 @@ namespace FikaAmazonAPI.Services
 {
     public class MerchantFulfillmentService : RequestService
     {
-        public MerchantFulfillmentService(AmazonCredential amazonCredential) : base(amazonCredential)
+        public MerchantFulfillmentService(AmazonCredential amazonCredential, IHttpClientFactory httpClientFactory) : base(
+            amazonCredential, httpClientFactory)
         {
         }
 

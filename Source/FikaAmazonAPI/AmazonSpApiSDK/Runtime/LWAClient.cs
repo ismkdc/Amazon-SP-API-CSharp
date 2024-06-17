@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FikaAmazonAPI.AmazonSpApiSDK.Models.Token;
@@ -16,7 +17,8 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
         public const string JsonMediaType = "application/json";
 
 
-        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, string proxyAddress = null)
+        public LWAClient(LWAAuthorizationCredentials lwaAuthorizationCredentials, IHttpClientFactory httpClientFactory,
+            string proxyAddress = null)
         {
             LWAAuthorizationCredentials = lwaAuthorizationCredentials;
             LWAAccessTokenRequestMetaBuilder = new LWAAccessTokenRequestMetaBuilder();
@@ -36,7 +38,7 @@ namespace FikaAmazonAPI.AmazonSpApiSDK.Runtime
                         }
                     };
 
-                RestClient = new RestClient(options);
+                RestClient = new RestClient(httpClientFactory.CreateClient(nameof(LWAClient)), options);
             }
         }
 
