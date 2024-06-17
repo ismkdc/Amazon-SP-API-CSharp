@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <PackageId>CSharpAmazonSpAPI</PackageId>
+        <PackageId>CSharpAmazonSpAPI.AspNetCore</PackageId>
         <Authors>Tareq Abuzuhri</Authors>
         <Company>Cozly AB</Company>
         <Product>CSharp Amazon Sp API</Product>
